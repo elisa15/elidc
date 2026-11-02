@@ -1,0 +1,16 @@
+<svg width="560" height="140" viewBox="0 0 560 140" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="70%">
+      <stop offset="0%" stop-color="#ff2fb1"/>
+      <stop offset="55%" stop-color="#8b2fff"/>
+      <stop offset="100%" stop-color="#ff8a5c"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(10,10)">
+    <path fill="url(#g1)" d="M60,8 L106,31 L106,77 L60,100 L13,77 L13,31 Z"/>
+    <path d="M95,17 L98,23 L104,26 L98,29 L95,35 L92,29 L86,26 L92,23 Z" fill="#ffffff" opacity="0.85"/>
+    <text x="60" y="79" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-style="italic" font-weight="600" font-size="50" fill="#ffffff">ED</text>
+  </g>
+  <text x="150" y="70" font-family="Fraunces, Georgia, serif" font-style="italic" font-weight="500" font-size="42" fill="url(#g1)">Elisa Dela Cruz</text>
+  <text x="151" y="98" font-family="Manrope, Arial, sans-serif" font-weight="700" font-size="13" letter-spacing="2.4" fill="#8b2fff">WORDPRESS &amp; SHOPIFY SPECIALIST</text>
+</svg>

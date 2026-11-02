@@ -1,0 +1,150 @@
+{
+    "key": "group_edc_project_fields",
+    "title": "Project Details",
+    "fields": [
+        {
+            "key": "field_edc_industry_badge",
+            "label": "Industry Badge",
+            "name": "industry_badge",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "e.g. Luxury Fashion — first pill on card + single page",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_edc_platform_badge",
+            "label": "Platform Badge",
+            "name": "platform_badge",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "e.g. Shopify — second (accent) pill",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_edc_role",
+            "label": "Role",
+            "name": "role",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "e.g. Ongoing design & optimisation partner",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_edc_summary",
+            "label": "Summary",
+            "name": "summary",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "Short 1–2 sentence card summary. Falls back to post excerpt if empty.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 3,
+            "new_lines": ""
+        },
+        {
+            "key": "field_edc_gradient_start",
+            "label": "Gradient Start",
+            "name": "gradient_start",
+            "aria-label": "",
+            "type": "color_picker",
+            "instructions": "Placeholder background if no Featured Image",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "#7c3aed",
+            "enable_opacity": 0,
+            "return_format": "string",
+            "custom_palette_source": "",
+            "palette_colors": "",
+            "show_color_wheel": true
+        },
+        {
+            "key": "field_edc_gradient_end",
+            "label": "Gradient End",
+            "name": "gradient_end",
+            "aria-label": "",
+            "type": "color_picker",
+            "instructions": "Paired with Gradient Start",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "#ec4899",
+            "enable_opacity": 0,
+            "return_format": "string",
+            "custom_palette_source": "",
+            "palette_colors": "",
+            "show_color_wheel": true
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "project"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Case-study fields for the Project CPT. Matches SCHEMA.md section 1.",
+    "show_in_rest": 0,
+    "display_title": "",
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1783686308
+}

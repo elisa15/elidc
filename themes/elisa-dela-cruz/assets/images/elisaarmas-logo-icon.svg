@@ -1,0 +1,12 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="70%">
+      <stop offset="0%" stop-color="#ff2fb1"/>
+      <stop offset="55%" stop-color="#8b2fff"/>
+      <stop offset="100%" stop-color="#ff8a5c"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#g1)" d="M100,14 L178,57 L178,143 L100,186 L22,143 L22,57 Z"/>
+  <path d="M158,34 L163,44 L173,49 L163,54 L158,64 L153,54 L143,49 L153,44 Z" fill="#ffffff" opacity="0.85"/>
+  <text x="100" y="130" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-style="italic" font-weight="600" font-size="84" fill="#ffffff">ED</text>
+</svg>

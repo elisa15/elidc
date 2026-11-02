@@ -1,0 +1,24 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.idea/
+.vscode/
+
+# Server-side backup copies
+*.bak
+*.bak-*
+*.orig
+
+# Secrets and data that must never be committed
+wp-config.php
+.env
+.env.*
+*.sql
+*.sql.gz
+*.zip
+*.tar.gz
+error_log
+*.log
+uploads/
