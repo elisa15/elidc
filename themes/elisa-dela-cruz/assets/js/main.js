@@ -1,15 +1,10 @@
 /**
  * Elisa Dela Cruz theme — interactive behaviour.
  * Ported from the static mockup; terminal lines and testimonials are now
- * read from window.edcData (localized from PHP/ACF in functions.php) with
- * the original hardcoded content kept here as a hard fallback.
+ * read from window.edcData (localized from PHP/ACF in functions.php). Terminal
+ * lines keep a neutral hardcoded fallback; testimonials have none.
  */
 (function () {
-  function hideLoader(){ const l = document.getElementById('loader'); if (!l || l.classList.contains('hide')) return; l.classList.add('hide'); l.style.pointerEvents='none'; window.setTimeout(function(){ l.classList.add('is-gone'); }, 650); }
-  document.addEventListener('DOMContentLoaded', () => setTimeout(hideLoader, 150));
-  window.addEventListener('load', () => setTimeout(hideLoader, 100));
-  setTimeout(hideLoader, 900);
-
   const glow = document.getElementById('cursorGlow');
   if (glow) {
     window.addEventListener('mousemove', e => {
@@ -71,7 +66,7 @@
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const fallbackTermLines = [
-    { p: '$ whoami', o: ['Elisa Dela Cruz', 'Senior Shopify Consultant'] },
+    { p: '$ whoami', o: ['Elisa Dela Cruz', 'Senior WordPress & Shopify Developer'] },
     { p: '$ expertise', o: ['Shopify', 'WordPress', 'WooCommerce', 'Performance', 'SEO'] },
     { p: '$ current_status', o: ['Helping businesses launch better websites'] },
     { p: '$ recent_work', o: ['✔ Shopify migration', '✔ Website rescue', '✔ Core Web Vitals', '✔ Security hardening'], cls: 'accent' }
@@ -182,8 +177,13 @@
 
   const contactModal = document.getElementById('contactModal');
   if (contactModal) {
+    let lastFocus = null;
     function isContactOpen(){
       return contactModal.style.visibility === 'visible';
+    }
+    function modalFocusables(){
+      return Array.from(contactModal.querySelectorAll('button, [href], input:not([type="hidden"]), select, textarea, [tabindex]:not([tabindex="-1"])'))
+        .filter(el => !el.disabled && el.offsetParent !== null && el.getAttribute('tabindex') !== '-1' && !el.closest('[aria-hidden="true"]'));
     }
     function edcFillCf7Challenge(){
       const tsEl = document.getElementById('edc_js_ts');
@@ -210,34 +210,48 @@
       contactModal.style.opacity = 1;
       contactModal.style.visibility = 'visible';
       contactModal.querySelector('.modal-box').style.transform = 'translateY(0) scale(1)';
+      contactModal.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
+      lastFocus = document.activeElement;
+      const first = modalFocusables()[0];
+      if (first) first.focus();
     }
     function closeContactModal(){
       if (!isContactOpen()) return;
       contactModal.style.opacity = 0;
       contactModal.style.visibility = 'hidden';
       contactModal.querySelector('.modal-box').style.transform = 'translateY(24px) scale(.96)';
+      contactModal.setAttribute('aria-hidden', 'true');
       if (!document.body.classList.contains('nav-locked')) {
         document.body.style.overflow = '';
       }
+      if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+      // Mobile: the nav CTA sits in a now-closed menu, so return focus to the menu button
+      if (lastFocus && document.activeElement !== lastFocus) {
+        const toggle = document.getElementById('navToggle');
+        if (toggle) toggle.focus();
+      }
+      lastFocus = null;
     }
     document.querySelectorAll('.js-open-contact').forEach(el => el.addEventListener('click', openContactModal));
     const modalCloseBtn = document.getElementById('modalClose');
     if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeContactModal);
     contactModal.addEventListener('click', (e) => { if (e.target === contactModal) closeContactModal(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeContactModal(); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') { closeContactModal(); return; }
+      // Keep Tab inside the dialog while it is open
+      if (e.key !== 'Tab' || !isContactOpen()) return;
+      const items = modalFocusables();
+      if (!items.length) return;
+      const first = items[0], last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      else if (!contactModal.contains(document.activeElement)) { e.preventDefault(); first.focus(); }
+    });
   }
 
-  const heroAnimTargets = '.hero .eyebrow, .hero h1, .hero p, .hero .actions, .terminal';
+  // Hero entrance is CSS-only (style.css "Hero entrance") so the hero never waits on JS.
   if (typeof gsap !== 'undefined' && !reducedMotion) {
-    gsap.set(heroAnimTargets, { opacity: 0, y: 24 });
-    gsap.timeline({ delay: 0.3 })
-      .to('.hero .eyebrow', { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' })
-      .to('.hero h1', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.5')
-      .to('.hero p', { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, '-=0.5')
-      .to('.hero .actions', { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.45')
-      .to('.terminal', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.6');
-
     if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
       document.querySelectorAll('.btn').forEach(btn => {
         btn.addEventListener('mousemove', (e) => {
@@ -249,8 +263,6 @@
         btn.addEventListener('mouseleave', () => { gsap.to(btn, { x: 0, y: 0, duration: 0.4, ease: 'elastic.out(1,0.4)' }); });
       });
     }
-  } else {
-    document.querySelectorAll(heroAnimTargets).forEach(el => { el.style.opacity = 1; });
   }
 })();
 

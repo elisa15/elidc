@@ -24,10 +24,6 @@ if ( ! defined( 'ABSPATH' ) ) {
   <defs><linearGradient id="iconGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ff2fb1"/><stop offset="55%" stop-color="#8b2fff"/><stop offset="100%" stop-color="#ff8a5c"/></linearGradient></defs>
 </svg>
 
-<?php
-$loader_image = edc_opt( 'loader_icon', EDC_URI . '/assets/images/elisaarmas-logo-icon-final.png' );
-?>
-<div class="loader" id="loader"><img src="<?php echo esc_url( $loader_image ); ?>" alt="Loading"></div>
 <div class="cursor-glow" id="cursorGlow"></div>
 <div class="grain"></div>
 

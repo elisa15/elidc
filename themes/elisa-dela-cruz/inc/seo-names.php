@@ -46,6 +46,26 @@ function edc_person_knows_about() {
 }
 
 /**
+ * Profile URLs for schema sameAs, taken from the footer social links in ACF.
+ * Only real http(s) profiles count; email and "#" placeholders are skipped.
+ *
+ * @return string[]
+ */
+function edc_person_same_as() {
+	if ( ! function_exists( 'edc_repeater' ) ) {
+		return array();
+	}
+	$urls = array();
+	foreach ( edc_repeater( 'footer_social', array() ) as $social ) {
+		$url = isset( $social['url'] ) ? trim( (string) $social['url'] ) : '';
+		if ( preg_match( '#^https?://#i', $url ) ) {
+			$urls[] = esc_url_raw( $url );
+		}
+	}
+	return $urls;
+}
+
+/**
  * Enrich Yoast Person schema with aliases, role, and topics.
  *
  * @param array $data Person graph piece.
@@ -69,9 +89,14 @@ function edc_enrich_person_schema( $data ) {
 		);
 	}
 	$data['alternateName'] = $names;
-	$data['jobTitle']     = 'WordPress & Shopify Developer';
+	$data['jobTitle']     = 'Senior WordPress & Shopify Developer';
 	$data['description']  = 'Web developer and WordPress specialist focused on Shopify development, Shopify migrations, WordPress security, and custom builds.';
 	$data['knowsAbout']   = edc_person_knows_about();
+
+	$same_as = edc_person_same_as();
+	if ( $same_as ) {
+		$data['sameAs'] = array_values( array_unique( array_merge( isset( $data['sameAs'] ) ? (array) $data['sameAs'] : array(), $same_as ) ) );
+	}
 
 	return $data;
 }

@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'EDC_VERSION', '1.2.0' );
+define( 'EDC_VERSION', '1.3.0' );
 define( 'EDC_DIR', get_template_directory() );
 define( 'EDC_URI', get_template_directory_uri() );
 
@@ -204,6 +204,21 @@ require_once EDC_DIR . '/inc/contact-form.php';
 require_once EDC_DIR . '/inc/security.php';
 require_once EDC_DIR . '/inc/seo-names.php';
 
+/**
+ * Drop the core emoji script/styles; the site uses native emoji only.
+ */
+function edc_disable_emojis() {
+	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+	remove_action( 'wp_print_styles', 'print_emoji_styles' );
+	remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+	remove_action( 'admin_print_styles', 'print_emoji_styles' );
+	remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
+	remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
+	remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
+	add_filter( 'emoji_svg_url', '__return_false' );
+}
+add_action( 'init', 'edc_disable_emojis' );
+
 /* -------------------------------------------------------------------------
  * Assets
  * ---------------------------------------------------------------------- */
@@ -224,7 +239,7 @@ function edc_enqueue_assets() {
 	// Dynamic data handed to main.js — terminal lines & testimonials — with
 	// fallbacks that exactly match the original static mockup content.
 	$default_terminal_lines = array(
-		array( 'p' => '$ whoami', 'o' => array( 'Elisa Dela Cruz', 'Senior Shopify Consultant' ) ),
+		array( 'p' => '$ whoami', 'o' => array( 'Elisa Dela Cruz', 'Senior WordPress & Shopify Developer' ) ),
 		array( 'p' => '$ expertise', 'o' => array( 'Shopify', 'WordPress', 'WooCommerce', 'Performance', 'SEO' ) ),
 		array( 'p' => '$ current_status', 'o' => array( 'Helping businesses launch better websites' ) ),
 		array( 'p' => '$ recent_work', 'o' => array( '✔ Shopify migration', '✔ Website rescue', '✔ Core Web Vitals', '✔ Security hardening' ), 'cls' => 'accent' ),
