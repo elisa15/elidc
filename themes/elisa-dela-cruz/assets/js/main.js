@@ -120,14 +120,8 @@
     }
   }
 
-  const fallbackTestimonials = [
-    { q: "\"Elisa took over a migration our previous agency couldn't finish and had our new Shopify store live within weeks , without losing a single product ranking.\"", n: "Placeholder client", c: "Grand Teton", s: 5 },
-    { q: "\"Fast, communicative, and genuinely cares about getting it right. Our site has never run better.\"", n: "Placeholder client", c: "Flat Stacks", s: 5 },
-    { q: "\"She rescued a hacked WooCommerce site we thought we'd lost. Back online, secure, and faster than before.\"", n: "Placeholder client", c: "Boat O'Craigo", s: 5 }
-  ];
-  const testimonials = (Array.isArray(edcData.testimonials) && edcData.testimonials.length)
-    ? edcData.testimonials
-    : fallbackTestimonials;
+  // Real ACF testimonials only; there is deliberately no hardcoded fallback.
+  const testimonials = Array.isArray(edcData.testimonials) ? edcData.testimonials : [];
 
   let ti = 0;
   function renderTesti(i){
@@ -146,7 +140,10 @@
   if (testimonials.length) {
     renderTesti(0);
     document.querySelectorAll('.testi-dot').forEach(d => d.addEventListener('click', () => { ti = +d.dataset.i; renderTesti(ti); }));
-    setInterval(() => { ti = (ti + 1) % testimonials.length; renderTesti(ti); }, 8000);
+    // Auto-advance only when there is something to rotate to (and motion is welcome).
+    if (testimonials.length > 1 && !reducedMotion) {
+      setInterval(() => { ti = (ti + 1) % testimonials.length; renderTesti(ti); }, 8000);
+    }
   }
 
   document.querySelectorAll('.tab-btn').forEach(btn => {

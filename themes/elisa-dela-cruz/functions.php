@@ -162,6 +162,18 @@ function edc_repeater( $selector, $default_rows = array(), $post_id = 'option' )
 }
 
 /**
+ * Whether a link URL is safe to print: not empty, not a bare "#", and not an
+ * anchor to a homepage section that is hidden from public visitors.
+ */
+function edc_link_is_usable( $url ) {
+	$url = is_string( $url ) ? trim( $url ) : '';
+	if ( $url === '' || $url === '#' ) {
+		return false;
+	}
+	return edc_nav_target_is_public( $url );
+}
+
+/**
  * Output the Contact Form 7 shortcode configured on the options page.
  * Falls back to a static (non-functional) form matching the mockup design
  * if CF7 isn't installed/active yet or no shortcode has been set.
@@ -231,13 +243,9 @@ function edc_enqueue_assets() {
 		}
 	}
 
-	$default_testimonials = array(
-		array( 'q' => "\"Elisa took over a migration our previous agency couldn't finish and had our new Shopify store live within weeks , without losing a single product ranking.\"", 'n' => 'Placeholder client', 'c' => 'Grand Teton', 's' => 5 ),
-		array( 'q' => "\"Fast, communicative, and genuinely cares about getting it right. Our site has never run better.\"", 'n' => 'Placeholder client', 'c' => 'Flat Stacks', 's' => 5 ),
-		array( 'q' => "\"She rescued a hacked WooCommerce site we thought we'd lost. Back online, secure, and faster than before.\"", 'n' => 'Placeholder client', 'c' => "Boat O'Craigo", 's' => 5 ),
-	);
+	// No fallback quotes: testimonials only ever come from real ACF rows.
 	$testimonial_rows = edc_repeater( 'testimonials', array() );
-	$testimonials = $default_testimonials;
+	$testimonials = array();
 	if ( ! empty( $testimonial_rows ) ) {
 		$testimonials = array();
 		foreach ( $testimonial_rows as $row ) {

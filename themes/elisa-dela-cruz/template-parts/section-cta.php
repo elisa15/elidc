@@ -11,8 +11,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $default_links = array(
 	array( 'label' => 'Email', 'url' => 'mailto:hello@elisaarmas.com' ),
-	array( 'label' => 'LinkedIn', 'url' => '#' ),
-	array( 'label' => 'GitHub', 'url' => '#' ),
 	array( 'label' => 'Portfolio', 'url' => '#work' ),
 );
 $links = edc_repeater( 'cta_links', $default_links );
@@ -29,7 +27,10 @@ $links = edc_repeater( 'cta_links', $default_links );
     <div class="footer-links">
       <?php foreach ( $links as $link ) :
         $label = isset( $link['label'] ) ? $link['label'] : '';
-        $url   = isset( $link['url'] ) ? $link['url'] : '#';
+        $url   = isset( $link['url'] ) ? $link['url'] : '';
+        if ( ! edc_link_is_usable( $url ) ) {
+          continue; // skips "#" placeholders and anchors to hidden sections
+        }
       ?>
         <a href="<?php echo esc_url( $url ); ?>"><?php echo esc_html( $label ); ?></a>
       <?php endforeach; ?>

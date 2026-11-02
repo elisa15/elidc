@@ -39,7 +39,7 @@ if ( ! defined( 'ABSPATH' ) ) {
         $hero_btn_secondary_label = trim( (string) edc_opt( 'hero_btn_secondary', 'View my work' ) );
         $hero_btn_secondary_url   = trim( (string) edc_opt( 'hero_btn_secondary_url', '#work' ) );
         $show_primary   = ( $hero_btn_primary_label !== '' && $hero_btn_primary_url !== '' );
-        $show_secondary = ( $hero_btn_secondary_label !== '' && $hero_btn_secondary_url !== '' );
+        $show_secondary = ( $hero_btn_secondary_label !== '' && edc_link_is_usable( $hero_btn_secondary_url ) );
         ?>
         <?php if ( $show_primary || $show_secondary ) : ?>
         <div class="actions">

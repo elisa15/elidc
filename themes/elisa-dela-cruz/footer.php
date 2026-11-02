@@ -43,8 +43,6 @@ if ( ! defined( 'ABSPATH' ) ) {
         <?php
         $default_socials = array(
           array( 'type' => 'email',   'url' => 'mailto:hello@elisaarmas.com' ),
-          array( 'type' => 'linkedin', 'url' => '#' ),
-          array( 'type' => 'github',  'url' => '#' ),
         );
         $socials = edc_repeater( 'footer_social', $default_socials );
         $icons = array(
@@ -54,7 +52,10 @@ if ( ! defined( 'ABSPATH' ) ) {
         );
         foreach ( $socials as $social ) {
           $type = isset( $social['type'] ) ? $social['type'] : 'email';
-          $url  = isset( $social['url'] ) ? $social['url'] : '#';
+          $url  = isset( $social['url'] ) ? $social['url'] : '';
+          if ( ! edc_link_is_usable( $url ) ) {
+            continue; // never print a dead "#" icon
+          }
           $icon = isset( $icons[ $type ] ) ? $icons[ $type ] : $icons['email'];
           echo '<a href="' . esc_url( $url ) . '" aria-label="' . esc_attr( ucfirst( $type ) ) . '">' . $icon . '</a>';
         }

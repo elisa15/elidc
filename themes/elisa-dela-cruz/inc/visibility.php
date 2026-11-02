@@ -35,8 +35,38 @@ function edc_opt_bool( $field_name, $default = true ) {
 	return (bool) $default;
 }
 
-function edc_should_show_section( $field_name ) {
+/**
+ * Whether at least one project is published (cached per request).
+ */
+function edc_has_published_projects() {
+	static $has = null;
+	if ( null === $has ) {
+		$has = (bool) get_posts( array(
+			'post_type'      => 'project',
+			'post_status'    => 'publish',
+			'posts_per_page' => 1,
+			'fields'         => 'ids',
+		) );
+	}
+	return $has;
+}
+
+/**
+ * Whether a section is enabled for the public. The work section also needs
+ * real projects, so every "#work" link disappears while it would be empty.
+ *
+ * @param string $field_name ACF field name.
+ */
+function edc_section_is_public( $field_name ) {
 	$is_enabled = edc_opt_bool( $field_name, true );
+	if ( $is_enabled && 'show_work' === $field_name ) {
+		return edc_has_published_projects();
+	}
+	return $is_enabled;
+}
+
+function edc_should_show_section( $field_name ) {
+	$is_enabled = edc_section_is_public( $field_name );
 	if ( $is_enabled ) {
 		return true;
 	}
@@ -49,7 +79,7 @@ function edc_should_show_section( $field_name ) {
  * @param string $field_name ACF field name.
  */
 function edc_is_admin_preview_section( $field_name ) {
-	$is_enabled = edc_opt_bool( $field_name, true );
+	$is_enabled = edc_section_is_public( $field_name );
 	return ! $is_enabled && is_user_logged_in() && current_user_can( 'manage_options' );
 }
 
