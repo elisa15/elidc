@@ -132,6 +132,7 @@ section{position:relative}
   .work-grid.v2>.card{grid-column:span 2}
   .work-grid.v2>.span-4{grid-column:span 4}
   .work-grid.v2>.span-3{grid-column:span 3}
+  .work-grid.v2>.span-6{grid-column:span 6}
   .work-grid.v2>.span-4 .shot-img{aspect-ratio:16/8.2}
 }
 .card{position:relative;background:var(--cream-50);border:1px solid rgba(20,20,26,.12);border-radius:var(--radius-xl);overflow:hidden;color:var(--ink-900);transition:transform var(--dur-panel) var(--ease),box-shadow var(--dur-panel) var(--ease)}

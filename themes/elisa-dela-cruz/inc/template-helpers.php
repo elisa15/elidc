@@ -129,6 +129,12 @@ function edc_project( $post_id ) {
 	$years        = edc_years( $text( 'year_start' ), $text( 'year_end' ) );
 
 	$platforms = edc_post_term_list( $id, 'project_platform' );
+	$order     = array_flip( array( 'shopify', 'wordpress', 'woocommerce', 'elementor' ) );
+	usort( $platforms, function ( $a, $b ) use ( $order ) {
+		$x = isset( $order[ $a['slug'] ] ) ? $order[ $a['slug'] ] : 99;
+		$y = isset( $order[ $b['slug'] ] ) ? $order[ $b['slug'] ] : 99;
+		return $x - $y;
+	} );
 	if ( empty( $platforms ) && '' !== $text( 'platform_badge' ) ) {
 		$platforms = array(
 			array(
@@ -181,6 +187,7 @@ function edc_project( $post_id ) {
 		'confidential' => $confidential,
 		'industry'     => $text( 'industry_badge' ),
 		'region'       => $text( 'region' ),
+		'role'         => $text( 'role' ),
 		'role_line'    => implode( ' · ', array_filter( array( $text( 'role' ), $text( 'engaged_via' ), $years ) ) ),
 		'years'        => $years,
 		'summary'      => $summary,
