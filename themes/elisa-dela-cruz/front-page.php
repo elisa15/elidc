@@ -1,6 +1,6 @@
 <?php
 /**
- * Front page — assembles the one-page home from template-parts.
+ * Front page — assembles the homepage from template-parts/home/.
  *
  * @package elisa-dela-cruz
  */
@@ -14,17 +14,13 @@ get_header();
 <main id="main" class="site-main">
 <?php
 $sections = array(
-	array( 'show_hero', 'Hero', 'section-hero' ),
-	array( 'show_proof', 'Proof strip', 'section-proof-testi' ),
-	array( 'show_tabs', 'Why clients keep coming back', 'section-hire' ),
-	array( 'show_believe', 'What I believe', 'section-believe' ),
-	array( 'show_toolbox', 'Toolbox', 'section-toolbox' ),
-	array( 'show_services', 'Services', 'section-services' ),
-	array( 'show_map', 'Global map', 'section-map' ),
-	array( 'show_work', 'Selected work', 'section-work' ),
-	array( 'show_help', 'Sound familiar?', 'section-help' ),
-	array( 'show_testimonials', 'Testimonials', 'section-testimonials' ),
-	array( 'show_cta', 'Final CTA', 'section-cta' ),
+	array( 'show_hero', 'Hero', 'template-parts/home/hero' ),
+	array( 'show_home_bridge', 'Bridge', 'template-parts/home/bridge' ),
+	array( 'show_work', 'Work', 'template-parts/home/work' ),
+	array( 'show_home_called', 'Called in for', 'template-parts/home/called' ),
+	array( 'show_home_about', 'Behind the code', 'template-parts/home/about' ),
+	array( 'show_home_record', 'Track record', 'template-parts/home/record' ),
+	array( 'show_cta', 'Contact', 'template-parts/home/contact' ),
 );
 
 foreach ( $sections as $section ) {
@@ -33,7 +29,7 @@ foreach ( $sections as $section ) {
 		continue;
 	}
 	edc_section_open( $field, $label );
-	get_template_part( 'template-parts/' . $part );
+	get_template_part( $part );
 	edc_section_close();
 }
 ?>

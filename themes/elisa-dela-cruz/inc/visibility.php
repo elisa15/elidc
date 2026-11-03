@@ -36,17 +36,28 @@ function edc_opt_bool( $field_name, $default = true ) {
 }
 
 /**
- * Whether at least one project is published (cached per request).
+ * Published project IDs picked for the homepage Work section, in their chosen order.
+ *
+ * @return int[]
+ */
+function edc_home_featured_project_ids() {
+	$ids = array();
+	foreach ( (array) edc_opt( 'home_featured_projects', array() ) as $id ) {
+		$id = (int) ( is_object( $id ) ? $id->ID : $id );
+		if ( $id && 'project' === get_post_type( $id ) && 'publish' === get_post_status( $id ) ) {
+			$ids[] = $id;
+		}
+	}
+	return $ids;
+}
+
+/**
+ * Whether the homepage Work section has at least one published featured project.
  */
 function edc_has_published_projects() {
 	static $has = null;
 	if ( null === $has ) {
-		$has = (bool) get_posts( array(
-			'post_type'      => 'project',
-			'post_status'    => 'publish',
-			'posts_per_page' => 1,
-			'fields'         => 'ids',
-		) );
+		$has = (bool) edc_home_featured_project_ids();
 	}
 	return $has;
 }
@@ -114,13 +125,11 @@ function edc_section_close() {
  */
 function edc_section_anchor_map() {
 	return array(
-		'hire'         => 'show_tabs',
-		'services'     => 'show_services',
 		'work'         => 'show_work',
+		'services'     => 'show_home_called',
+		'about'        => 'show_home_about',
+		'track-record' => 'show_home_record',
 		'contact'      => 'show_cta',
-		'toolbox'      => 'show_toolbox',
-		'map'          => 'show_map',
-		'testimonials' => 'show_testimonials',
 	);
 }
 
