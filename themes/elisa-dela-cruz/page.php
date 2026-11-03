@@ -10,7 +10,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 get_header();
-
+?>
+<main id="main">
+<?php
 while ( have_posts() ) :
 	the_post();
 	?>
@@ -26,5 +28,7 @@ while ( have_posts() ) :
 	</section>
 	<?php
 endwhile;
-
+?>
+</main>
+<?php
 get_footer();

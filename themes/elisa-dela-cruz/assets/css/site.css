@@ -49,6 +49,7 @@ em.voice,.voice{font-family:var(--font-serif);font-style:italic;font-weight:500;
 .nav ul a{text-decoration:none;color:var(--mist);font-weight:600;font-size:15px}
 .nav ul a:hover,.nav ul a[aria-current]{color:var(--paper)}
 .nav .btn{min-height:42px;padding:0 18px;font-size:14px}
+.nav ul a.btn-primary{color:#fff}
 .menu-btn{display:none;background:var(--night-700);border:1px solid rgba(255,255,255,.16);color:var(--paper);width:46px;height:46px;border-radius:var(--radius-md);cursor:pointer}
 @media (max-width:860px){
   .nav{background:rgba(9,9,13,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}

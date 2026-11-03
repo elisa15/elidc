@@ -158,14 +158,15 @@ function edc_filter_nav_menu_items( $items ) {
 	if ( empty( $items ) || ! is_array( $items ) ) {
 		return $items;
 	}
-	// Admins previewing keep all links.
-	if ( is_user_logged_in() && current_user_can( 'manage_options' ) ) {
-		return $items;
-	}
-	$filtered = array();
+	// Admins previewing keep links to hidden sections, but nobody gets an empty or "#" link.
+	$is_admin_preview = is_user_logged_in() && current_user_can( 'manage_options' );
+	$filtered         = array();
 	foreach ( $items as $item ) {
-		$url = isset( $item->url ) ? $item->url : '';
-		if ( edc_nav_target_is_public( $url ) ) {
+		$url = isset( $item->url ) ? trim( (string) $item->url ) : '';
+		if ( '' === $url || '#' === $url ) {
+			continue;
+		}
+		if ( $is_admin_preview || edc_nav_target_is_public( $url ) ) {
 			$filtered[] = $item;
 		}
 	}
@@ -174,23 +175,99 @@ function edc_filter_nav_menu_items( $items ) {
 add_filter( 'wp_nav_menu_objects', 'edc_filter_nav_menu_items', 20 );
 
 /**
- * Primary menu fallback with visibility-aware anchors.
+ * Default site navigation: Work · Services · About · Contact. Each item is listed
+ * only when its target exists, so no link ever leads nowhere.
+ *
+ * @return array<int,array{label:string,url:string,current:bool}>
  */
-function edc_primary_menu_fallback() {
-	$items = array(
-		array( 'href' => '#hire', 'label' => 'Why me', 'field' => 'show_tabs' ),
-		array( 'href' => '#services', 'label' => 'Services', 'field' => 'show_services' ),
-		array( 'href' => '#work', 'label' => 'Work', 'field' => 'show_work' ),
-		array( 'href' => '#contact', 'label' => 'Contact', 'field' => 'show_cta' ),
-	);
-	echo '<ul>';
-	foreach ( $items as $item ) {
-		if ( ! edc_should_show_section( $item['field'] ) ) {
+function edc_primary_nav_items() {
+	$items  = array();
+	$counts = wp_count_posts( 'project' );
+	if ( $counts && ! empty( $counts->publish ) ) {
+		$items[] = array(
+			'label'   => 'Work',
+			'url'     => get_post_type_archive_link( 'project' ),
+			'current' => is_post_type_archive( 'project' ) || is_singular( 'project' ),
+		);
+	}
+	foreach ( array( 'services' => 'Services', 'about' => 'About', 'contact' => 'Contact' ) as $slug => $label ) {
+		$page = get_page_by_path( $slug );
+		if ( ! $page || 'publish' !== $page->post_status ) {
 			continue;
 		}
-		echo '<li><a href="' . esc_url( $item['href'] ) . '">' . esc_html( $item['label'] ) . '</a></li>';
+		$items[] = array(
+			'label'   => $label,
+			'url'     => get_permalink( $page ),
+			'current' => is_page( $page->ID ),
+		);
 	}
+	return $items;
+}
+
+/**
+ * Where "Start a project" goes without JS: the Contact page, else the homepage contact section.
+ */
+function edc_contact_url() {
+	$page = get_page_by_path( 'contact' );
+	if ( $page && 'publish' === $page->post_status ) {
+		return get_permalink( $page );
+	}
+	return edc_section_is_public( 'show_cta' ) ? home_url( '/#contact' ) : '';
+}
+
+/**
+ * "Start a project" nav button as a list item, or '' when it has nowhere to go.
+ */
+function edc_nav_cta_item() {
+	$url   = edc_contact_url();
+	$modal = edc_should_show_section( 'show_contact_modal' );
+	if ( '' === $url && ! $modal ) {
+		return '';
+	}
+	return sprintf(
+		'<li><a class="btn btn-primary%s" href="%s" data-ga-event="cta_start_project" data-ga-label="Nav Start a project">%s</a></li>',
+		$modal ? ' js-open-contact' : '',
+		esc_url( '' !== $url ? $url : home_url( '/' ) ),
+		esc_html( edc_opt( 'nav_cta_label', 'Start a project' ) )
+	);
+}
+
+/**
+ * Primary menu fallback (no menu assigned to the "primary" location).
+ */
+function edc_primary_menu_fallback() {
+	echo '<ul id="menu">';
+	foreach ( edc_primary_nav_items() as $item ) {
+		printf(
+			'<li><a href="%s"%s>%s</a></li>',
+			esc_url( $item['url'] ),
+			$item['current'] ? ' aria-current="page"' : '',
+			esc_html( $item['label'] )
+		);
+	}
+	echo edc_nav_cta_item(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in edc_nav_cta_item().
 	echo '</ul>';
+}
+
+/**
+ * Width and height attributes for a theme or Media Library image URL, or ''.
+ */
+function edc_image_size_attrs( $url ) {
+	$id = attachment_url_to_postid( $url );
+	if ( $id ) {
+		$src = wp_get_attachment_image_src( $id, 'full' );
+		if ( $src ) {
+			return sprintf( ' width="%d" height="%d"', $src[1], $src[2] );
+		}
+	}
+	if ( 0 === strpos( $url, EDC_URI ) ) {
+		$path = EDC_DIR . substr( $url, strlen( EDC_URI ) );
+		$size = is_readable( $path ) ? getimagesize( $path ) : false;
+		if ( $size ) {
+			return sprintf( ' width="%d" height="%d"', $size[0], $size[1] );
+		}
+	}
+	return '';
 }
 
 /**

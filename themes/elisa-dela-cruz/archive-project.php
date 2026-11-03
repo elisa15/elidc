@@ -12,6 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header();
 ?>
+<main id="main">
 <section style="padding-top:170px;">
 	<div class="wrap">
 		<div class="section-head" data-reveal="up">
@@ -50,5 +51,6 @@ get_header();
 		<?php endif; ?>
 	</div>
 </section>
+</main>
 <?php
 get_footer();
