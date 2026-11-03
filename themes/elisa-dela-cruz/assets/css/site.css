@@ -295,6 +295,7 @@ section{position:relative}
 .contact .alt a,.contact .alt button{color:var(--mist);text-decoration:none;min-height:var(--tap);display:inline-flex;align-items:center;background:none;border:0;font:inherit;cursor:pointer;padding:0}
 .contact .alt a:hover,.contact .alt button:hover{color:var(--paper)}
 .contact .meta{margin-top:18px;font:400 13px var(--font-mono);color:var(--haze)}
+html:not(.js) .contact .copy-email,.js .contact .mailto-email{display:none}
 
 /* ---------- Footer ---------- */
 .site-footer{border-top:1px solid var(--line);padding:34px 0 40px;font-size:14px;color:var(--fg-subtle);background:var(--night-900)}

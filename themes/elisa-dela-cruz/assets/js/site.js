@@ -171,8 +171,12 @@
 		var btn = e.target.closest('[data-copy]');
 		if (!btn) { return; }
 		var value = btn.getAttribute('data-copy');
-		if (!value || !navigator.clipboard) { return; }
+		if (!value) { return; }
 		e.preventDefault();
+		if (!navigator.clipboard) {
+			window.location.href = 'mailto:' + value;
+			return;
+		}
 		var status = $('#copy-status');
 		navigator.clipboard.writeText(value).then(function () {
 			if (!btn.hasAttribute('data-label')) { btn.setAttribute('data-label', btn.innerHTML); }
