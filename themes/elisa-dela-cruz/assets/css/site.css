@@ -205,7 +205,7 @@ section{position:relative}
 .swatch-art .dots i.sel{outline:2px solid #2a2530;outline-offset:3px}
 
 @media (max-width:760px){
-  .work-grid,.called-grid,.testis,.testis.three,.cs-next{grid-template-columns:1fr}
+  .work-grid{grid-template-columns:1fr}
   .work-grid.swipe{display:grid;grid-auto-flow:column;grid-auto-columns:86%;grid-template-columns:none;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;margin:0 calc(var(--gutter)*-1);padding:4px var(--gutter) 18px;scroll-padding:0 var(--gutter);-webkit-overflow-scrolling:touch}
   .work-grid.swipe .card{scroll-snap-align:start}
   .work-grid.swipe .card:hover{transform:none}
@@ -358,4 +358,9 @@ html:not(.js) .contact .copy-email,.js .contact .mailto-email{display:none}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
   .js [data-reveal]{opacity:1;transform:none}
+}
+
+/* ---------- Single column on small screens (after the grids it overrides) ---------- */
+@media (max-width:760px){
+  .called-grid,.testis,.testis.three,.cs-next{grid-template-columns:1fr}
 }
