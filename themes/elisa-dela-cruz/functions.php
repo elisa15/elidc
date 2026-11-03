@@ -81,6 +81,9 @@ add_action( 'acf/init', 'edc_register_options_page' );
 function edc_opt( $selector, $default = '' ) {
 	if ( function_exists( 'get_field' ) ) {
 		$value = get_field( $selector, 'option' );
+		if ( null === $value ) {
+			$value = edc_acf_json_default( $selector );
+		}
 		if ( $value !== null && $value !== '' && $value !== false ) {
 			return $value;
 		}
@@ -94,11 +97,42 @@ function edc_opt( $selector, $default = '' ) {
 function edc_field( $selector, $default = '', $post_id = null ) {
 	if ( function_exists( 'get_field' ) ) {
 		$value = get_field( $selector, $post_id );
+		if ( null === $value ) {
+			$value = edc_acf_json_default( $selector );
+		}
 		if ( $value !== null && $value !== '' && $value !== false ) {
 			return $value;
 		}
 	}
 	return $default;
+}
+
+/**
+ * The acf-json default for a field that has never been saved. ACF only applies
+ * defaults when a field is read by key, so name lookups need this. Defaults from
+ * the legacy Global Theme Options group are skipped: they hold retired copy.
+ */
+function edc_acf_json_default( $name ) {
+	static $cache = array();
+	if ( ! is_string( $name ) || ! function_exists( 'acf_get_field' ) ) {
+		return null;
+	}
+	if ( array_key_exists( $name, $cache ) ) {
+		return $cache[ $name ];
+	}
+
+	$cache[ $name ] = null;
+	$field          = acf_get_field( $name );
+	if ( ! $field || ! isset( $field['default_value'] ) || '' === $field['default_value'] ) {
+		return null;
+	}
+	$group = acf_get_field_group( $field['parent'] );
+	if ( ! $group || 'group_edc_site_content' === $group['key'] ) {
+		return null;
+	}
+
+	$cache[ $name ] = $field['default_value'];
+	return $cache[ $name ];
 }
 
 /**
@@ -159,6 +193,8 @@ function edc_contact_form() {
 }
 
 require_once EDC_DIR . '/inc/content-model.php';
+require_once EDC_DIR . '/inc/template-helpers.php';
+require_once EDC_DIR . '/inc/projects-query.php';
 require_once EDC_DIR . '/inc/visibility.php';
 require_once EDC_DIR . '/inc/contact-form.php';
 require_once EDC_DIR . '/inc/security.php';
