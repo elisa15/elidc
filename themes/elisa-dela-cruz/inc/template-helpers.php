@@ -303,6 +303,17 @@ function edc_testimonial( $post_id ) {
 }
 
 /**
+ * Escaped attribution for a testimonial: "<b>Name</b> · Role, Company", skipping empty parts.
+ */
+function edc_testimonial_attribution( $testimonial ) {
+	if ( empty( $testimonial['name'] ) ) {
+		return '';
+	}
+	$detail = implode( ', ', array_filter( array( $testimonial['role'], $testimonial['company'] ) ) );
+	return '<b>' . esc_html( $testimonial['name'] ) . '</b>' . ( '' !== $detail ? ' · ' . esc_html( $detail ) : '' );
+}
+
+/**
  * Career log rows (newest first) with a 7-character hash on every row.
  */
 function edc_career_log() {
