@@ -232,67 +232,27 @@ function edc_enqueue_assets() {
 	// Legacy stylesheet loads last so un-migrated sections keep their look until they are rebuilt.
 	wp_enqueue_style( 'edc-style', get_stylesheet_uri(), array( 'edc-site' ), EDC_VERSION );
 
-	wp_enqueue_script( 'edc-gsap', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js', array(), '3.12.5', true );
-
-	wp_enqueue_script( 'edc-main', EDC_URI . '/assets/js/main.js', array( 'edc-gsap' ), EDC_VERSION, true );
-
-	// Dynamic data handed to main.js — terminal lines & testimonials — with
-	// fallbacks that exactly match the original static mockup content.
-	$default_terminal_lines = array(
-		array( 'p' => '$ whoami', 'o' => array( 'Elisa Dela Cruz', 'Senior WordPress & Shopify Developer' ) ),
-		array( 'p' => '$ expertise', 'o' => array( 'Shopify', 'WordPress', 'WooCommerce', 'Performance', 'SEO' ) ),
-		array( 'p' => '$ current_status', 'o' => array( 'Helping businesses launch better websites' ) ),
-		array( 'p' => '$ recent_work', 'o' => array( '✔ Shopify migration', '✔ Website rescue', '✔ Core Web Vitals', '✔ Security hardening' ), 'cls' => 'accent' ),
-	);
-	$terminal_rows = edc_repeater( 'terminal_lines', array() );
-	$terminal_lines = $default_terminal_lines;
-	if ( ! empty( $terminal_rows ) ) {
-		$terminal_lines = array();
-		foreach ( $terminal_rows as $row ) {
-			$output_raw = isset( $row['output'] ) ? $row['output'] : '';
-			$terminal_lines[] = array(
-				'p'   => isset( $row['prompt'] ) ? $row['prompt'] : '$',
-				'o'   => array_filter( array_map( 'trim', explode( "\n", $output_raw ) ) ),
-				'cls' => ! empty( $row['accent'] ) ? 'accent' : '',
-			);
-		}
-	}
-
-	// No fallback quotes: testimonials only ever come from real ACF rows.
-	$testimonial_rows = edc_repeater( 'testimonials', array() );
-	$testimonials = array();
-	if ( ! empty( $testimonial_rows ) ) {
-		$testimonials = array();
-		foreach ( $testimonial_rows as $row ) {
-			$quote = isset( $row['quote'] ) ? trim( (string) $row['quote'] ) : '';
-			if ( $quote === '' ) {
-				continue;
-			}
-			$name = isset( $row['name'] ) ? trim( (string) $row['name'] ) : '';
-			$company = isset( $row['company'] ) ? trim( (string) $row['company'] ) : '';
-			if ( $name === '' && $company !== '' ) {
-				$name = $company;
-				$company = '';
-			}
-			$testimonials[] = array(
-				'q' => $quote,
-				'n' => $name,
-				'c' => $company,
-				's' => isset( $row['rating'] ) ? intval( $row['rating'] ) : 5,
-			);
-		}
-	}
-
-	wp_add_inline_script(
-		'edc-main',
-		'window.edcData = ' . wp_json_encode( array(
-			'terminalLines' => $terminal_lines,
-			'testimonials'  => $testimonials,
-		) ) . ';',
-		'before'
+	wp_enqueue_script(
+		'edc-site',
+		EDC_URI . '/assets/js/site.js',
+		array(),
+		EDC_VERSION,
+		array(
+			'in_footer' => true,
+			'strategy'  => 'defer',
+		)
 	);
 }
 add_action( 'wp_enqueue_scripts', 'edc_enqueue_assets' );
+
+/**
+ * Mark JS support before first paint so hidden-until-revealed content and the
+ * mobile menu never flash; site.js loads deferred in the footer.
+ */
+function edc_print_js_class() {
+	echo "<script>document.documentElement.classList.add('js')</script>\n";
+}
+add_action( 'wp_head', 'edc_print_js_class', 0 );
 
 /* Nav menu fallback moved to inc/visibility.php */
 

@@ -6,7 +6,8 @@
 
 /* ---------- Base ---------- */
 *,*::before,*::after{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + 12px);-webkit-text-size-adjust:100%}
+[hidden]{display:none!important}
 body{margin:0;background:var(--surface);color:var(--fg);font:400 17px/1.65 var(--font-sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 img{max-width:100%;height:auto;display:block}
 a{color:inherit}
@@ -57,7 +58,12 @@ em.voice,.voice{font-family:var(--font-serif);font-style:italic;font-weight:500;
   .nav.open ul{display:flex}
   .nav ul li a{display:flex;min-height:52px;align-items:center;font-size:18px;border-bottom:1px solid rgba(255,255,255,.09)}
   .nav ul li:last-child a{border:0;margin-top:16px;justify-content:center}
-  .menu-btn{display:grid;place-items:center}
+  .menu-btn{display:grid;place-items:center;margin-left:auto}
+  /* Without JS the menu can't open, so show it in the page flow instead. */
+  html:not(.js) .nav{position:static}
+  html:not(.js) .nav-in{height:auto;flex-wrap:wrap;padding-block:12px}
+  html:not(.js) .menu-btn{display:none}
+  html:not(.js) .nav ul{display:flex;position:static;width:100%;padding:8px 0 0;border:0}
 }
 
 /* ---------- Sections ---------- */

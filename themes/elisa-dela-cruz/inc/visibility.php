@@ -350,9 +350,13 @@ function edc_print_google_analytics() {
 
 	$measurement_id = 'G-4TNEDPHB08';
 	define( 'EDC_GA_PRINTED', true );
+	// Local copies keep the dataLayer for debugging but never send hits to the live property.
+	$send_hits = 'local' !== wp_get_environment_type();
 	?>
 <!-- Google tag (gtag.js) -->
+<?php if ( $send_hits ) : ?>
 <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo rawurlencode( $measurement_id ); ?>"></script>
+<?php endif; ?>
 <script>
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}

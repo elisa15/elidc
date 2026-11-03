@@ -24,91 +24,28 @@ function edc_contact_form_styles() {
 .modal-box .wpcf7-form-control-wrap{display:block}
 .modal-box .wpcf7 input[type=text],
 .modal-box .wpcf7 input[type=email],
-.modal-box .wpcf7 textarea{
-  width:100%;
-  background:rgba(255,255,255,.04);
-  border:1px solid var(--border-2);
-  border-radius:8px;
-  padding:12px 14px;
-  color:#fff;
-  font-family:'Manrope',sans-serif;
-  font-size:14px;
-  line-height:1.4;
-  outline:none;
-  transition:border-color .25s,box-shadow .25s;
-}
-.modal-box .wpcf7 textarea{height:90px;resize:vertical;min-height:90px}
+.modal-box .wpcf7 textarea{width:100%;background:var(--night-900);border:1px solid var(--line-strong);border-radius:var(--radius-sm);padding:12px 14px;color:var(--paper);font:inherit;font-size:16px;line-height:1.4;transition:border-color var(--dur-ui) var(--ease)}
+.modal-box .wpcf7 textarea{min-height:110px;resize:vertical}
 .modal-box .wpcf7 input::placeholder,
-.modal-box .wpcf7 textarea::placeholder{color:var(--dim-2)}
+.modal-box .wpcf7 textarea::placeholder{color:var(--haze)}
 .modal-box .wpcf7 input:focus,
-.modal-box .wpcf7 textarea:focus{
-  border-color:rgba(255,47,177,.55);
-  box-shadow:0 0 0 3px rgba(255,47,177,.12);
-}
-.modal-box .wpcf7 .btn.btn-fill,
-.modal-box .wpcf7 input.wpcf7-submit{
-  width:100%;
-  justify-content:center;
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding:12px 24px;
-  border-radius:8px;
-  font-size:13.5px;
-  font-weight:700;
-  letter-spacing:.01em;
-  cursor:pointer;
-  font-family:inherit;
-  background:var(--grad);
-  background-size:200% 200%;
-  color:#fff;
-  border:none;
-  transition:background-position .6s ease,transform .25s;
-}
-.modal-box .wpcf7 .btn.btn-fill:hover,
-.modal-box .wpcf7 input.wpcf7-submit:hover{transform:translateY(-1px)}
+.modal-box .wpcf7 textarea:focus{border-color:var(--magenta)}
+.modal-box .wpcf7 input.wpcf7-submit{width:100%;min-height:48px;padding:0 22px;border:0;border-radius:var(--radius-md);background:var(--grad-btn);background-size:140% 100%;color:#fff;font:700 15px/1 var(--font-sans);cursor:pointer;transition:background-position var(--dur-panel) var(--ease)}
+.modal-box .wpcf7 input.wpcf7-submit:hover{background-position:100% 0}
+.modal-box .wpcf7 input.wpcf7-submit:focus-visible{outline-color:var(--paper)}
 .modal-box .wpcf7 .wpcf7-not-valid{border-color:#ff5c7a !important}
-.modal-box .wpcf7 .wpcf7-not-valid-tip{
-  display:block;
-  margin-top:6px;
-  font-size:12px;
-  color:#ff8aa0;
-}
-.modal-box .wpcf7 .wpcf7-response-output{
-  margin:4px 0 0;
-  padding:12px 14px;
-  border-radius:10px;
-  font-size:13px;
-  line-height:1.5;
-  border:1px solid var(--border);
-}
-.modal-box .wpcf7 form.sent .wpcf7-response-output{
-  border-color:rgba(80,200,140,.45);
-  background:rgba(80,200,140,.08);
-  color:#b8f0d0;
-}
+.modal-box .wpcf7 .wpcf7-not-valid-tip{display:block;margin-top:6px;font-size:13px;color:#ff8aa0}
+.modal-box .wpcf7 .wpcf7-response-output{margin:4px 0 0;padding:12px 14px;border-radius:var(--radius-sm);font-size:14px;line-height:1.5;border:1px solid var(--line)}
+.modal-box .wpcf7 form.sent .wpcf7-response-output{border-color:rgba(126,226,184,.45);background:rgba(126,226,184,.08);color:var(--mint)}
 .modal-box .wpcf7 form.failed .wpcf7-response-output,
 .modal-box .wpcf7 form.aborted .wpcf7-response-output,
 .modal-box .wpcf7 form.spam .wpcf7-response-output,
-.modal-box .wpcf7 form.invalid .wpcf7-response-output{
-  border-color:rgba(255,92,122,.45);
-  background:rgba(255,92,122,.08);
-  color:#ffb3c0;
-}
+.modal-box .wpcf7 form.invalid .wpcf7-response-output{border-color:rgba(255,92,122,.45);background:rgba(255,92,122,.08);color:#ffb3c0}
 /* Honeypot / challenge fields — hidden from humans */
-.edc-hp{
-  position:absolute !important;
-  left:-10000px !important;
-  top:auto !important;
-  width:1px !important;
-  height:1px !important;
-  overflow:hidden !important;
-  opacity:0 !important;
-  pointer-events:none !important;
-}
+.edc-hp{position:absolute !important;left:-10000px !important;top:auto !important;width:1px !important;height:1px !important;overflow:hidden !important;opacity:0 !important;pointer-events:none !important}
 CSS;
 
-	wp_add_inline_style( 'edc-style', $css );
+	wp_add_inline_style( 'edc-site', $css );
 }
 add_action( 'wp_enqueue_scripts', 'edc_contact_form_styles', 40 );
 
@@ -135,7 +72,7 @@ function edc_cf7_challenge_token( $ts ) {
 }
 
 /**
- * Inject honeypot + empty JS challenge fields (filled by main.js when modal opens).
+ * Inject honeypot + empty JS challenge fields (filled by assets/js/site.js when the modal opens).
  *
  * @param string $html Form HTML.
  * @return string
