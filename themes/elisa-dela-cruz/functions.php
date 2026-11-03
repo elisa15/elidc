@@ -50,47 +50,6 @@ function edc_setup() {
 add_action( 'after_setup_theme', 'edc_setup' );
 
 /* -------------------------------------------------------------------------
- * Custom Post Type: Project
- * (Registered here by the theme. Cursor only needs to attach an ACF field
- * group to this existing post type — see SCHEMA.md.)
- * ---------------------------------------------------------------------- */
-function edc_register_project_cpt() {
-	$labels = array(
-		'name'                  => __( 'Projects', 'elisa-dela-cruz' ),
-		'singular_name'         => __( 'Project', 'elisa-dela-cruz' ),
-		'menu_name'             => __( 'Projects', 'elisa-dela-cruz' ),
-		'add_new'               => __( 'Add New', 'elisa-dela-cruz' ),
-		'add_new_item'          => __( 'Add New Project', 'elisa-dela-cruz' ),
-		'edit_item'             => __( 'Edit Project', 'elisa-dela-cruz' ),
-		'new_item'              => __( 'New Project', 'elisa-dela-cruz' ),
-		'view_item'             => __( 'View Project', 'elisa-dela-cruz' ),
-		'view_items'            => __( 'View Projects', 'elisa-dela-cruz' ),
-		'search_items'          => __( 'Search Projects', 'elisa-dela-cruz' ),
-		'not_found'             => __( 'No projects found', 'elisa-dela-cruz' ),
-		'not_found_in_trash'    => __( 'No projects found in Trash', 'elisa-dela-cruz' ),
-		'all_items'             => __( 'All Projects', 'elisa-dela-cruz' ),
-		'archives'              => __( 'Project Archives', 'elisa-dela-cruz' ),
-		'featured_image'        => __( 'Project Screenshot', 'elisa-dela-cruz' ),
-		'set_featured_image'    => __( 'Set project screenshot', 'elisa-dela-cruz' ),
-		'remove_featured_image' => __( 'Remove project screenshot', 'elisa-dela-cruz' ),
-	);
-
-	register_post_type( 'project', array(
-		'labels'        => $labels,
-		'public'        => true,
-		'has_archive'   => true,
-		'rewrite'       => array( 'slug' => 'projects', 'with_front' => false ),
-		'menu_icon'     => 'dashicons-portfolio',
-		'menu_position' => 5,
-		'supports'      => array( 'title', 'editor', 'thumbnail', 'excerpt' ),
-		'show_in_rest'  => true,
-		'show_ui'       => true,
-		'show_in_menu'  => true,
-	) );
-}
-add_action( 'init', 'edc_register_project_cpt' );
-
-/* -------------------------------------------------------------------------
  * ACF Options Page (site-wide singleton content)
  * Guarded because acf_add_options_page() is an ACF PRO feature — if the
  * install only has free ACF, this simply won't register and every
@@ -199,6 +158,7 @@ function edc_contact_form() {
 	<?php
 }
 
+require_once EDC_DIR . '/inc/content-model.php';
 require_once EDC_DIR . '/inc/visibility.php';
 require_once EDC_DIR . '/inc/contact-form.php';
 require_once EDC_DIR . '/inc/security.php';
