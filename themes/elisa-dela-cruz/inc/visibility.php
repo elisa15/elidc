@@ -250,6 +250,73 @@ function edc_primary_menu_fallback() {
 }
 
 /**
+ * Footer site links: the "footer" menu when assigned, else the primary items.
+ *
+ * @return array<int,array{label:string,url:string,current:bool}>
+ */
+function edc_footer_nav_items() {
+	$locations = get_nav_menu_locations();
+	if ( empty( $locations['footer'] ) ) {
+		return edc_primary_nav_items();
+	}
+
+	$items = array();
+	$menu  = wp_get_nav_menu_items( $locations['footer'] );
+	foreach ( edc_filter_nav_menu_items( $menu ? $menu : array() ) as $item ) {
+		if ( ! empty( $item->menu_item_parent ) ) {
+			continue;
+		}
+		$items[] = array(
+			'label'   => $item->title,
+			'url'     => $item->url,
+			'current' => untrailingslashit( $item->url ) === untrailingslashit( home_url( add_query_arg( array() ) ) ),
+		);
+	}
+	return $items;
+}
+
+/**
+ * URL of a row in the legacy footer social repeater, or ''.
+ */
+function edc_footer_social_url( $type ) {
+	foreach ( edc_repeater( 'footer_social', array() ) as $row ) {
+		if ( isset( $row['type'], $row['url'] ) && $type === $row['type'] && edc_link_is_usable( $row['url'] ) ) {
+			return trim( $row['url'] );
+		}
+	}
+	return '';
+}
+
+/**
+ * CV, LinkedIn, GitHub and Email links for the footer; each only when set.
+ *
+ * @return array<int,array{label:string,url:string,attrs:string}>
+ */
+function edc_footer_elsewhere_links() {
+	$email = trim( (string) edc_opt( 'contact_email', '' ) );
+	$email = is_email( $email ) ? 'mailto:' . $email : edc_footer_social_url( 'email' );
+
+	$links = array(
+		array( 'CV ↓', edc_cv_url(), ' download data-ga-event="cv_download" data-ga-label="Footer CV"' ),
+		array( 'LinkedIn', edc_profile( 'linkedin_url' ) ? edc_profile( 'linkedin_url' ) : edc_footer_social_url( 'linkedin' ), ' rel="me noopener"' ),
+		array( 'GitHub', edc_profile( 'github_url' ) ? edc_profile( 'github_url' ) : edc_footer_social_url( 'github' ), ' rel="me noopener"' ),
+		array( 'Email', $email, '' ),
+	);
+
+	$out = array();
+	foreach ( $links as $link ) {
+		if ( edc_link_is_usable( $link[1] ) ) {
+			$out[] = array(
+				'label' => $link[0],
+				'url'   => trim( $link[1] ),
+				'attrs' => $link[2],
+			);
+		}
+	}
+	return $out;
+}
+
+/**
  * Width and height attributes for a theme or Media Library image URL, or ''.
  */
 function edc_image_size_attrs( $url ) {

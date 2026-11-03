@@ -292,6 +292,12 @@ section{position:relative}
 .site-footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
 .site-footer nav{display:flex;gap:6px 22px;flex-wrap:wrap}
 .site-footer a{text-decoration:none;color:var(--mist);min-height:var(--tap);display:inline-flex;align-items:center}
+.site-footer a:hover,.site-footer a[aria-current]{color:var(--paper)}
+.back-to-top{position:fixed;right:22px;bottom:22px;z-index:var(--z-nav);width:var(--tap);height:var(--tap);border-radius:var(--radius-pill);display:grid;place-items:center;background:var(--grad-btn);color:#fff;border:1px solid rgba(255,255,255,.16);box-shadow:var(--shadow-float);opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity var(--dur-ui) var(--ease),visibility var(--dur-ui),transform var(--dur-ui) var(--ease)}
+.back-to-top.is-visible{opacity:1;visibility:visible;transform:none}
+.back-to-top svg{width:18px;height:18px;fill:currentColor}
+.back-to-top:focus-visible{outline-color:var(--paper)}
+@media (max-width:640px){.back-to-top{right:16px;bottom:16px}}
 
 /* ---------- Case study ---------- */
 .cs-hero{padding:150px 0 60px;background:radial-gradient(50% 60% at 90% 0,rgba(255,47,177,.14),transparent 70%),var(--night-900)}
