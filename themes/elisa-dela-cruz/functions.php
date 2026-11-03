@@ -223,14 +223,18 @@ add_action( 'init', 'edc_disable_emojis' );
  * Assets
  * ---------------------------------------------------------------------- */
 function edc_enqueue_assets() {
+	// Fraunces 600 and JetBrains Mono 700 are only used by the legacy style.css; drop them when it is retired.
 	wp_enqueue_style(
 		'edc-google-fonts',
-		'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap',
+		'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=JetBrains+Mono:wght@400;500;700&family=Manrope:wght@400;500;600;700;800&display=swap',
 		array(),
 		null
 	);
 
-	wp_enqueue_style( 'edc-style', get_stylesheet_uri(), array(), EDC_VERSION );
+	wp_enqueue_style( 'edc-tokens', EDC_URI . '/assets/css/tokens.css', array(), EDC_VERSION );
+	wp_enqueue_style( 'edc-site', EDC_URI . '/assets/css/site.css', array( 'edc-tokens' ), EDC_VERSION );
+	// Legacy stylesheet loads last so un-migrated sections keep their look until they are rebuilt.
+	wp_enqueue_style( 'edc-style', get_stylesheet_uri(), array( 'edc-site' ), EDC_VERSION );
 
 	wp_enqueue_script( 'edc-gsap', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js', array(), '3.12.5', true );
 
