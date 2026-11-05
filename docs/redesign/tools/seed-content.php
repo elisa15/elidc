@@ -182,7 +182,7 @@ edc_seed_fields( $profile, 'option', array(
 			array( 'feat', 'going independent', 'HEAD → now', '2022 →', 'Client Website Manager · independent · local & overseas clients', 1, 'Customising Shopify themes, building WordPress funnels and landing pages, and looking after sites long-term. I also coordinate a small team of SEO specialists, Google Ads people, copywriters and junior developers.', '' ),
 			array( 'feat', 'Shopify at scale, four storefronts', 'US beauty brand, via Microsourcing', '2020–22', 'Shopify Developer · US account', 0, 'Maintaining the US store and replicating it for Australia, Europe and Canada. In the same years: WordPress development and support for Capability Partners and The AM College in Australia, and consulting for Cenit Lighting in Manila.', '' ),
 			array( 'chore', 'dedicated developer for US & AU accounts', 'Microsourcing, EMAPTA', '2018–20', 'WordPress Developer · Fourandhalf (US real estate) · RedEx Digital & Filta (AU)', 0, 'Designing, building and maintaining WordPress sites for overseas agencies and their clients.', '' ),
-			array( 'feat', 'leading the dev team', '2nd Office', '2016–18', 'Mid-level Web Developer / Project Coordinator', 0, "E-commerce sites for US clients on Shopify and WordPress. I ran the dev team, the scrum meetings and the client reporting. This is where I learned that most project problems aren't code problems.", '' ),
+			array( 'feat', 'leading the dev team', '', '2016–18', 'Mid-level Web Developer / Project Coordinator', 0, "E-commerce sites for US clients on Shopify and WordPress. I ran the dev team, the scrum meetings and the client reporting. This is where I learned that most project problems aren't code problems.", '' ),
 			array( 'refactor', 'agency years, AU clients', 'ZigZag / The Colour Club, Follow Digital', '2015–18', 'Web Developer · Sage + SASS builds', 0, 'Custom WordPress themes for Australian agencies, including photography portfolios built from scratch on Sage.', '' ),
 			array( 'feat', 'HTML, jQuery, PHP, WordPress & Magento', 'Glued Creative', '2012–15', 'Web Developer', 0, 'Where WordPress became the main tool, with Magento along the way.', '' ),
 			array( 'init', 'PHP portal systems', 'J.A.O. Builders', '2011', 'PHP Web Developer', 0, 'A web-based portal system and its database, from scratch. The first commit.', '' ),
@@ -487,7 +487,7 @@ edc_seed_fields( $hg, 'option', array(
 		array( 'Say the uncomfortable thing early.', "If the timeline, plugin or plan won't work, you'll hear it in week one, not week six." ),
 	) ),
 	'home_pull_testimonial'  => $chris,
-	'home_lead_text'         => 'Scrum, client reporting and dev coordination at 2nd Office. Today I coordinate SEO specialists, ads, copywriters and junior developers on client projects.',
+	'home_lead_text'         => 'I\'ve led development teams, creative teams and junior developers, and I mentor young designers and aspiring developers. Today I coordinate SEO specialists, ads, copywriters and junior developers on client projects.',
 	'home_record_heading'    => '',      // ⏳
 	'home_stats'             => array(), // ⏳
 	'home_testimonials'      => array( $rachel, $chris ),
