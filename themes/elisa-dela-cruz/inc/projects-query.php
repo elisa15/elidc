@@ -90,3 +90,74 @@ function edc_projects_filtered_noindex_yoast( $robots ) {
 	return $robots;
 }
 add_filter( 'wpseo_robots_array', 'edc_projects_filtered_noindex_yoast' );
+
+/**
+ * The next featured project with a case study (by menu order, wrapping to the first), or 0.
+ */
+function edc_next_case_study( $post_id ) {
+	$ids = get_posts( array(
+		'post_type'        => 'project',
+		'post_status'      => 'publish',
+		'posts_per_page'   => -1,
+		'fields'           => 'ids',
+		'orderby'          => array( 'menu_order' => 'ASC', 'date' => 'DESC' ),
+		'suppress_filters' => false,
+	) );
+	$ids = array_values( array_filter( $ids, function ( $id ) {
+		return edc_project_has_case_study( $id ) && 'featured' === edc_field( 'tier', 'selected', $id );
+	} ) );
+
+	$at = array_search( (int) $post_id, array_map( 'intval', $ids ), true );
+	if ( count( $ids ) < 2 && false !== $at ) {
+		return 0;
+	}
+	if ( false === $at ) {
+		return $ids ? (int) $ids[0] : 0;
+	}
+	return (int) $ids[ ( $at + 1 ) % count( $ids ) ];
+}
+
+/**
+ * CreativeWork schema for a case study, authored by the Person Yoast outputs.
+ * Confidential projects use their display label only (never a real client name).
+ */
+function edc_case_study_schema( $graph ) {
+	if ( ! is_singular( 'project' ) || ! is_array( $graph ) ) {
+		return $graph;
+	}
+	$project = edc_project( get_queried_object_id() );
+	if ( ! $project ) {
+		return $graph;
+	}
+
+	$person = '';
+	foreach ( $graph as $piece ) {
+		if ( isset( $piece['@type'], $piece['@id'] ) && in_array( 'Person', (array) $piece['@type'], true ) ) {
+			$person = $piece['@id'];
+			break;
+		}
+	}
+
+	$headline = trim( wp_strip_all_tags( (string) edc_field( 'cs_headline', '', $project['id'] ) ) );
+	$work     = array(
+		'@type'  => 'CreativeWork',
+		'@id'    => get_permalink( $project['id'] ) . '#case-study',
+		'name'   => '' !== $headline ? $headline : $project['title'],
+		'url'    => get_permalink( $project['id'] ),
+		'about'  => implode( ', ', array_filter( array_merge( wp_list_pluck( $project['platforms'], 'name' ), array( $project['industry'] ) ) ) ),
+		'author' => $person ? array( '@id' => $person ) : array( '@type' => 'Person', 'name' => edc_profile( 'profile_name', 'Elisa A. Dela Cruz' ) ),
+	);
+	if ( '' !== $project['summary'] ) {
+		$work['description'] = $project['summary'];
+	}
+	if ( $project['client'] && ! $project['confidential'] ) {
+		$work['sourceOrganization'] = array( '@type' => 'Organization', 'name' => $project['client'] );
+	}
+	if ( '' === $work['about'] ) {
+		unset( $work['about'] );
+	}
+
+	$graph[] = $work;
+	return $graph;
+}
+add_filter( 'wpseo_schema_graph', 'edc_case_study_schema' );
