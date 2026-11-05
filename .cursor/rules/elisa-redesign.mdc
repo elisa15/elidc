@@ -19,7 +19,7 @@ You are implementing the approved B− redesign of Elisa A. Dela Cruz's portfoli
 
 ## Safety
 - Never deploy, never connect to or run anything against elisaarmas.com or its database, never push to `main`. Work on a branch and open a pull request.
-- Seed scripts must refuse to run when `home_url()` contains `elisaarmas.com`.
+- Seed scripts must refuse to run when `home_url()` contains `elisaarmas.com`, unless run through the approved deploy runbook (`docs/redesign/07-deploy-plan.md`).
 - Do not delete ACF data or legacy field groups; retired templates move to `template-parts/legacy/`.
 
 ## Code

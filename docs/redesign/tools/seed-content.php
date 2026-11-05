@@ -5,7 +5,8 @@
  *   wp eval-file docs/redesign/tools/seed-content.php
  *
  * Idempotent: re-running updates existing posts and options, never duplicates them.
- * Every ⏳ pending field is written as empty. Never run this against the live site.
+ * Every ⏳ pending field is written as empty. On the live site it runs only through the
+ * approved deploy runbook (docs/redesign/07-deploy-plan.md).
  *
  * @package elisa-dela-cruz
  */
@@ -13,7 +14,10 @@
 if ( ! defined( 'WP_CLI' ) || ! WP_CLI ) {
 	exit( "Run with: wp eval-file docs/redesign/tools/seed-content.php\n" );
 }
-if ( false !== stripos( home_url(), 'elisaarmas.com' ) || false !== stripos( site_url(), 'elisaarmas.com' ) ) {
+// The live site is refused unless the deploy runbook passes Elisa's approval explicitly
+// (docs/redesign/07-deploy-plan.md): --exec="define( 'EDC_SEED_LIVE', 'approved-by-elisa' );"
+$edc_is_live = false !== stripos( home_url(), 'elisaarmas.com' ) || false !== stripos( site_url(), 'elisaarmas.com' );
+if ( $edc_is_live && ! ( defined( 'EDC_SEED_LIVE' ) && 'approved-by-elisa' === EDC_SEED_LIVE ) ) {
 	WP_CLI::error( 'Refusing to seed: this looks like the live site (' . home_url() . ').' );
 }
 if ( ! function_exists( 'update_field' ) || ! function_exists( 'acf_get_field' ) ) {

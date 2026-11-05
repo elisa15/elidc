@@ -10,6 +10,7 @@ Everything Cursor (or any developer) needs to build the approved B− redesign i
 | 04 | [04-build-spec.md](04-build-spec.md) | File-by-file build: assets, PHP structure, templates, template parts, JS, SEO, performance |
 | 05 | [05-content-entry.md](05-content-entry.md) | The exact, verified content to enter; what stays empty |
 | 06 | [06-tasks-and-qa.md](06-tasks-and-qa.md) | Ordered tasks with acceptance criteria, QA checklist, definition of done |
+| 07 | [07-deploy-plan.md](07-deploy-plan.md) | How the theme and content go live: stages, backup, rollback |
 
 ## Sources of truth
 
