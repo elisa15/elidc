@@ -30,7 +30,8 @@ $edc_elsewhere    = edc_footer_elsewhere_links();
 </footer>
 
 <?php
-if ( edc_should_show_section( 'show_contact_modal' ) ) {
+// The Contact page has the form inline, so it skips the modal (one form, unique field IDs).
+if ( edc_should_show_section( 'show_contact_modal' ) && ! is_page_template( 'page-templates/contact.php' ) ) {
 	get_template_part( 'template-parts/modal-contact' );
 }
 ?>

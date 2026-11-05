@@ -18,29 +18,29 @@ function edc_contact_form_styles() {
 	}
 
 	$css = <<<'CSS'
-.modal-box .wpcf7{margin:0}
-.modal-box .wpcf7 form{display:flex;flex-direction:column;gap:14px;margin:0}
-.modal-box .wpcf7 form p{margin:0}
-.modal-box .wpcf7-form-control-wrap{display:block}
-.modal-box .wpcf7 input[type=text],
-.modal-box .wpcf7 input[type=email],
-.modal-box .wpcf7 textarea{width:100%;background:var(--night-900);border:1px solid var(--line-strong);border-radius:var(--radius-sm);padding:12px 14px;color:var(--paper);font:inherit;font-size:16px;line-height:1.4;transition:border-color var(--dur-ui) var(--ease)}
-.modal-box .wpcf7 textarea{min-height:110px;resize:vertical}
-.modal-box .wpcf7 input::placeholder,
-.modal-box .wpcf7 textarea::placeholder{color:var(--haze)}
-.modal-box .wpcf7 input:focus,
-.modal-box .wpcf7 textarea:focus{border-color:var(--magenta)}
-.modal-box .wpcf7 input.wpcf7-submit{width:100%;min-height:48px;padding:0 22px;border:0;border-radius:var(--radius-md);background:var(--grad-btn);background-size:140% 100%;color:#fff;font:700 15px/1 var(--font-sans);cursor:pointer;transition:background-position var(--dur-panel) var(--ease)}
-.modal-box .wpcf7 input.wpcf7-submit:hover{background-position:100% 0}
-.modal-box .wpcf7 input.wpcf7-submit:focus-visible{outline-color:var(--paper)}
-.modal-box .wpcf7 .wpcf7-not-valid{border-color:#ff5c7a !important}
-.modal-box .wpcf7 .wpcf7-not-valid-tip{display:block;margin-top:6px;font-size:13px;color:#ff8aa0}
-.modal-box .wpcf7 .wpcf7-response-output{margin:4px 0 0;padding:12px 14px;border-radius:var(--radius-sm);font-size:14px;line-height:1.5;border:1px solid var(--line)}
-.modal-box .wpcf7 form.sent .wpcf7-response-output{border-color:rgba(126,226,184,.45);background:rgba(126,226,184,.08);color:var(--mint)}
-.modal-box .wpcf7 form.failed .wpcf7-response-output,
-.modal-box .wpcf7 form.aborted .wpcf7-response-output,
-.modal-box .wpcf7 form.spam .wpcf7-response-output,
-.modal-box .wpcf7 form.invalid .wpcf7-response-output{border-color:rgba(255,92,122,.45);background:rgba(255,92,122,.08);color:#ffb3c0}
+:is(.modal-box,.contact-form) .wpcf7{margin:0}
+:is(.modal-box,.contact-form) .wpcf7 form{display:flex;flex-direction:column;gap:14px;margin:0}
+:is(.modal-box,.contact-form) .wpcf7 form p{margin:0}
+:is(.modal-box,.contact-form) .wpcf7-form-control-wrap{display:block}
+:is(.modal-box,.contact-form) .wpcf7 input[type=text],
+:is(.modal-box,.contact-form) .wpcf7 input[type=email],
+:is(.modal-box,.contact-form) .wpcf7 textarea{width:100%;background:var(--night-900);border:1px solid var(--line-strong);border-radius:var(--radius-sm);padding:12px 14px;color:var(--paper);font:inherit;font-size:16px;line-height:1.4;transition:border-color var(--dur-ui) var(--ease)}
+:is(.modal-box,.contact-form) .wpcf7 textarea{min-height:110px;resize:vertical}
+:is(.modal-box,.contact-form) .wpcf7 input::placeholder,
+:is(.modal-box,.contact-form) .wpcf7 textarea::placeholder{color:var(--haze)}
+:is(.modal-box,.contact-form) .wpcf7 input:focus,
+:is(.modal-box,.contact-form) .wpcf7 textarea:focus{border-color:var(--magenta)}
+:is(.modal-box,.contact-form) .wpcf7 input.wpcf7-submit{width:100%;min-height:48px;padding:0 22px;border:0;border-radius:var(--radius-md);background:var(--grad-btn);background-size:140% 100%;color:#fff;font:700 15px/1 var(--font-sans);cursor:pointer;transition:background-position var(--dur-panel) var(--ease)}
+:is(.modal-box,.contact-form) .wpcf7 input.wpcf7-submit:hover{background-position:100% 0}
+:is(.modal-box,.contact-form) .wpcf7 input.wpcf7-submit:focus-visible{outline-color:var(--paper)}
+:is(.modal-box,.contact-form) .wpcf7 .wpcf7-not-valid{border-color:#ff5c7a !important}
+:is(.modal-box,.contact-form) .wpcf7 .wpcf7-not-valid-tip{display:block;margin-top:6px;font-size:13px;color:#ff8aa0}
+:is(.modal-box,.contact-form) .wpcf7 .wpcf7-response-output{margin:4px 0 0;padding:12px 14px;border-radius:var(--radius-sm);font-size:14px;line-height:1.5;border:1px solid var(--line)}
+:is(.modal-box,.contact-form) .wpcf7 form.sent .wpcf7-response-output{border-color:rgba(126,226,184,.45);background:rgba(126,226,184,.08);color:var(--mint)}
+:is(.modal-box,.contact-form) .wpcf7 form.failed .wpcf7-response-output,
+:is(.modal-box,.contact-form) .wpcf7 form.aborted .wpcf7-response-output,
+:is(.modal-box,.contact-form) .wpcf7 form.spam .wpcf7-response-output,
+:is(.modal-box,.contact-form) .wpcf7 form.invalid .wpcf7-response-output{border-color:rgba(255,92,122,.45);background:rgba(255,92,122,.08);color:#ffb3c0}
 /* Honeypot / challenge fields — hidden from humans */
 .edc-hp{position:absolute !important;left:-10000px !important;top:auto !important;width:1px !important;height:1px !important;overflow:hidden !important;opacity:0 !important;pointer-events:none !important}
 CSS;

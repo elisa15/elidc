@@ -32,14 +32,10 @@ while ( have_posts() ) :
 	$learned  = trim( (string) edc_field( 'learned', '', $id ) );
 	$quote    = edc_testimonial( (int) edc_field( 'cs_testimonial', 0, $id ) );
 
-	$rich = function ( $name ) use ( $id ) {
-		$value = edc_field( $name, '', $id );
-		return is_string( $value ) && '' !== trim( wp_strip_all_tags( $value ) ) ? wp_kses_post( $value ) : '';
-	};
-	$situation = $rich( 'situation' );
-	$tricky    = $rich( 'tricky' );
-	$technical = $rich( 'technical_breakdown' );
-	$result    = $rich( 'result' );
+	$situation = edc_rich_field( 'situation', $id );
+	$tricky    = edc_rich_field( 'tricky', $id );
+	$technical = edc_rich_field( 'technical_breakdown', $id );
+	$result    = edc_rich_field( 'result', $id );
 
 	$next = edc_next_case_study( $id );
 

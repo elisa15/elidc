@@ -341,3 +341,21 @@ function edc_verified_stats() {
 	}
 	return $out;
 }
+
+/**
+ * A WYSIWYG field as sanitised HTML, or '' when it holds no visible text.
+ */
+function edc_rich_field( $name, $post_id = null ) {
+	$value = edc_field( $name, '', $post_id );
+	if ( ! is_string( $value ) || '' === trim( wp_strip_all_tags( $value ) ) ) {
+		return '';
+	}
+	return wp_kses_post( $value );
+}
+
+/**
+ * Lines of a textarea field, trimmed, empties dropped.
+ */
+function edc_lines( $text ) {
+	return array_values( array_filter( array_map( 'trim', preg_split( '/\R/', (string) $text ) ), 'strlen' ) );
+}

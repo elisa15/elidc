@@ -202,9 +202,9 @@
 			.filter(function (el) { return el.offsetParent !== null && el.getAttribute('tabindex') !== '-1' && !el.closest('[aria-hidden="true"]'); });
 	}
 
-	function fillCf7Challenge() {
-		if (!$('#edc_js_ts', modal) || !window.fetch) { return; }
-		fetch(modal.getAttribute('data-challenge') || '/wp-json/edc/v1/cf7-challenge', { credentials: 'same-origin' })
+	function fillCf7Challenge(scope) {
+		if (!scope || !$('input[name="edc_js_ts"]', scope) || !window.fetch) { return; }
+		fetch((modal && modal.getAttribute('data-challenge')) || '/wp-json/edc/v1/cf7-challenge', { credentials: 'same-origin' })
 			.then(function (r) { return r.ok ? r.json() : null; })
 			.then(function (data) {
 				if (!data || !data.ts || !data.token) { return; }
@@ -214,10 +214,19 @@
 			.catch(function () {});
 	}
 
+	// The Contact page form sits in the page: fill its challenge on first focus.
+	var inlineForm = $('.contact-form');
+	if (inlineForm) {
+		inlineForm.addEventListener('focusin', function fillOnce() {
+			inlineForm.removeEventListener('focusin', fillOnce);
+			fillCf7Challenge(inlineForm);
+		});
+	}
+
 	function openModal() {
 		lastFocus = document.activeElement;
 		setMenu(false);
-		fillCf7Challenge();
+		fillCf7Challenge(modal);
 		modal.classList.add('open');
 		document.body.style.overflow = 'hidden';
 		var first = modalFocusables()[0];
