@@ -295,7 +295,7 @@ section{position:relative}
 .contact .alt a,.contact .alt button{color:var(--mist);text-decoration:none;min-height:var(--tap);display:inline-flex;align-items:center;background:none;border:0;font:inherit;cursor:pointer;padding:0}
 .contact .alt a:hover,.contact .alt button:hover{color:var(--paper)}
 .contact .meta{margin-top:18px;font:400 13px var(--font-mono);color:var(--haze)}
-html:not(.js) .copy-email,.js .mailto-email{display:none}
+html:not(.js) .copy-email,html.js .mailto-email{display:none!important}
 
 /* ---------- Footer ---------- */
 .site-footer{border-top:1px solid var(--line);padding:34px 0 40px;font-size:14px;color:var(--fg-subtle);background:var(--night-900)}
@@ -455,3 +455,7 @@ html:not(.js) .copy-email,.js .mailto-email{display:none}
 .post-list article{border-bottom:1px solid var(--line);padding-bottom:24px}
 .post-list h2{font-size:clamp(22px,2.4vw,28px);margin-bottom:8px}
 .post-list h2 a{color:var(--fg);text-decoration:none}
+.compact.no-visual{border-top:3px solid var(--accent-ink)}
+.compact.no-visual .compact-body{padding-top:22px}
+.highlight dl>div{display:contents}
+@media (max-width:760px){.cs-shot .shot-img{aspect-ratio:4/3}}

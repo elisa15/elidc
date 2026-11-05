@@ -214,13 +214,18 @@
 			.catch(function () {});
 	}
 
-	// The Contact page form sits in the page: fill its challenge on first focus.
+	// The Contact page form sits in the page: fill its challenge on load and refresh it
+	// on interaction once it is half an hour old (the server accepts tokens up to 2h).
 	var inlineForm = $('.contact-form');
 	if (inlineForm) {
-		inlineForm.addEventListener('focusin', function fillOnce() {
-			inlineForm.removeEventListener('focusin', fillOnce);
+		var challengeAt = 0;
+		var refreshChallenge = function () {
+			if (Date.now() - challengeAt < 30 * 60 * 1000) { return; }
+			challengeAt = Date.now();
 			fillCf7Challenge(inlineForm);
-		});
+		};
+		refreshChallenge();
+		['focusin', 'pointerdown', 'input'].forEach(function (type) { inlineForm.addEventListener(type, refreshChallenge); });
 	}
 
 	function openModal() {
