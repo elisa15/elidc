@@ -1,6 +1,6 @@
 <?php
 /**
- * Generic page template.
+ * Generic page: night title, content on cream.
  *
  * @package elisa-dela-cruz
  */
@@ -16,16 +16,18 @@ get_header();
 while ( have_posts() ) :
 	the_post();
 	?>
-	<section style="padding-top:170px;">
-		<div class="wrap" style="max-width:760px;">
-			<div class="section-head" data-reveal="up">
-				<h1 style="font-size:clamp(30px,4vw,46px);font-weight:700;letter-spacing:-.015em;color:#fff;"><?php the_title(); ?></h1>
-			</div>
-			<div style="color:var(--dim);font-size:16px;line-height:1.8;">
-				<?php the_content(); ?>
-			</div>
-		</div>
-	</section>
+<section class="page-hero">
+  <div class="wrap">
+    <h1><?php the_title(); ?></h1>
+  </div>
+</section>
+	<?php if ( '' !== trim( wp_strip_all_tags( get_the_content() ) ) ) : ?>
+<section class="sec light page-sec">
+  <div class="wrap">
+    <div class="prose entry"><?php the_content(); ?></div>
+  </div>
+</section>
+	<?php endif; ?>
 	<?php
 endwhile;
 ?>

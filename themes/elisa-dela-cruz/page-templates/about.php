@@ -43,7 +43,7 @@ while ( have_posts() ) :
       <?php endif; ?>
     </div>
     <?php if ( $portrait ) : ?>
-    <div class="hex"><?php echo wp_get_attachment_image( $portrait, 'large', false, array( 'loading' => 'eager', 'fetchpriority' => 'high' ) ); ?></div>
+    <div class="hex"><?php echo wp_get_attachment_image( $portrait, 'edc-portrait', false, array( 'loading' => 'eager', 'fetchpriority' => 'high' ) ); ?></div>
     <?php endif; ?>
   </div>
 </section>

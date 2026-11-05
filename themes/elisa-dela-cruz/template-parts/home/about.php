@@ -27,7 +27,7 @@ $has_portrait = $portrait && wp_attachment_is_image( $portrait );
 <section class="sec light" id="about">
   <div class="wrap btc<?php echo $has_portrait ? '' : ' no-portrait'; ?>">
     <?php if ( $has_portrait ) : ?>
-    <div class="hex" data-reveal><?php echo wp_get_attachment_image( $portrait, 'large', false, array( 'loading' => 'lazy' ) ); ?></div>
+    <div class="hex" data-reveal><?php echo wp_get_attachment_image( $portrait, 'edc-portrait', false, array( 'loading' => 'lazy' ) ); ?></div>
     <?php endif; ?>
     <div data-reveal>
       <?php get_template_part( 'template-parts/common/path-eyebrow', null, array( 'path' => 'about' ) ); ?>

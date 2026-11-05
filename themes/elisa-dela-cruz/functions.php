@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'EDC_VERSION', '1.3.0' );
+define( 'EDC_VERSION', '1.4.0' );
 define( 'EDC_DIR', get_template_directory() );
 define( 'EDC_URI', get_template_directory_uri() );
 
@@ -38,9 +38,9 @@ function edc_setup() {
 	add_theme_support( 'align-wide' );
 	add_theme_support( 'responsive-embeds' );
 
-	// Image sizes used across case-study cards / single-project hero.
-	add_image_size( 'edc-case-card', 900, 700, true );
-	add_image_size( 'edc-project-hero', 1600, 1000, true );
+	// Project screenshots (cropped from the top of the page) and the hex portrait.
+	add_image_size( 'edc-shot', 1200, 705, array( 'center', 'top' ) );
+	add_image_size( 'edc-portrait', 600, 672, true );
 
 	register_nav_menus( array(
 		'primary' => __( 'Primary Navigation', 'elisa-dela-cruz' ),
@@ -167,9 +167,8 @@ function edc_link_is_usable( $url ) {
 }
 
 /**
- * Output the Contact Form 7 shortcode configured on the options page.
- * Falls back to a static (non-functional) form matching the mockup design
- * if CF7 isn't installed/active yet or no shortcode has been set.
+ * Output the Contact Form 7 form configured on the options page. Without CF7 or a
+ * shortcode there is no working form, so visitors get nothing and admins get a note.
  */
 function edc_contact_form() {
 	$shortcode = edc_opt( 'cf7_shortcode', '' );
@@ -179,17 +178,9 @@ function edc_contact_form() {
 		echo do_shortcode( $shortcode );
 		return;
 	}
-	?>
-	<form onsubmit="return false;" style="display:flex;flex-direction:column;gap:14px;">
-		<input type="text" placeholder="Your name" style="width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border-2);border-radius:8px;padding:12px 14px;color:#fff;font-family:'Manrope',sans-serif;font-size:14px;">
-		<input type="email" placeholder="name@company.com" style="width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border-2);border-radius:8px;padding:12px 14px;color:#fff;font-family:'Manrope',sans-serif;font-size:14px;">
-		<textarea placeholder="Tell me about your project" style="width:100%;height:90px;resize:none;background:rgba(255,255,255,.04);border:1px solid var(--border-2);border-radius:8px;padding:12px 14px;color:#fff;font-family:'Manrope',sans-serif;font-size:14px;"></textarea>
-		<button class="btn btn-fill" type="submit" style="width:100%;justify-content:center;">Send message</button>
-		<?php if ( current_user_can( 'edit_theme_options' ) ) : ?>
-			<p style="font-size:11px;color:var(--dim-2);margin-top:4px;">Admin note: install &amp; activate Contact Form 7, then paste its shortcode into Site Content &rarr; CF7 Shortcode to make this form functional.</p>
-		<?php endif; ?>
-	</form>
-	<?php
+	if ( current_user_can( 'edit_theme_options' ) ) {
+		echo '<p class="admin-note">Admin note: activate Contact Form 7, then paste its shortcode into Site Content &rarr; CF7 Shortcode.</p>';
+	}
 }
 
 require_once EDC_DIR . '/inc/content-model.php';
@@ -219,18 +210,15 @@ add_action( 'init', 'edc_disable_emojis' );
  * Assets
  * ---------------------------------------------------------------------- */
 function edc_enqueue_assets() {
-	// Fraunces 600 and JetBrains Mono 700 are only used by the legacy style.css; drop them when it is retired.
 	wp_enqueue_style(
 		'edc-google-fonts',
-		'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=JetBrains+Mono:wght@400;500;700&family=Manrope:wght@400;500;600;700;800&display=swap',
+		'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap',
 		array(),
 		null
 	);
 
 	wp_enqueue_style( 'edc-tokens', EDC_URI . '/assets/css/tokens.css', array(), EDC_VERSION );
 	wp_enqueue_style( 'edc-site', EDC_URI . '/assets/css/site.css', array( 'edc-tokens' ), EDC_VERSION );
-	// Legacy stylesheet loads last so un-migrated sections keep their look until they are rebuilt.
-	wp_enqueue_style( 'edc-style', get_stylesheet_uri(), array( 'edc-site' ), EDC_VERSION );
 
 	wp_enqueue_script(
 		'edc-site',
@@ -265,3 +253,19 @@ add_filter( 'excerpt_more', function () {
 
 // Keep the block editor's default width sane for standard pages.
 add_theme_support( 'wp-block-styles' );
+
+/**
+ * Open the Google Fonts connections early (the font files are versioned by
+ * Google, so they can't be preloaded by URL).
+ */
+function edc_font_preconnect( $urls, $relation ) {
+	if ( 'preconnect' === $relation ) {
+		$urls[] = 'https://fonts.googleapis.com';
+		$urls[] = array(
+			'href'        => 'https://fonts.gstatic.com',
+			'crossorigin' => 'anonymous',
+		);
+	}
+	return $urls;
+}
+add_filter( 'wp_resource_hints', 'edc_font_preconnect', 10, 2 );

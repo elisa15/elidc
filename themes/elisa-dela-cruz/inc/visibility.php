@@ -385,6 +385,6 @@ function edc_admin_preview_styles() {
 	}
 	$css = '.edc-section--admin-hidden{outline:1px dashed rgba(255,47,177,.45);outline-offset:6px;position:relative;}'
 		. '.edc-admin-hidden-badge{position:absolute;top:10px;left:10px;z-index:50;font:600 11px/1.2 Manrope,system-ui,sans-serif;letter-spacing:.04em;text-transform:uppercase;color:#fff;background:rgba(20,20,26,.82);border:1px solid rgba(255,47,177,.55);border-radius:999px;padding:6px 10px;pointer-events:none;}';
-	wp_add_inline_style( 'edc-style', $css );
+	wp_add_inline_style( 'edc-site', $css );
 }
 add_action( 'wp_enqueue_scripts', 'edc_admin_preview_styles', 30 );

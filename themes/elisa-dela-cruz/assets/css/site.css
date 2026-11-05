@@ -447,3 +447,11 @@ html:not(.js) .copy-email,.js .mailto-email{display:none}
   .called-grid,.testis,.testis.three,.cs-next{grid-template-columns:1fr}
 }
 .page-sec .gap-top{margin-top:clamp(56px,7vw,80px)}
+.entry a,.post-list a{color:var(--accent-ink)}
+.entry h2,.entry h3{margin:1.6em 0 .6em;color:var(--fg)}
+.entry ul,.entry ol{padding-left:22px}
+.entry img{max-width:100%;height:auto}
+.post-list{display:grid;gap:28px;max-width:760px}
+.post-list article{border-bottom:1px solid var(--line);padding-bottom:24px}
+.post-list h2{font-size:clamp(22px,2.4vw,28px);margin-bottom:8px}
+.post-list h2 a{color:var(--fg);text-decoration:none}

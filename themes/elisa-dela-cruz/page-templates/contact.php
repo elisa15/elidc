@@ -45,7 +45,7 @@ while ( have_posts() ) :
 <section class="sec light page-sec">
   <div class="wrap contact-layout<?php echo $has_form ? '' : ' no-form'; ?>">
 		<?php if ( $has_form ) : ?>
-    <div class="contact-form">
+    <div class="contact-form" data-challenge="<?php echo esc_url( rest_url( 'edc/v1/cf7-challenge' ) ); ?>">
       <h2 class="sr-only">Send a message</h2>
       <?php edc_contact_form(); ?>
     </div>

@@ -204,7 +204,7 @@
 
 	function fillCf7Challenge(scope) {
 		if (!scope || !$('input[name="edc_js_ts"]', scope) || !window.fetch) { return; }
-		fetch((modal && modal.getAttribute('data-challenge')) || '/wp-json/edc/v1/cf7-challenge', { credentials: 'same-origin' })
+		fetch(scope.getAttribute('data-challenge') || '/wp-json/edc/v1/cf7-challenge', { credentials: 'same-origin' })
 			.then(function (r) { return r.ok ? r.json() : null; })
 			.then(function (data) {
 				if (!data || !data.ts || !data.token) { return; }

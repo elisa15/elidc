@@ -21,7 +21,7 @@ $image = function ( $id ) use ( $project ) {
 	if ( '' === $alt ) {
 		$alt = trim( $project['client'] . ' homepage' );
 	}
-	return wp_get_attachment_image( $id, 'large', false, array( 'loading' => 'lazy', 'alt' => $alt ) );
+	return wp_get_attachment_image( $id, 'edc-shot', false, array( 'loading' => 'lazy', 'alt' => $alt ) );
 };
 
 $badge = $visual['badge'] ? '<span class="badge">' . esc_html( $visual['badge'] ) . '</span>' : '';
