@@ -1,6 +1,8 @@
 # 07 — Deploy plan (elisaarmas.com)
 
-Status: **waiting for Elisa's approval.** Nothing below has been run on the live site.
+Status: **deployed 6 Nov 2026** (approved by Elisa). Backup: `~/Backups/elisaarmas-deploy/2026-11-06-0636/`. The old theme is still on the server as `themes/elisa-dela-cruz.previous` until Elisa confirms.
+
+Deploy notes: the tools upload first landed under the full Mac path inside `edc-deploy-tmp` (macOS rsync ignores `/./`); fixed with the `upload-tools` stage. 4 of 71 thumbnails failed: old Elementor/The7 SVG and font files, unrelated. The menu's "Home" (`#top`) item shows on live, because the hero is public; remove it in Appearance → Menus if you don't want it.
 
 Everything runs from the Mac through `docs/redesign/tools/deploy.sh <stage>`, over the `dcx` SSH key, one stage at a time. Between stages we stop and check.
 

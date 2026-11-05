@@ -4,6 +4,7 @@
 #   docs/redesign/tools/deploy.sh <stage>
 #
 # Stages, in order: preflight · backup · upload · migrate · verify · cleanup
+# Re-send only the scripts and screenshots: upload-tools
 # Undo:             rollback-theme · rollback-db <backup-dir>
 #
 # Only touches public_html/wp-content (themes/elisa-dela-cruz*, a temporary
@@ -56,10 +57,17 @@ backup() {
 upload() {
 	say "Upload theme to $THEMES/elisa-dela-cruz.incoming"
 	rsync -a --delete --exclude '.DS_Store' -e "ssh ${SSH_OPTS[*]}" "$REPO/themes/elisa-dela-cruz/" "$HOST:$THEMES/elisa-dela-cruz.incoming/"
-	say "Upload deploy tools and screenshots to $TMP"
-	rsync -a --delete -e "ssh ${SSH_OPTS[*]}" --relative "$REPO/./docs/redesign/tools/" "$REPO/./docs/redesign/reference/prototype/assets/shots/" "$HOST:$TMP/"
+	upload_tools
 	say "Swap themes (old copy kept as elisa-dela-cruz.previous)"
 	remote 'cd wp-content/themes && test -d elisa-dela-cruz.incoming && test ! -e elisa-dela-cruz.previous && mv elisa-dela-cruz elisa-dela-cruz.previous && mv elisa-dela-cruz.incoming elisa-dela-cruz && grep -m1 Version elisa-dela-cruz/style.css'
+}
+
+upload_tools() {
+	say "Upload deploy tools and screenshots to $TMP"
+	# Relative paths from the repo root (macOS rsync ignores the /./ marker).
+	remote 'rm -rf wp-content/edc-deploy-tmp && mkdir -p wp-content/edc-deploy-tmp'
+	( cd "$REPO" && rsync -aR -e "ssh ${SSH_OPTS[*]}" docs/redesign/tools docs/redesign/reference/prototype/assets/shots "$HOST:$TMP/" )
+	remote 'find wp-content/edc-deploy-tmp -type f | sort'
 }
 
 migrate() {
@@ -115,6 +123,7 @@ rollback_db() {
 
 case "${1:-}" in
 	preflight|backup|upload|migrate|verify|cleanup) "$1" ;;
+	upload-tools) upload_tools ;;
 	rollback-theme) rollback_theme ;;
 	rollback-db) rollback_db "${2:-}" ;;
 	*) sed -n '2,10p' "$0"; exit 1 ;;
