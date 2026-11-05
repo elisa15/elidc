@@ -605,6 +605,287 @@
             ]
         },
         {
+            "key": "field_edc_h_tab_tools",
+            "label": "Toolbox",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_edc_h_tools_h2",
+            "label": "Heading",
+            "name": "home_tools_heading",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Allowed HTML: <em class=\"voice\">.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Tools change. The approach <em class=\"voice\">doesn't</em>.",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_edc_h_tools_sub",
+            "label": "Intro",
+            "name": "home_tools_intro",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Right platform, clean build, safe launch, and docs your team can run with.",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_edc_h_tools",
+            "label": "Tools",
+            "name": "home_tools",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Tools you actually use. Grouped into the three orbits.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 30,
+            "collapsed": "",
+            "button_label": "Add tool",
+            "rows_per_page": 30,
+            "sub_fields": [
+                {
+                    "key": "field_edc_h_tools_g",
+                    "label": "Group",
+                    "name": "group",
+                    "aria-label": "",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "35",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "platform": "Platform",
+                        "interface": "Interface",
+                        "build": "Build & ship"
+                    },
+                    "default_value": "platform",
+                    "return_format": "value",
+                    "multiple": 0,
+                    "allow_null": 0,
+                    "ui": 0,
+                    "ajax": 0,
+                    "placeholder": "",
+                    "parent_repeater": "field_edc_h_tools"
+                },
+                {
+                    "key": "field_edc_h_tools_n",
+                    "label": "Name",
+                    "name": "name",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "65",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "parent_repeater": "field_edc_h_tools"
+                }
+            ]
+        },
+        {
+            "key": "field_edc_h_roles_h3",
+            "label": "Roles heading",
+            "name": "home_roles_heading",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "One hire. The whole team.",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_edc_h_roles",
+            "label": "Roles",
+            "name": "home_roles",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "What you do on a project, in order.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 8,
+            "collapsed": "",
+            "button_label": "Add role",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_edc_h_roles_t",
+                    "label": "What",
+                    "name": "title",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "parent_repeater": "field_edc_h_roles"
+                },
+                {
+                    "key": "field_edc_h_roles_r",
+                    "label": "As",
+                    "name": "role",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "parent_repeater": "field_edc_h_roles"
+                }
+            ]
+        },
+        {
+            "key": "field_edc_h_skills_h3",
+            "label": "Skills heading",
+            "name": "home_skills_heading",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "What I'm good at",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_edc_h_skills",
+            "label": "Skills",
+            "name": "home_skills",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Short skill names.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 16,
+            "collapsed": "",
+            "button_label": "Add skill",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_edc_h_skills_n",
+                    "label": "Skill",
+                    "name": "name",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "parent_repeater": "field_edc_h_skills"
+                }
+            ]
+        },
+        {
             "key": "field_edc_h_tab_about",
             "label": "Behind the code",
             "name": "",
@@ -1137,6 +1418,26 @@
             "ui": 1,
             "ui_on_text": "",
             "ui_off_text": ""
+        },
+        {
+            "key": "field_edc_h_show_tools",
+            "label": "Toolbox",
+            "name": "show_home_tools",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
         }
     ],
     "location": [
@@ -1160,5 +1461,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1793620000
+    "modified": 1793922715
 }

@@ -64,6 +64,65 @@
 		onMedia(wide, function () { if (wide.matches) { setMenu(false); } });
 	}
 
+	/* ---------- Motion extras (skipped when reduced motion is on) ---------- */
+	if (!reduceMotion.matches) {
+		// Bridge statement: one line at a time.
+		$$('.bridge p').forEach(function (p) {
+			var parts = p.innerHTML.split(/<br\s*\/?>/i);
+			if (parts.length < 2) { return; }
+			p.innerHTML = parts.map(function (html, i) { return '<span class="line" style="--d:' + i + '">' + html + '</span>'; }).join('<br>');
+			var bridge = p.closest('.bridge');
+			if (bridge) { bridge.setAttribute('data-reveal', ''); }
+		});
+
+		// Stagger siblings that reveal together (cards, roles, testimonials).
+		$$('[data-reveal]').forEach(function (el) {
+			var sibs = Array.prototype.filter.call(el.parentNode.children, function (c) { return c.hasAttribute('data-reveal'); });
+			var i = sibs.indexOf(el);
+			if (sibs.length > 1 && i > 0) { el.style.setProperty('--d', String(Math.min(i, 7))); }
+		});
+
+		// Thin scroll progress bar.
+		var bar = document.createElement('div');
+		bar.className = 'scroll-progress';
+		bar.setAttribute('aria-hidden', 'true');
+		document.body.appendChild(bar);
+		var ticking = false;
+		var paint = function () {
+			var max = document.documentElement.scrollHeight - window.innerHeight;
+			bar.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, window.scrollY / max) : 0) + ')';
+			ticking = false;
+		};
+		window.addEventListener('scroll', function () {
+			if (!ticking) { ticking = true; window.requestAnimationFrame(paint); }
+		}, { passive: true });
+		paint();
+
+		// Stats count up once when they come into view ("13+" counts 0 to 13, then keeps the "+").
+		var stats = $$('.stat b');
+		if (stats.length && 'IntersectionObserver' in window) {
+			var countIo = new IntersectionObserver(function (entries) {
+				entries.forEach(function (entry) {
+					if (!entry.isIntersecting) { return; }
+					countIo.unobserve(entry.target);
+					var el = entry.target;
+					var m = el.textContent.match(/^(\D*)(\d[\d,]*)(.*)$/);
+					if (!m) { return; }
+					var end = parseInt(m[2].replace(/,/g, ''), 10);
+					var start = null;
+					var step = function (t) {
+						if (start === null) { start = t; }
+						var k = Math.min(1, (t - start) / 1200);
+						el.textContent = m[1] + Math.round(end * (1 - Math.pow(1 - k, 3))).toLocaleString() + m[3];
+						if (k < 1) { window.requestAnimationFrame(step); }
+					};
+					window.requestAnimationFrame(step);
+				});
+			}, { threshold: 0.6 });
+			stats.forEach(function (el) { countIo.observe(el); });
+		}
+	}
+
 	/* ---------- Reveal ---------- */
 	var reveals = $$('[data-reveal]');
 	if (reveals.length) {

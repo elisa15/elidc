@@ -222,3 +222,15 @@ Empty blocks don't render, so the pages are publishable with only the "enter now
 - Enter the content above; upload screenshots as WebP.
 - Assign page templates; set the primary menu (Work → `/projects/`, Services, About, Contact).
 - Check Search Console for "Elisa Dela Cruz" queries before changing the homepage title in Yoast.
+
+## Update, 6 Nov 2026 (Elisa's feedback)
+
+Source: Elisa's 2026 portfolio PDF (`Elisa-Dela-Cruz-Portfolio-2026.pdf`) and her instructions in chat. All of it is in `tools/seed-content.php`.
+
+- Grouped cards split: Boat O'Craigo, Frankland Estate and God's Hill Wines are separate projects; so are Winehub and PerkRunner, and Cenit Lighting and Oasis Water. The old grouped posts are drafted (not deleted) and their URLs redirect to the new cards.
+- Homepage featured: US beauty brand, Boat O'Craigo, God's Hill Wines, Winehub, PerkRunner, Frankland Estate. Cenit and Oasis moved to Selected work on /projects/.
+- 25 Selected work projects and 2 Technical highlights, with summaries in Elisa's portfolio wording. Screenshots are fresh captures of the live sites (1440px); Sound & Sight uses Elisa's own full-size design file. Work-in-progress wineries, prototypes and sites without a public page have no screenshot.
+- Christopher Sorini: shown (Elisa asked), with the review and title from the portfolio. Company and LinkedIn link still ⏳.
+- Stats: 13+ years, 150+ projects, 5 countries (portfolio page 1).
+- New homepage Toolbox section: tools (portfolio page 3), roles (page 1) and skills (pages 1 and 18).
+- Still anonymous: the US beauty brand. The portfolio names it, but the site keeps it unnamed until Elisa says otherwise.

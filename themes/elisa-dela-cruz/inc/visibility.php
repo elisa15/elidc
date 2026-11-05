@@ -127,6 +127,7 @@ function edc_section_anchor_map() {
 	return array(
 		'work'         => 'show_work',
 		'services'     => 'show_home_called',
+		'stack'        => 'show_home_tools',
 		'about'        => 'show_home_about',
 		'track-record' => 'show_home_record',
 		'contact'      => 'show_cta',

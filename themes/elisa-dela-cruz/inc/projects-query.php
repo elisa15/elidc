@@ -161,3 +161,23 @@ function edc_case_study_schema( $graph ) {
 	return $graph;
 }
 add_filter( 'wpseo_schema_graph', 'edc_case_study_schema' );
+
+/**
+ * Grouped project cards that were split up (Nov 2026): send their old URLs to the new cards.
+ */
+function edc_project_retired_slug_redirect() {
+	if ( ! is_404() ) {
+		return;
+	}
+	$map  = array(
+		'three-wineries'     => 'boat-ocraigo',
+		'perkrunner-winehub' => 'winehub',
+		'cenit-oasis'        => 'cenit-lighting',
+	);
+	$path = trim( (string) wp_parse_url( isset( $_SERVER['REQUEST_URI'] ) ? wp_unslash( $_SERVER['REQUEST_URI'] ) : '', PHP_URL_PATH ), '/' ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+	if ( preg_match( '#^projects/([a-z0-9-]+)$#', $path, $m ) && isset( $map[ $m[1] ] ) ) {
+		wp_safe_redirect( get_post_type_archive_link( 'project' ) . '#project-' . $map[ $m[1] ], 301 );
+		exit;
+	}
+}
+add_action( 'template_redirect', 'edc_project_retired_slug_redirect', 5 );

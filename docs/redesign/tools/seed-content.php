@@ -214,14 +214,14 @@ edc_seed_fields( $tg, $rachel, array(
 
 $chris = edc_seed_post( 'testimonial', '', 'Christopher Sorini – LinkedIn', array(), 'christopher-sorini' );
 edc_seed_fields( $tg, $chris, array(
-	'quote'                => "Give her an unfamiliar technology, and she'll learn it quickly, then teach you a thing or two along the way. … Elisa is someone I was fortunate to hire and would gladly work with again.",
-	'quote_short'          => "She brings the confidence to challenge assumptions and the judgment to make that pushback constructive. If a timeline needs rethinking or there's a better way to approach a problem, she'll speak up and explain why.",
+	'quote'                => "Out of the dozens of candidates I interviewed, she stood out for her independent thinking, curiosity, and versatility. She brings the confidence to challenge assumptions and the judgment to make that pushback constructive. Give her an unfamiliar technology, and she'll learn it quickly, then teach you a thing or two along the way. As her role grew, she led our UX and UI teams.",
+	'quote_short'          => 'Elisa is someone I was fortunate to hire and would gladly work with again.',
 	'person_name'          => 'Christopher Sorini',
-	'person_role'          => '', // ⏳
-	'company'              => '', // ⏳
+	'person_role'          => 'Director of Automation and Technical Solutions',
+	'company'              => '', // Not named in the portfolio.
 	'relationship'         => 'employer',
-	'source_url'           => '', // ⏳
-	'permission_confirmed' => 0,  // ⏳ off until Elisa confirms
+	'source_url'           => '', // ⏳ LinkedIn recommendation URL
+	'permission_confirmed' => 1,  // Elisa asked for it on the site, 6 Nov 2026.
 ) );
 
 /* ---------------------------------------------------------------------------
@@ -343,111 +343,174 @@ $p_beauty = edc_seed_project( 'us-beauty-brand', 'One beauty brand, four Shopify
 	'learned'             => '', // ⏳
 ) );
 
-$p_wineries = edc_seed_project( 'three-wineries', 'Three wineries, moved to Shopify', 2, array( 'solved', 'built' ), array( 'shopify' ), array(
+// Featured (homepage + top of /projects/). Wording from Elisa's 2026 portfolio PDF.
+$p_boat = edc_seed_project( 'boat-ocraigo', "Boat O'Craigo, moved to Shopify", 2, array( 'built', 'solved' ), array( 'shopify' ), array(
 	'tier'                => 'featured',
-	'client_display_name' => "Boat O'Craigo, Frankland Estate and God's Hill",
+	'client_display_name' => "Boat O'Craigo",
 	'industry_badge'      => 'Wine',
-	'region'              => 'Australia',
-	'role'                => 'Design & development',
-	'summary'             => "Australian wineries moved off older platforms onto custom Shopify stores. For Boat O'Craigo I did the new design too.",
-	'names'               => edc_seed_rows( array( 'name', 'note' ), array(
-		array( "Boat O'Craigo", 'Yarra Valley' ),
-		array( 'Frankland Estate', '' ),
-		array( "God's Hill", 'Barossa Valley' ),
-	) ),
-	'chips'               => $chips( array( 'Migration' ) ),
-	'visual_mode'         => 'screenshot',
-	'screenshot'          => edc_seed_image( 'boatocraigo.jpg', "Boat O'Craigo homepage" ),
+	'region'              => 'Yarra Valley, AU',
+	'role'                => 'Platform migration',
+	'summary'             => 'Moved a boutique Yarra Valley winery onto Shopify with wine club integration, with zero disruption to ongoing club sales. Wines, cellar door tastings, dining and private events now live in one store.',
+	'chips'               => $chips( array( 'Wine club', 'Migration' ) ),
+	'screenshot'          => edc_seed_image( 'boatocraigo-live.jpg', "Boat O'Craigo homepage" ),
 	'browser_label'       => 'boatocraigo.com.au',
-	'visual_badge'        => '+ 2 more wineries',
 	'live_url'            => 'https://boatocraigo.com.au/',
-	'behind_meta'         => 'migrations',
+	'behind_meta'         => 'migration · Shopify',
 	'behind_rows'         => $behind( array(
-		array( 'from', 'Vin Creative (×2), WordPress (×1)' ),
-		array( 'to', 'custom Shopify stores' ),
-		array( 'did', "Boat O'Craigo: new design + build. Frankland Estate, God's Hill: custom build + migration" ),
+		array( 'needed', 'a new store without interrupting wine club sales' ),
+		array( 'did', 'new design, Shopify build, wine club integration, migration' ),
+		array( 'now', 'wines, tastings, dining and events in one store' ),
 	) ),
 ) );
 
-$p_perk = edc_seed_project( 'perkrunner-winehub', 'Selling subscriptions to Shopify merchants', 3, array( 'built' ), array( 'wordpress' ), array(
-	'tier'                 => 'featured',
-	'client_display_name'  => 'PerkRunner and Winehub',
-	'industry_badge'       => 'Shopify subscription and loyalty software',
-	'role'                 => 'Design & development',
-	'summary'              => 'Designed and built from scratch: the websites for two Shopify subscription and loyalty platforms, PerkRunner and Winehub.',
-	'chips'                => $chips( array( 'Design' ) ),
-	'visual_mode'          => 'split',
-	'screenshot'           => edc_seed_image( 'perkrunner.jpg', 'PerkRunner homepage' ),
-	'screenshot_secondary' => edc_seed_image( 'winehub.jpg', 'Winehub homepage' ),
-	'browser_label'        => 'perkrunner.com · winehub.io',
-	'behind_meta'          => 'built · from scratch',
-	'behind_rows'          => $behind( array(
-		array( 'needed', 'marketing sites for two SaaS products' ),
-		array( 'did', 'design, build and launch, from blank page to live' ),
-		array( 'stack', 'WordPress' ),
-	) ),
-) );
-
-$p_sound = edc_seed_project( 'sound-and-sight', 'From design file to working website', 4, array( 'built' ), array( 'wordpress', 'elementor' ), array(
+$p_godshill = edc_seed_project( 'gods-hill-wines', "God's Hill Wines, rebuilt on Shopify", 3, array( 'built', 'solved' ), array( 'shopify' ), array(
 	'tier'                => 'featured',
-	'client_display_name' => 'Sound & Sight Solutions',
-	'industry_badge'      => 'Smart home & AV',
-	'region'              => 'Chicago, US',
-	'role'                => 'Development',
-	'summary'             => 'A custom WordPress site for Sound & Sight Solutions, a Chicago smart-home and AV company, built from their design all the way to deployment.',
-	'chips'               => $chips( array( 'Custom' ) ),
-	'visual_mode'         => 'screenshot',
-	'screenshot'          => edc_seed_image( 'soundsight-design.jpg', 'Sound and Sight Solutions homepage design' ),
-	'browser_label'       => 'Sound & Sight Solutions',
-	'visual_badge'        => 'design file',
-	'behind_meta'         => 'built · design → deploy',
+	'client_display_name' => "God's Hill Wines",
+	'industry_badge'      => 'Wine',
+	'region'              => 'Barossa Valley, AU',
+	'role'                => 'Shopify migration',
+	'summary'             => 'Rebuilt a family-owned Barossa winery on Shopify with wine club integration. Migrated the full product range and enhanced the product photography so every bottle looks its best.',
+	'chips'               => $chips( array( 'Wine club', 'Product migration' ) ),
+	'screenshot'          => edc_seed_image( 'godshill.jpg', "God's Hill Wines homepage" ),
+	'browser_label'       => 'godshillwines.com',
+	'live_url'            => 'https://godshillwines.com/',
+	'behind_meta'         => 'migration · Shopify',
 	'behind_rows'         => $behind( array(
-		array( 'needed', 'a working site matching the approved design' ),
-		array( 'did', 'custom build, responsive behaviour, deployment' ),
-		array( 'stack', 'WordPress · Elementor' ),
+		array( 'did', 'Shopify rebuild, wine club integration, full product migration' ),
+		array( 'plus', 'enhanced product photography across the range' ),
 	) ),
 ) );
 
-$p_cenit = edc_seed_project( 'cenit-oasis', 'A Shopify store, then the sister brand', 5, array( 'built' ), array( 'shopify', 'wordpress', 'elementor' ), array(
-	'tier'                 => 'featured',
-	'client_display_name'  => 'Cenit Lighting and Oasis Water Philippines',
-	'industry_badge'       => 'Lighting and water',
-	'region'               => 'Philippines',
-	'role'                 => 'Shopify & WordPress developer',
-	'summary'              => 'Cenit Lighting hired me to build their Shopify store. Then they brought me back to turn their design for Oasis Water into a working WordPress site in Elementor.',
-	'card_span'            => 'half',
-	'visual_mode'          => 'split',
-	'screenshot'           => edc_seed_image( 'cenit.jpg', 'Cenit Lighting Shopify store' ),
-	'screenshot_secondary' => edc_seed_image( 'oasis.jpg', 'Oasis Water Philippines homepage' ),
-	'browser_label'        => 'shop.cenitlighting.com · oasiswaterph.com',
-	'behind_meta'          => 'built · repeat client',
-	'behind_rows'          => $behind( array(
-		array( 'first', 'Shopify store for Cenit Lighting (their WordPress site stayed as is)' ),
-		array( 'then', 'Oasis Water Philippines: their design, built in WordPress + Elementor' ),
-		array( 'why it matters', 'they came back' ),
+$p_winehub = edc_seed_project( 'winehub', "Winehub's marketing site", 4, array( 'built' ), array( 'wordpress' ), array(
+	'tier'                => 'featured',
+	'client_display_name' => 'Winehub',
+	'industry_badge'      => 'SaaS',
+	'region'              => 'Worldwide',
+	'role'                => 'Design & development',
+	'summary'             => 'Designed and built the marketing site for a Shopify wine club, subscription and loyalty platform used by wineries worldwide, with custom feature pages and product mockups drawn from the real app.',
+	'chips'               => $chips( array( 'UI design', 'Product mockups' ) ),
+	'screenshot'          => edc_seed_image( 'winehub-live.jpg', 'Winehub homepage' ),
+	'browser_label'       => 'winehub.io',
+	'live_url'            => 'https://winehub.io/',
+	'behind_meta'         => 'built · from scratch',
+	'behind_rows'         => $behind( array(
+		array( 'did', 'design and build, custom feature pages' ),
+		array( 'mockups', 'dashboard, members, email automation, integrations' ),
+		array( 'stack', 'custom WordPress' ),
 	) ),
 ) );
 
-// Selected work and highlights: name, platform and region/role only (summaries and links ⏳).
-$minor = array(
-	array( 'tvi-resource-development', 'TVI Resource Development', array( 'wordpress', 'elementor' ), 'selected', 'PH', 'From scratch to deployment', array() ),
-	array( 'st-augustine-gold-copper', 'St. Augustine Gold & Copper', array( 'wordpress', 'elementor' ), 'selected', 'PH', 'From scratch to deployment', array() ),
-	array( 'dd-music', 'D&D Music', array( 'wordpress', 'elementor' ), 'selected', 'PH', 'From scratch to deployment', array() ),
-	array( 'futbol-funatics', 'Futbol Funatics', array( 'wordpress', 'elementor' ), 'selected', 'PH', 'From scratch to deployment', array() ),
-	array( 'sorini-strategic-advisors', 'Sorini Strategic Advisors', array( 'wordpress', 'elementor' ), 'selected', '', 'Design → deploy', array() ),
-	array( 'vertical-green', 'Vertical Green', array( 'wordpress', 'elementor' ), 'selected', '', 'Implemented their design + updates', array() ),
-	array( 'home-of-lights', 'Home of Lights', array( 'shopify' ), 'highlight', '', 'Custom PDP template', array(
+$p_perk = edc_seed_project( 'perkrunner', "PerkRunner's marketing site", 5, array( 'built' ), array( 'wordpress' ), array(
+	'tier'                => 'featured',
+	'client_display_name' => 'PerkRunner',
+	'industry_badge'      => 'SaaS',
+	'region'              => 'Worldwide',
+	'role'                => 'Design & development',
+	'summary'             => "Designed and built the marketing site for a Shopify subscriptions and loyalty app: five core pages, eight feature pages, a grouped mega menu, and story-led product visuals that walk through a customer's journey.",
+	'chips'               => $chips( array( 'UX writing', 'Design system' ) ),
+	'screenshot'          => edc_seed_image( 'perkrunner-live.jpg', 'PerkRunner homepage' ),
+	'browser_label'       => 'perkrunner.com',
+	'live_url'            => 'https://perkrunner.com/',
+	'behind_meta'         => 'built · from scratch',
+	'behind_rows'         => $behind( array(
+		array( 'pages', '5 core pages, 8 feature pages, grouped mega menu' ),
+		array( 'did', 'design system, UX writing, build' ),
+		array( 'stack', 'custom WordPress' ),
+	) ),
+) );
+
+$p_frankland = edc_seed_project( 'frankland-estate', "Frankland Estate's new Shopify store", 6, array( 'built', 'solved' ), array( 'shopify' ), array(
+	'tier'                => 'featured',
+	'client_display_name' => 'Frankland Estate',
+	'industry_badge'      => 'Wine',
+	'region'              => 'Western Australia',
+	'role'                => 'Shopify store setup',
+	'summary'             => 'Set up a new Shopify store for a leading Western Australian winery, migrated from VinCreative with wine club integration. Included pickup locations and email domain setup with the client team.',
+	'chips'               => $chips( array( 'Wine club', 'Migration' ) ),
+	'screenshot'          => edc_seed_image( 'frankland-live.jpg', 'Frankland Estate homepage' ),
+	'browser_label'       => 'franklandestate.com.au',
+	'live_url'            => 'https://franklandestate.com.au/',
+	'behind_meta'         => 'migration · Shopify',
+	'behind_rows'         => $behind( array(
+		array( 'from', 'VinCreative' ),
+		array( 'to', 'Shopify, with wine club integration' ),
+		array( 'plus', 'pickup locations, email domain setup' ),
+	) ),
+) );
+
+// Retired grouped cards: kept as drafts (nothing deleted), old URLs redirect to the new cards.
+foreach ( array( 'three-wineries', 'perkrunner-winehub', 'cenit-oasis' ) as $old_slug ) {
+	$old = get_page_by_path( $old_slug, OBJECT, 'project' );
+	if ( $old && 'draft' !== $old->post_status ) {
+		wp_update_post( array( 'ID' => $old->ID, 'post_status' => 'draft' ) );
+		WP_CLI::log( "Drafted grouped project #{$old->ID}: {$old_slug}" );
+	}
+}
+
+// Selected work: name, platform, region, role, summary, screenshot where the live site is Elisa's work.
+// array( slug, title, kinds, platforms, region, role, industry, summary, chips, shot, label, url )
+$selected = array(
+	array( 'enerco', 'Enerco', array( 'built', 'solved' ), array( 'shopify', 'woocommerce' ), 'United States', 'Ecommerce migration', 'Heating & propane', 'Migrated a US heating and propane manufacturer to Shopify: 100+ SKUs across hoses, regulators, heaters and accessories. Zero data loss and full SEO redirect coverage.', array( '100+ SKUs', 'SEO redirects' ), 'enerco.jpg', 'enerco.com', 'https://enerco.com/' ),
+	array( 'grand-teton-collection', 'Grand Teton Collection', array( 'built', 'solved' ), array( 'shopify', 'woocommerce' ), 'United States', 'WooCommerce → Shopify', 'Outdoor heating', 'Moved a US outdoor heating brand from WooCommerce to Shopify while keeping SEO intact. Built a full video hero and restructured navigation across wood stoves, pellet stoves, ash vacuums and accessories.', array( 'Migration', 'Video hero' ), 'grandteton.jpg', 'grandtetoncollection.com', 'https://grandtetoncollection.com/' ),
+	array( 'fuelkeg', 'FuelKeg', array( 'built', 'solved' ), array( 'shopify', 'woocommerce' ), 'United States', 'WooCommerce → Shopify rebuild', 'Propane', 'Migrated a single-product propane brand to Shopify with a full brand-story rebuild, including a custom retailer finder, how-to-use section and product registration.', array( 'Brand rebuild', 'Retailer finder' ), 'fuelkeg.jpg', 'fuelkegrefillablepropanetank.com', 'https://fuelkegrefillablepropanetank.com/' ),
+	array( 'sound-and-sight', 'Sound & Sight Solutions', array( 'built' ), array( 'wordpress', 'elementor' ), 'Chicago, US', 'Development', 'Smart home & AV', 'A custom WordPress site for a Chicago smart-home and AV company, built from their design all the way to deployment.', array( 'Design → build' ), 'soundsight.jpg', 'Sound & Sight Solutions', '' ),
+	array( 'cenit-lighting', 'Cenit Lighting', array( 'built' ), array( 'shopify' ), 'Philippines', 'Shopify store build', 'Lighting', 'Hired to create the Shopify store for a Philippine lighting brand, running alongside its existing WordPress website, with category and brand navigation, new arrivals and a clean product-led look.', array( 'Store build', 'Collections' ), 'cenit-live.jpg', 'shop.cenitlighting.com', 'https://shop.cenitlighting.com/' ),
+	array( 'oasis-water', 'Oasis Water Philippines', array( 'built' ), array( 'wordpress', 'elementor' ), 'Philippines', 'WordPress developer', 'Water', "Cenit Lighting's sister brand brought me back to turn their design into a working WordPress site in Elementor.", array( 'Repeat client' ), 'oasis-live.jpg', 'oasiswaterph.com', 'https://oasiswaterph.com/' ),
+	array( 'flat-stacks', 'Flat Stacks', array( 'built' ), array( 'shopify' ), 'Australia', 'Custom development', 'Kitchenware', 'Built custom B2B ordering functionality that no off-the-shelf app could handle, for an Australian collapsible kitchenware brand.', array( 'B2B', 'Custom build' ), 'flatstacks.jpg', 'flatstacks.com.au', 'https://flatstacks.com.au/' ),
+	array( 'suubee-premium', 'Suubee Premium', array( 'built' ), array( 'wordpress' ), 'Australia', 'Custom WordPress build', 'Trading education', "Built in WordPress for an Australian trading education and mentorship program, with a custom API integration that brings live Australian stock data into the members' trading desk.", array( 'API integration', 'Members' ), 'suubee.jpg', 'suubeepremium.com', 'https://suubeepremium.com/' ),
+	array( 'maria-nicola', 'Maria Nicola', array( 'built' ), array( 'shopify' ), 'Australia', 'Ongoing design & optimisation partner', 'Jewellery', 'Long-term Shopify partner for an Australian jewellery brand. Custom design and conversion work around the signature 10 Way Necklace, multi-currency selling in six currencies, collection management and performance monitoring.', array( 'CRO', 'Multi-currency' ), 'marianicola.jpg', 'marianicola.com', 'https://marianicola.com/' ),
+	array( 'proserveus', 'ProServeUS', array( 'built' ), array( 'shopify' ), 'United States', 'Shopify design & build', 'Preparedness & government supply', 'Designed from the ground up and built on Shopify for a US preparedness and government contract supplier, with a catalogue of 80,000+ SKUs hidden from non-members. The store is currently on hiatus.', array( '80K SKUs', 'Members-only' ), '', '', '' ),
+	array( 'stanno', 'Stanno', array( 'built' ), array( 'shopify' ), '', 'B2B storefront build', 'Sportswear', "Delivered a Shopify Plus B2B storefront for a sportswear brand's wholesale buyers, with tiered pricing.", array( 'Shopify Plus', 'B2B wholesale' ), '', '', '' ),
+	array( 'capability-partners', 'Capability Partners', array( 'built' ), array( 'wordpress' ), 'Australia', 'Sole web developer since 2020', 'Asset management consulting', 'Sole web developer since 2020 for an Australian asset management consultancy and its training college: three company websites and a public learning management system.', array( 'LMS', 'Support' ), '', '', '' ),
+	array( 'chateau-tanunda', 'Château Tanunda', array( 'built' ), array( 'shopify' ), 'Barossa Valley, AU', 'Shopify migration & UI/UX', 'Wine', "Finishing a WordPress to Shopify migration for one of the Barossa's historic estates: a 30-page UI/UX review and designs for the homepage, mega menu, shop filters, product page, cart drawer, Wine Club and Loyalty pages, and the wine club sign-up flow.", array( 'In progress', 'Wine club' ), '', '', '' ),
+	array( 'seppeltsfield', 'Seppeltsfield', array( 'built' ), array( 'shopify' ), 'Barossa Valley, AU', 'Shopify store work', 'Wine', "Restructuring a landmark winery's Shopify store: six main collections with Centennial as a featured range, collection landing pages, rebuilt gifting and voucher pages, and a new mega menu.", array( 'In progress', 'Collections' ), '', '', '' ),
+	array( 'all-saints-estate', 'All Saints Estate, St Leonards Vineyard & Mount Ophir Estate', array( 'built' ), array( 'shopify' ), 'Victoria, AU', 'Three-site Shopify rebuild', 'Wine & hospitality', 'Full Shopify rebuilds of three sister winery and hospitality sites, moving off VinCreative onto Shopify with wine club integration. Discovery review and redesign for all three, with All Saints as the lead site.', array( 'In progress', 'Redesign' ), '', '', '' ),
+	array( 'winehub-app', 'Winehub app UI/UX (prototype)', array( 'built' ), array(), '', 'Product & app design', 'SaaS', 'Several weeks of UX and UI work on a clickable prototype of the Winehub admin app: dashboard, wine clubs, club editor, products, club runs, allocations, loyalty tiers and subscriptions, on one shared design system.', array( 'UI/UX', 'Prototype' ), '', '', '' ),
+	array( 'perkrunner-app', 'PerkRunner app UI/UX (prototype)', array( 'built' ), array(), '', 'Product & app design', 'SaaS', 'UX and UI redesign of a Shopify embedded app for subscriptions, loyalty and bundles. I set up its design system and UI library, then redesigned the screens one by one as connected prototypes handed off to the development team.', array( 'UI/UX', 'Design system' ), '', '', '' ),
+	array( 'vertical-green', 'Vertical Green', array( 'built' ), array( 'wordpress' ), 'Philippines', 'Company website', 'Vertical gardens', 'Website for a vertical garden and green wall company, showcasing its HyGro wall, moss and mat systems, project gallery and industry solutions for hotels, offices and developers.', array( 'Brand site', 'Lead gen' ), 'verticalgreen.jpg', 'verticalgreen.com.ph', 'https://verticalgreen.com.ph/' ),
+	array( 'dd-music', 'D&D Music', array( 'built' ), array( 'woocommerce', 'wordpress' ), 'Philippines', 'Online store', 'Music gear', 'WooCommerce store for a Filipino guitar and music gear brand, with nationwide shipping, GCash, Maya and card payments, a custom shop, news and a store directory.', array( 'Local payments' ), 'ddmusic.jpg', 'ddmusic.ph', 'https://ddmusic.ph/' ),
+	array( 'futbol-funatics', 'Futbol Funatics', array( 'built' ), array( 'wordpress' ), 'Philippines', 'Academy website', 'Sports', 'Website for a youth football academy, covering training programs, services, updates and sponsors, with a clear path for families to join.', array( 'Sports programs' ), 'futbol.jpg', 'futbolfunatics.com', 'https://futbolfunatics.com/' ),
+	array( 'tvi-resource-development', 'TVI Resource Development', array( 'built' ), array( 'wordpress' ), 'Philippines', 'Corporate website', 'Mining & resources', 'Corporate website for a Philippine resource development company, covering its business, sustainability and community programs, and news.', array( 'Corporate', 'Sustainability' ), 'tvird.jpg', 'tvird.com.ph', 'https://tvird.com.ph/' ),
+	array( 'tvi-pacific', 'TVI Pacific', array( 'built' ), array( 'wordpress' ), 'Canada / Philippines', 'Investor website', 'Mining & resources', 'Investor-facing website for a TSX-V listed company with Philippine projects: holdings, investor resources, news and live share and metals price tickers.', array( 'Investor relations', 'Live market data' ), 'tvipacific.jpg', 'tvipacific.com', 'https://tvipacific.com/' ),
+	array( 'st-augustine-gold-copper', 'St. Augustine Gold & Copper', array( 'built' ), array( 'wordpress' ), 'Mindanao, PH', 'Corporate & investor website', 'Mining & resources', 'Corporate and investor website for the company behind a major copper-gold project in Mindanao, with company, project, responsibility and investor portal sections.', array( 'Investor portal' ), 'sagc.jpg', 'sagcmining.com', 'https://sagcmining.com/' ),
+	array( 'sorini-strategic-advisors', 'Sorini Strategic Advisors', array( 'built' ), array( 'wordpress' ), 'Washington, DC, US', 'Firm website', 'Trade advisory', 'Website for a Washington, DC international trade advisory firm, covering trade and tariff policy, market access and customs compliance services, plus regular trade updates.', array( 'Professional services' ), 'sorini.jpg', 'ssa-dc.com', 'https://ssa-dc.com/' ),
+	array( 'dcx-commerce', 'DCX Commerce', array( 'built' ), array( 'wordpress' ), '', 'Agency website · co-founder', 'Own brand', 'The site for my Shopify migration agency: a custom theme, full technical SEO setup, and a Migration Academy content hub that brings in organic leads.', array( 'Custom theme', 'SEO' ), '', 'dcxcommerce.com', 'https://dcxcommerce.com/' ),
+);
+$sel_ids = array();
+foreach ( $selected as $i => $s ) {
+	list( $slug, $title, $kinds, $platforms, $region, $role, $industry, $summary, $chip_labels, $shot, $label, $url ) = $s;
+	$sel_ids[ $slug ] = edc_seed_project( $slug, $title, 10 + $i, $kinds, $platforms, array(
+		'tier'                => 'selected',
+		'client_display_name' => $title,
+		'industry_badge'      => $industry,
+		'region'              => $region,
+		'role'                => $role,
+		'summary'             => $summary,
+		'chips'               => $chips( $chip_labels ),
+		'visual_mode'         => 'screenshot',
+		'screenshot'          => $shot ? edc_seed_image( $shot, $title . ' homepage' ) : '',
+		'browser_label'       => $label,
+		'live_url'            => $url,
+	) );
+}
+
+// Technical highlights: short problem → fix notes.
+$highlights = array(
+	array( '66-site-performance', '66-site performance programme', array( 'solved' ), array( 'wordpress' ), 'agency portfolio optimisation', array(
+		array( 'scope', '66 sites on one hosting portfolio' ),
+		array( 'did', 'audited with Lighthouse data and plugin fingerprinting' ),
+		array( 'fix', 'rolled out fixes site by site' ),
+	) ),
+	array( 'home-of-lights', 'Home of Lights', array( 'built' ), array( 'shopify' ), 'custom PDP template', array(
 		array( 'did', 'custom product field + custom product page template' ),
 		array( 'stack', 'Shopify · Liquid' ),
 	) ),
 );
-$minor_ids = array();
-foreach ( $minor as $i => $m ) {
-	list( $slug, $title, $platforms, $tier, $region, $role, $rows ) = $m;
-	$minor_ids[ $slug ] = edc_seed_project( $slug, $title, 10 + $i, array( 'built' ), $platforms, array(
-		'tier'        => $tier,
-		'region'      => $region,
-		'role'        => $role,
+foreach ( $highlights as $i => $h ) {
+	list( $slug, $title, $kinds, $platforms, $meta, $rows ) = $h;
+	$sel_ids[ $slug ] = edc_seed_project( $slug, $title, 60 + $i, $kinds, $platforms, array(
+		'tier'        => 'highlight',
+		'behind_meta' => $meta,
 		'behind_rows' => $behind( $rows ),
 	) );
 }
@@ -467,22 +530,46 @@ edc_seed_fields( $hg, 'option', array(
 		array( 'o', 'WordPress · Shopify · WooCommerce · PHP · Liquid · JS', '' ),
 		array( 'p', '$ last_fixed', '' ),
 		array( 'o', '✔ One beauty brand, four storefronts', $p_beauty ),
-		array( 'o', '✔ Three wineries, moved to Shopify', $archive ),
+		array( 'o', "✔ Boat O'Craigo, God's Hill, Frankland: wine club stores on Shopify", $archive ),
 	) ),
-	'home_featured_projects' => array( $p_beauty, $p_wineries, $p_perk, $p_sound, $p_cenit ),
+	'home_more_heading'      => 'More work across Shopify and WordPress',
+	'home_featured_projects' => array( $p_beauty, $p_boat, $p_godshill, $p_winehub, $p_perk, $p_frankland ),
 	'home_more_projects'     => array(
-		$minor_ids['tvi-resource-development'],
-		$minor_ids['st-augustine-gold-copper'],
-		$minor_ids['dd-music'],
-		$minor_ids['futbol-funatics'],
-		$minor_ids['sorini-strategic-advisors'],
-		$minor_ids['home-of-lights'],
+		$sel_ids['enerco'],
+		$sel_ids['grand-teton-collection'],
+		$sel_ids['fuelkeg'],
+		$sel_ids['maria-nicola'],
+		$sel_ids['sound-and-sight'],
+		$sel_ids['cenit-lighting'],
+		$sel_ids['suubee-premium'],
+		$sel_ids['flat-stacks'],
 	),
 	'home_called'            => edc_seed_rows( array( 'label', 'title', 'text', 'stack', 'link_label', 'link' ), array(
 		array( '01 / move', 'Moving house without losing the furniture', 'Migrations: WooCommerce to Shopify, host to host, theme to theme. Rankings, redirects, customers and orders come along.', '301 maps · data import · DNS · Search Console', 'See a migration', $archive ),
 		array( '02 / rescue', 'Getting hacked sites back on their feet', "Malware cleanup, recovery, and hardening, so it doesn't happen twice.", 'file forensics · clean restore · hardening · monitoring', 'See a rescue', '' ),
 		array( '03 / speed', 'Making slow sites stop being slow', 'Core Web Vitals, bloated page builders, image pipelines, caching, and the plugin nobody remembers installing.', 'Lighthouse · caching · images · script audits', 'See a speed fix', '' ),
 		array( '04 / build', "Building the bit the theme can't do", 'Custom Liquid sections, ACF architecture, PHP and JavaScript functionality, API integrations and automation.', 'Liquid · PHP · ACF · REST / GraphQL · JS', 'See a build', $archive ),
+	) ),
+	// Toolbox, roles and skills: from the 2026 portfolio PDF (pages 1, 3 and 18).
+	'home_tools'             => edc_seed_rows( array( 'group', 'name' ), array(
+		array( 'platform', 'WordPress' ), array( 'platform', 'Shopify' ), array( 'platform', 'Shopify Plus' ), array( 'platform', 'Liquid' ),
+		array( 'interface', 'HTML5' ), array( 'interface', 'CSS3' ), array( 'interface', 'jQuery' ), array( 'interface', 'Tailwind' ), array( 'interface', 'Adobe CC' ),
+		array( 'build', 'VS Code' ), array( 'build', 'GitHub' ), array( 'build', 'Cursor' ), array( 'build', 'Claude' ), array( 'build', 'Vercel' ), array( 'build', 'Supabase' ),
+	) ),
+	'home_roles'             => edc_seed_rows( array( 'title', 'role' ), array(
+		array( 'Plan & audit', 'Strategist' ),
+		array( 'Document', 'Analyst' ),
+		array( 'Pitch & present', 'Consultant' ),
+		array( 'Design UI/UX', 'Designer' ),
+		array( 'Develop', 'Engineer' ),
+		array( 'Test & QA', 'Tester, every device' ),
+		array( 'Deploy', 'Release manager' ),
+		array( 'Train & support', 'Trainer' ),
+	) ),
+	'home_skills'            => edc_seed_rows( array( 'name' ), array(
+		array( 'Shopify & Shopify Plus' ), array( 'WordPress & WooCommerce' ), array( 'Platform migrations' ), array( 'Wine club stores' ),
+		array( 'Custom Shopify builds' ), array( 'B2B ordering' ), array( 'Custom WordPress builds' ), array( 'SaaS websites' ),
+		array( 'API integrations' ), array( 'App UI/UX' ), array( 'Design systems' ), array( 'Performance & SEO' ), array( 'Security & maintenance' ),
 	) ),
 	'home_about_story'       => 'I started in 2011 writing PHP portal systems. Somewhere along the way I became the person teams call when a migration stalls, a site gets hacked, or a checkout breaks at 2am.',
 	'home_principles'        => edc_seed_rows( array( 'title', 'text' ), array(
@@ -492,8 +579,13 @@ edc_seed_fields( $hg, 'option', array(
 	) ),
 	'home_pull_testimonial'  => $chris,
 	'home_lead_text'         => 'I\'ve led development teams, creative teams and junior developers, and I mentor young designers and aspiring developers. Today I coordinate SEO specialists, ads, copywriters and junior developers on client projects.',
-	'home_record_heading'    => '',      // ⏳
-	'home_stats'             => array(), // ⏳
+	'home_record_heading'    => '',
+	// From the 2026 portfolio PDF, page 1.
+	'home_stats'             => edc_seed_rows( array( 'value', 'label', 'verified' ), array(
+		array( '13+', 'Years', 1 ),
+		array( '150+', 'Projects', 1 ),
+		array( '5', 'Countries', 1 ),
+	) ),
 	'home_testimonials'      => array( $rachel, $chris ),
 ) );
 
