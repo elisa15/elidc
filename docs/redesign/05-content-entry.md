@@ -238,7 +238,7 @@ Source: Elisa's 2026 portfolio PDF (`Elisa-Dela-Cruz-Portfolio-2026.pdf`) and he
 - Services page filled from the portfolio (pages 1 and 18): lede, four engagements with related projects, process steps, agencies text and four FAQs. Pricing and hours are still ⏳ (Elisa to confirm).
 - Screenshots for Château Tanunda, Seppeltsfield, All Saints (labelled "new design"), the Winehub and PerkRunner app prototypes and DCX Commerce, cropped from the portfolio PDF. On /projects/, cards without a screenshot sort last.
 
-## Fixed-price packages (added 6 Nov 2026, NOT confirmed)
+## Fixed-price packages (added 6 Nov 2026, prices confirmed by Elisa the same day)
 
 Services → "Fixed-price fixes": four packages suggested by Claude (Site audit $350, Malware removal $450, Speed fix $500, Care plan $150/month). **Hidden** until Elisa reviews the prices and scope and switches on *Show fixed-price packages* on the Services page in wp-admin.
 

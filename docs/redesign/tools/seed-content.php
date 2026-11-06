@@ -686,7 +686,7 @@ if ( ! $terms_page ) {
 // Packages are seeded once (while the list is empty); after that they belong to Elisa in wp-admin.
 if ( edc_seed_is_empty( get_field( edc_seed_key( 'group_edc_page_services', 'services_packages' ), $page_ids['services'], false ) ) ) {
 	edc_seed_fields( 'group_edc_page_services', $page_ids['services'], array(
-	// Fixed-price packages: SUGGESTED by Claude (6 Nov 2026), not confirmed by Elisa.
+	// Fixed-price packages: suggested by Claude, prices and scope confirmed by Elisa (6 Nov 2026).
 		// Hidden until she switches show_services_packages on in wp-admin (seeded empty, so never overwritten).
 		'show_services_packages'    => '',
 		'services_packages_heading' => 'Fixed-price fixes',
