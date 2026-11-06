@@ -22,7 +22,7 @@ $live     = edc_link_is_usable( $project['live_url'] ) ? $project['live_url'] : 
 // Without a screenshot, illustration or terminal line the card is text only (no empty gradient box).
 $has_visual = 'none' !== $project['visual']['mode'];
 ?>
-<article class="compact<?php echo $has_visual ? '' : ' no-visual'; ?>" id="project-<?php echo esc_attr( $project['slug'] ); ?>" data-reveal>
+<article class="compact<?php echo $has_visual ? '' : ' no-visual'; ?>" id="project-<?php echo esc_attr( $project['slug'] ); ?>" data-type="<?php echo esc_attr( implode( ' ', wp_list_pluck( $project['kinds'], 'slug' ) ) ); ?>" data-platform="<?php echo esc_attr( implode( ' ', wp_list_pluck( $project['platforms'], 'slug' ) ) ); ?>"<?php echo ! empty( $args['hidden'] ) ? ' hidden' : ''; ?> data-reveal>
   <?php if ( $has_visual ) : ?>
   <div class="shot">
     <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i><?php if ( $project['visual']['browser_label'] ) : ?><span><?php echo esc_html( $project['visual']['browser_label'] ); ?></span><?php endif; ?></div>

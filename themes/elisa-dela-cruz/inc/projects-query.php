@@ -35,18 +35,8 @@ function edc_projects_archive_query( $query ) {
 	$query->set( 'posts_per_page', -1 );
 	$query->set( 'orderby', array( 'menu_order' => 'ASC', 'date' => 'DESC' ) );
 
-	$filters   = edc_project_filters();
-	$tax_query = array();
-	if ( '' !== $filters['type'] ) {
-		$tax_query[] = array( 'taxonomy' => 'project_type', 'field' => 'slug', 'terms' => $filters['type'] );
-	}
-	if ( '' !== $filters['platform'] ) {
-		$tax_query[] = array( 'taxonomy' => 'project_platform', 'field' => 'slug', 'terms' => $filters['platform'] );
-	}
-	if ( $tax_query ) {
-		$tax_query['relation'] = 'AND';
-		$query->set( 'tax_query', $tax_query );
-	}
+	// Every project is rendered; filters only mark cards hidden (archive-project.php),
+	// so site.js can switch filters in the browser without reloading.
 }
 add_action( 'pre_get_posts', 'edc_projects_archive_query' );
 

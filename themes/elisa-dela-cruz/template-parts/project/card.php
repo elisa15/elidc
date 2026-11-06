@@ -33,7 +33,7 @@ if ( 'home' === $context ) {
 	}
 }
 ?>
-<article class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>" id="project-<?php echo esc_attr( $slug ); ?>" data-type="<?php echo esc_attr( implode( ' ', wp_list_pluck( $project['kinds'], 'slug' ) ) ); ?>" data-platform="<?php echo esc_attr( implode( ' ', wp_list_pluck( $project['platforms'], 'slug' ) ) ); ?>" data-reveal>
+<article class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>" id="project-<?php echo esc_attr( $slug ); ?>" data-type="<?php echo esc_attr( implode( ' ', wp_list_pluck( $project['kinds'], 'slug' ) ) ); ?>" data-platform="<?php echo esc_attr( implode( ' ', wp_list_pluck( $project['platforms'], 'slug' ) ) ); ?>"<?php echo ! empty( $args['hidden'] ) ? ' hidden' : ''; ?> data-reveal>
   <div class="shot">
     <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i><?php if ( $project['visual']['browser_label'] ) : ?><span><?php echo esc_html( $project['visual']['browser_label'] ); ?></span><?php endif; ?></div>
     <?php get_template_part( 'template-parts/project/visual', null, array( 'project' => $project ) ); ?>

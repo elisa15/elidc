@@ -15,7 +15,7 @@ if ( ! $project ) {
 	return;
 }
 ?>
-<article class="highlight" id="project-<?php echo esc_attr( $project['slug'] ); ?>" data-reveal>
+<article class="highlight" id="project-<?php echo esc_attr( $project['slug'] ); ?>" data-type="<?php echo esc_attr( implode( ' ', wp_list_pluck( $project['kinds'], 'slug' ) ) ); ?>" data-platform="<?php echo esc_attr( implode( ' ', wp_list_pluck( $project['platforms'], 'slug' ) ) ); ?>"<?php echo ! empty( $args['hidden'] ) ? ' hidden' : ''; ?> data-reveal>
   <div class="highlight-head">
     <h3>
       <?php if ( $project['url'] ) : ?>

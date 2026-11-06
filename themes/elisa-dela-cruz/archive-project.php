@@ -43,36 +43,64 @@ foreach ( $tiers['selected'] as $post_id ) {
 $tiers['selected'] = array_merge( $with_visual, $text_only );
 
 /*
- * One filter row per taxonomy, built from terms that have at least one project.
- * Each link keeps the other filter's value.
+ * Filters, shown as a shell command: `$ ls ~/elisa/work --kind … --platform …`.
+ * Every project is in the page; the ones that don't match carry `hidden`, so plain
+ * links work without JS and site.js can re-filter in place with no reload.
  */
-$filter_rows = array(
+$flags = array(
 	'type'     => array(
-		'taxonomy' => 'project_type',
+		'flag'     => '--kind',
 		'label'    => 'Kind of work',
-		'all'      => 'All',
+		'taxonomy' => 'project_type',
 		'order'    => array( 'built', 'solved' ),
 	),
 	'platform' => array(
-		'taxonomy' => 'project_platform',
+		'flag'     => '--platform',
 		'label'    => 'Platform',
-		'all'      => 'All platforms',
+		'taxonomy' => 'project_platform',
 		'order'    => array( 'wordpress', 'shopify', 'woocommerce', 'elementor' ),
 	),
 );
-foreach ( $filter_rows as $param => $row ) {
+
+// Kind and platform slugs for every project, used for matching and counts.
+$meta = array();
+foreach ( $tiers as $tier_ids ) {
+	foreach ( $tier_ids as $post_id ) {
+		$meta[ $post_id ] = array(
+			'type'     => wp_list_pluck( edc_post_term_list( $post_id, 'project_type' ), 'slug' ),
+			'platform' => wp_list_pluck( edc_post_term_list( $post_id, 'project_platform' ), 'slug' ),
+		);
+	}
+}
+$matches = function ( $post_id, $want ) use ( $meta ) {
+	foreach ( $want as $param => $slug ) {
+		if ( '' !== $slug && ! in_array( $slug, $meta[ $post_id ][ $param ], true ) ) {
+			return false;
+		}
+	}
+	return true;
+};
+$count_for = function ( $param, $slug ) use ( $meta, $filters, $matches ) {
+	$want           = $filters;
+	$want[ $param ] = $slug;
+	return count( array_filter( array_keys( $meta ), function ( $id ) use ( $matches, $want ) {
+		return $matches( $id, $want );
+	} ) );
+};
+
+foreach ( $flags as $param => $flag ) {
 	$terms = get_terms( array(
-		'taxonomy'   => $row['taxonomy'],
+		'taxonomy'   => $flag['taxonomy'],
 		'hide_empty' => true,
 	) );
 	$terms = is_wp_error( $terms ) ? array() : $terms;
-	$order = array_flip( $row['order'] );
+	$order = array_flip( $flag['order'] );
 	usort( $terms, function ( $a, $b ) use ( $order ) {
 		$x = isset( $order[ $a->slug ] ) ? $order[ $a->slug ] : 99;
 		$y = isset( $order[ $b->slug ] ) ? $order[ $b->slug ] : 99;
 		return $x - $y;
 	} );
-	$filter_rows[ $param ]['terms'] = $terms;
+	$flags[ $param ]['terms'] = $terms;
 }
 
 $filter_url = function ( $param, $slug ) use ( $filters, $archive ) {
@@ -81,7 +109,19 @@ $filter_url = function ( $param, $slug ) use ( $filters, $archive ) {
 	return add_query_arg( array_filter( $args ), $archive );
 };
 
-$has_posts = (bool) array_filter( $tiers );
+$visible = array();
+foreach ( $tiers as $tier => $tier_ids ) {
+	$visible[ $tier ] = array_values( array_filter( $tier_ids, function ( $id ) use ( $matches, $filters ) {
+		return $matches( $id, $filters );
+	} ) );
+}
+$total = count( array_merge( $visible['featured'], $visible['selected'], $visible['highlight'] ) );
+
+$tier_parts = array(
+	'featured'  => array( 'Featured', 'work-grid', 'template-parts/project/card' ),
+	'selected'  => array( 'Selected work', 'compact-grid', 'template-parts/project/compact' ),
+	'highlight' => array( 'Technical highlights', 'highlights', 'template-parts/project/highlight' ),
+);
 
 get_header();
 ?>
@@ -96,57 +136,50 @@ get_header();
 
 <section class="sec light archive-work">
   <div class="wrap">
-    <?php foreach ( $filter_rows as $param => $row ) : ?>
-      <?php if ( count( $row['terms'] ) > 1 ) : ?>
-    <nav class="filters" aria-label="<?php echo esc_attr( 'Filter by ' . strtolower( $row['label'] ) ); ?>">
-      <a href="<?php echo esc_url( $filter_url( $param, '' ) ); ?>"<?php echo '' === $filters[ $param ] ? ' aria-current="true"' : ''; ?>><?php echo esc_html( $row['all'] ); ?></a>
-        <?php foreach ( $row['terms'] as $term ) : ?>
-      <a href="<?php echo esc_url( $filter_url( $param, $term->slug ) ); ?>"<?php echo $term->slug === $filters[ $param ] ? ' aria-current="true"' : ''; ?> data-ga-event="filter_change" data-ga-label="<?php echo esc_attr( $param . ':' . $term->slug ); ?>"><?php echo esc_html( $term->name ); ?></a>
+    <nav class="cmd-filter" aria-label="Filter projects" data-archive="<?php echo esc_url( $archive ); ?>">
+      <div class="cmd-bar" aria-hidden="true"><i></i><i></i><i></i><span>zsh · ~/elisa/work</span></div>
+      <p class="cmd-line">
+        <span class="cmd-prompt" aria-hidden="true">$ ls ~/elisa/work</span>
+        <?php foreach ( $flags as $param => $flag ) : ?>
+          <?php if ( count( $flag['terms'] ) > 1 ) : ?>
+        <span class="cmd-flag" role="group" aria-label="<?php echo esc_attr( $flag['label'] ); ?>">
+          <span class="cmd-name" aria-hidden="true"><?php echo esc_html( $flag['flag'] ); ?></span>
+          <a class="cmd-arg" href="<?php echo esc_url( $filter_url( $param, '' ) ); ?>" data-param="<?php echo esc_attr( $param ); ?>" data-value=""<?php echo '' === $filters[ $param ] ? ' aria-current="true"' : ''; ?>>all</a>
+            <?php foreach ( $flag['terms'] as $term ) : ?>
+          <a class="cmd-arg" href="<?php echo esc_url( $filter_url( $param, $term->slug ) ); ?>" data-param="<?php echo esc_attr( $param ); ?>" data-value="<?php echo esc_attr( $term->slug ); ?>"<?php echo $term->slug === $filters[ $param ] ? ' aria-current="true"' : ''; ?> data-ga-event="filter_change" data-ga-label="<?php echo esc_attr( $param . ':' . $term->slug ); ?>"><?php echo esc_html( strtolower( $term->name ) ); ?><sup data-count><?php echo (int) $count_for( $param, $term->slug ); ?></sup></a>
+            <?php endforeach; ?>
+        </span>
+          <?php endif; ?>
         <?php endforeach; ?>
+      </p>
+      <p class="cmd-out" aria-live="polite"><span class="cmd-arrow" aria-hidden="true">→</span> <b data-total><?php echo (int) $total; ?></b> <span data-noun><?php echo 1 === $total ? 'project' : 'projects'; ?></span><span class="cmd-caret" aria-hidden="true"></span></p>
     </nav>
-      <?php endif; ?>
+
+    <p class="empty-note"<?php echo $total ? ' hidden' : ''; ?>>Nothing here yet for that filter. <a class="link-arrow" href="<?php echo esc_url( $archive ); ?>" data-reset>See all projects <span class="arr" aria-hidden="true">→</span></a></p>
+
+    <?php
+    foreach ( $tier_parts as $tier => $part ) :
+      if ( ! $tiers[ $tier ] ) {
+        continue;
+      }
+      list( $heading, $grid, $template ) = $part;
+      ?>
+    <div class="tier" data-tier="<?php echo esc_attr( $tier ); ?>"<?php echo $visible[ $tier ] ? '' : ' hidden'; ?>>
+      <h2 class="tier-h"><?php echo esc_html( $heading ); ?></h2>
+      <div class="<?php echo esc_attr( $grid ); ?>">
+        <?php
+        foreach ( $tiers[ $tier ] as $i => $post_id ) {
+          get_template_part( $template, null, array(
+            'post_id' => $post_id,
+            'context' => 'archive',
+            'index'   => $i,
+            'hidden'  => ! in_array( $post_id, $visible[ $tier ], true ),
+          ) );
+        }
+        ?>
+      </div>
+    </div>
     <?php endforeach; ?>
-
-    <?php if ( ! $has_posts ) : ?>
-    <p class="empty-note">Nothing here yet for that filter. <a class="link-arrow" href="<?php echo esc_url( $archive ); ?>">See all projects <span class="arr" aria-hidden="true">→</span></a></p>
-    <?php endif; ?>
-
-    <?php if ( $tiers['featured'] ) : ?>
-    <h2 class="tier-h">Featured</h2>
-    <div class="work-grid">
-      <?php
-      foreach ( $tiers['featured'] as $i => $post_id ) {
-        get_template_part( 'template-parts/project/card', null, array(
-          'post_id' => $post_id,
-          'context' => 'archive',
-          'index'   => $i,
-        ) );
-      }
-      ?>
-    </div>
-    <?php endif; ?>
-
-    <?php if ( $tiers['selected'] ) : ?>
-    <h2 class="tier-h">Selected work</h2>
-    <div class="compact-grid">
-      <?php
-      foreach ( $tiers['selected'] as $post_id ) {
-        get_template_part( 'template-parts/project/compact', null, array( 'post_id' => $post_id ) );
-      }
-      ?>
-    </div>
-    <?php endif; ?>
-
-    <?php if ( $tiers['highlight'] ) : ?>
-    <h2 class="tier-h">Technical highlights</h2>
-    <div class="highlights">
-      <?php
-      foreach ( $tiers['highlight'] as $post_id ) {
-        get_template_part( 'template-parts/project/highlight', null, array( 'post_id' => $post_id ) );
-      }
-      ?>
-    </div>
-    <?php endif; ?>
   </div>
 </section>
 
