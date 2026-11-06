@@ -256,8 +256,8 @@ Set up by `docs/redesign/tools/shop-setup.php` (deploy stage `shop`). Products a
 | Site audit | $350 per site | confirmed |
 | Malware removal | $450 per WordPress site (qty 1–5) | confirmed |
 | Speed fix | $500 per site (qty 1–5) | confirmed |
-| 1 hour of fixes | $75 per hour (1–5 hours) | **suggested, ⏳ Elisa to confirm** |
-| Custom section or template | $350 per section | **suggested, ⏳ Elisa to confirm** |
+| 1 hour of fixes | $75 per hour (1–5 hours) | confirmed |
+| Custom section or template | $350 per section | confirmed |
 | Care plan | $150 / month (external: Stripe subscription link) | confirmed; ⏳ link |
 
 Also ⏳ for Elisa: the promises on the two new items ("Unused time is refunded", "Starts within 2 working days", "One round of changes"), tax settings (off for now), and connecting a payment provider (WooCommerce → Settings → Payments). `/fixes/` is created as a **draft**; publish it once payments work. When it's published, the Services page swaps its package cards for a "Need a quick fix?" block linking to it.

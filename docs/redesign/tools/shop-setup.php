@@ -60,9 +60,9 @@ if ( ! $term ) {
 }
 
 /*
- * Products. Prices for Site audit, Malware removal, Speed fix and Care plan were confirmed
- * by Elisa on 6 Nov 2026. "1 hour of fixes" and "Custom section or template" are
- * SUGGESTED prices and must be confirmed before /fixes/ is published.
+ * Products. All prices confirmed by Elisa on 6 Nov 2026. The promises on "1 hour of fixes"
+ * and "Custom section or template" (refunds, start time, rounds of changes) are still
+ * hers to review before /fixes/ is published.
  */
 $products = array(
 	array(
