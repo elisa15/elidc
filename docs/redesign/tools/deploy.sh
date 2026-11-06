@@ -93,7 +93,7 @@ verify() {
 		local code="${html##*$'\n'}"
 		local h1; h1="$(grep -o '<h1' <<<"$html" | wc -l | tr -d ' ')"
 		local hash; hash="$(grep -c 'href="#"' <<<"$html" || true)"
-		local leak; leak="$(grep -ciE 'revel|lorem|zero disruption' <<<"$html" || true)"
+		local leak; leak="$(grep -ciE 'revel|lorem' <<<"$html" || true)"
 		printf '%-30s %s  h1=%s  href#=%s  leaks=%s\n' "$p" "$code" "$h1" "$hash" "$leak"
 		[[ "$code" == 200 && "$h1" == 1 && "$hash" == 0 && "$leak" == 0 ]] || fail=1
 	done

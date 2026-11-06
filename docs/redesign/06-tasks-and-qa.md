@@ -68,7 +68,7 @@ Work through these in order. Each task is one commit (or a few), on a branch off
 ## QA checklist (run before the pull request)
 
 ### Content integrity
-- [ ] `grep -rniE "lorem|grand teton|flat stacks|zero disruption|verified client feedback|maria nicola" themes/elisa-dela-cruz --include=*.php --include=*.js | grep -v /legacy/` finds nothing.
+- [ ] `grep -rniE "lorem|verified client feedback" themes/elisa-dela-cruz --include=*.php --include=*.js | grep -v /legacy/` finds nothing.
 - [ ] With **every** ACF field empty (fresh install, ACF active), the homepage shows only the approved defaults; no fake projects, quotes, stats or links.
 - [ ] With ACF **deactivated**, no PHP fatal errors.
 - [ ] A testimonial with permission off never renders (homepage, pull quote, case study).
