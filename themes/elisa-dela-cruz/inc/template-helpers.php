@@ -359,3 +359,22 @@ function edc_rich_field( $name, $post_id = null ) {
 function edc_lines( $text ) {
 	return array_values( array_filter( array_map( 'trim', preg_split( '/\R/', (string) $text ) ), 'strlen' ) );
 }
+
+/**
+ * Fixed-price packages from the Services page, or array() while they are switched off.
+ * Each row gets a 'slug' (from its name) used by the Contact page prefill.
+ */
+function edc_service_packages() {
+	$page = get_page_by_path( 'services' );
+	if ( ! $page || 'publish' !== $page->post_status || ! edc_field( 'show_services_packages', false, $page->ID ) ) {
+		return array();
+	}
+	$out = array();
+	foreach ( edc_filled_rows( edc_repeater( 'services_packages', array(), $page->ID ), array( 'name', 'price' ) ) as $row ) {
+		$row['name']   = trim( $row['name'] );
+		$row['slug']   = sanitize_title( $row['name'] );
+		$row['label']  = trim( $row['name'] . ' · ' . trim( $row['price'] . ' ' . ( isset( $row['unit'] ) ? $row['unit'] : '' ) ) );
+		$out[ $row['slug'] ] = $row;
+	}
+	return $out;
+}

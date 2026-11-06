@@ -558,3 +558,33 @@ html:not(.js) .copy-email,html.js .mailto-email{display:none!important}
   .hex:hover{transform:rotate(-2deg) scale(1.02)}
   .page-hero .hex{animation:float 7s ease-in-out .8s infinite}
 }
+
+/* ---------- Fixed-price packages (Services) ---------- */
+.packages-sec{padding-top:clamp(40px,5vw,64px);background:radial-gradient(40% 60% at 10% 0,rgba(139,47,255,.12),transparent 70%),var(--night-900)}
+.packages-sec h2{font-size:var(--fs-section-h2)}
+.packages-sec .sub{color:var(--fg-muted);font-size:clamp(17px,1.6vw,19px);margin:14px 0 36px;max-width:620px}
+.packages{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--grid-gap)}
+.package{display:flex;flex-direction:column;gap:12px;padding:26px 24px 24px;border:1px solid var(--line-strong);border-radius:var(--radius-xl);background:var(--night-800);position:relative;overflow:hidden}
+.package::before{content:"";position:absolute;inset:0 0 auto;height:3px;background:var(--grad)}
+.package h3{font-size:20px}
+.package .price{margin:0;display:flex;align-items:baseline;gap:6px}
+.package .price b{font:500 clamp(34px,3.4vw,42px)/1 var(--font-serif);background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.package .price span{font:500 13px var(--font-mono);color:var(--fg-subtle)}
+.package .note{margin:0;font-size:14px;color:var(--mint)}
+.package .inc{list-style:none;margin:4px 0 0;padding:0;display:grid;gap:8px;font-size:15px;color:var(--fg-muted)}
+.package .inc li{padding-left:22px;position:relative}
+.package .inc li::before{content:"✓";position:absolute;left:0;color:var(--mint);font-weight:700}
+.package .exc{margin:0;font-size:13.5px;color:var(--fg-subtle)}
+.package .exc b{color:var(--fg-muted);font-weight:600}
+.package .turn{margin:auto 0 0;padding-top:8px;font:500 12.5px var(--font-mono);color:var(--fg-subtle)}
+.package .btn{justify-content:center;margin-top:6px}
+.pkg-terms{margin-top:22px;font-size:14px;color:var(--fg-subtle)}
+.pkg-terms a{color:var(--fg)}
+@media (prefers-reduced-motion:no-preference){.package{transition:transform var(--dur-panel) var(--ease),border-color var(--dur-ui)}.package:hover{transform:translateY(-4px);border-color:rgba(255,47,177,.5)}}
+@media (max-width:1100px){.packages{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.packages{grid-template-columns:1fr}}
+
+/* ---------- Contact: package being booked ---------- */
+.booking-note{border:1px solid var(--line-strong);border-left:3px solid var(--accent-ink);border-radius:var(--radius-md);background:var(--surface-raised);padding:14px 16px;margin-bottom:20px;font-size:15px;color:var(--fg)}
+.booking-note b{font-weight:700}
+.contact-form .booking-note{background:rgba(255,255,255,.04);color:var(--paper)}

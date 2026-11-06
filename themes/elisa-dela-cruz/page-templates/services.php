@@ -27,6 +27,13 @@ while ( have_posts() ) :
 	$agency_h    = trim( (string) edc_field( 'services_agencies_heading', '', $id ) );
 	$agency_text = edc_lines( edc_field( 'services_agencies_text', '', $id ) );
 	$faq         = edc_filled_rows( edc_repeater( 'services_faq', array(), $id ), array( 'q', 'a' ) );
+	$packages    = edc_service_packages();
+	$pkg_heading = trim( (string) edc_field( 'services_packages_heading', '', $id ) );
+	$pkg_intro   = trim( (string) edc_field( 'services_packages_intro', '', $id ) );
+	$terms       = (string) edc_field( 'services_terms_page', '', $id );
+	$terms_id    = $terms ? url_to_postid( $terms ) : 0;
+	$terms       = ( $terms_id && 'publish' === get_post_status( $terms_id ) ) ? $terms : '';
+	$contact_url = edc_contact_url();
 	?>
 <section class="page-hero">
   <div class="wrap">
@@ -37,6 +44,52 @@ while ( have_posts() ) :
     <?php endif; ?>
   </div>
 </section>
+
+	<?php if ( $packages ) : ?>
+<section class="sec page-sec packages-sec" id="packages">
+  <div class="wrap">
+		<?php if ( '' !== $pkg_heading ) : ?>
+    <h2 data-reveal><?php echo esc_html( $pkg_heading ); ?></h2>
+		<?php endif; ?>
+		<?php if ( '' !== $pkg_intro ) : ?>
+    <p class="sub" data-reveal><?php echo esc_html( $pkg_intro ); ?></p>
+		<?php endif; ?>
+    <div class="packages">
+		<?php
+		foreach ( $packages as $pkg ) :
+			$included = edc_lines( isset( $pkg['included'] ) ? $pkg['included'] : '' );
+			$excluded = edc_lines( isset( $pkg['excluded'] ) ? $pkg['excluded'] : '' );
+			$pay      = isset( $pkg['pay_url'] ) && edc_link_is_usable( $pkg['pay_url'] ) ? $pkg['pay_url'] : '';
+			$href     = $pay ? $pay : ( $contact_url ? add_query_arg( 'package', $pkg['slug'], $contact_url ) : '' );
+			$button   = ! empty( $pkg['button_label'] ) ? $pkg['button_label'] : 'Book now';
+			?>
+      <article class="package" id="package-<?php echo esc_attr( $pkg['slug'] ); ?>" data-reveal>
+        <h3><?php echo esc_html( $pkg['name'] ); ?></h3>
+        <p class="price"><b><?php echo esc_html( trim( $pkg['price'] ) ); ?></b><?php if ( ! empty( $pkg['unit'] ) ) : ?> <span><?php echo esc_html( trim( $pkg['unit'] ) ); ?></span><?php endif; ?></p>
+			<?php if ( ! empty( $pkg['note'] ) ) : ?>
+        <p class="note"><?php echo esc_html( trim( $pkg['note'] ) ); ?></p>
+			<?php endif; ?>
+			<?php if ( $included ) : ?>
+        <ul class="inc"><?php foreach ( $included as $item ) : ?><li><?php echo esc_html( $item ); ?></li><?php endforeach; ?></ul>
+			<?php endif; ?>
+			<?php if ( $excluded ) : ?>
+        <p class="exc"><b>Not included:</b> <?php echo esc_html( implode( ' · ', $excluded ) ); ?></p>
+			<?php endif; ?>
+			<?php if ( ! empty( $pkg['turnaround'] ) ) : ?>
+        <p class="turn"><?php echo esc_html( trim( $pkg['turnaround'] ) ); ?></p>
+			<?php endif; ?>
+			<?php if ( $href ) : ?>
+        <a class="btn btn-primary" href="<?php echo esc_url( $href ); ?>"<?php echo $pay ? ' rel="noopener"' : ''; ?> data-ga-event="package_book" data-ga-label="<?php echo esc_attr( $pkg['name'] . ( $pay ? ' (checkout)' : ' (contact)' ) ); ?>"><?php echo esc_html( $button ); ?> <span class="arr" aria-hidden="true">→</span><span class="sr-only"> (<?php echo esc_html( $pkg['name'] ); ?>)</span></a>
+			<?php endif; ?>
+      </article>
+		<?php endforeach; ?>
+    </div>
+		<?php if ( $terms ) : ?>
+    <p class="pkg-terms">Fixed prices are for the scope listed. <a href="<?php echo esc_url( $terms ); ?>">Read the service terms</a>.</p>
+		<?php endif; ?>
+  </div>
+</section>
+	<?php endif; ?>
 
 	<?php if ( $engagements ) : ?>
 <section class="sec light page-sec">

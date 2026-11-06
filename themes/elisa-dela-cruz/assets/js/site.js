@@ -284,6 +284,10 @@
 			fillCf7Challenge(inlineForm);
 		};
 		refreshChallenge();
+		// Booking a fixed-price package: start the message with it.
+		var pkgLabel = inlineForm.getAttribute('data-package');
+		var pkgField = pkgLabel ? $('textarea', inlineForm) : null;
+		if (pkgField && !pkgField.value) { pkgField.value = 'Package: ' + pkgLabel + '\n\n'; }
 		['focusin', 'pointerdown', 'input'].forEach(function (type) { inlineForm.addEventListener(type, refreshChallenge); });
 	}
 

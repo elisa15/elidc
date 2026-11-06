@@ -29,6 +29,11 @@ while ( have_posts() ) :
 	$email    = is_email( $email ) ? $email : '';
 	$linkedin = edc_profile( 'linkedin_url' ) ? edc_profile( 'linkedin_url' ) : edc_footer_social_url( 'linkedin' );
 	$linkedin = edc_link_is_usable( $linkedin ) ? $linkedin : '';
+	// Arriving from a package button (?package=slug), or back from checkout (&paid=1).
+	$packages = edc_service_packages();
+	$pkg_slug = isset( $_GET['package'] ) ? sanitize_title( wp_unslash( $_GET['package'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	$package  = ( '' !== $pkg_slug && isset( $packages[ $pkg_slug ] ) ) ? $packages[ $pkg_slug ] : null;
+	$paid     = $package && ! empty( $_GET['paid'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 	$photo    = (int) edc_field( 'contact_photo', 0, $id );
 	$photo    = ( $photo && wp_attachment_is_image( $photo ) ) ? $photo : 0;
 	$meta     = implode( ' · ', array_filter( array( trim( (string) edc_profile( 'reply_promise' ) ), trim( (string) edc_profile( 'location_line' ) ) ) ) );
@@ -47,7 +52,12 @@ while ( have_posts() ) :
 <section class="sec light page-sec">
   <div class="wrap contact-layout<?php echo $has_form ? '' : ' no-form'; ?>">
 		<?php if ( $has_form ) : ?>
-    <div class="contact-form" data-challenge="<?php echo esc_url( rest_url( 'edc/v1/cf7-challenge' ) ); ?>">
+    <div class="contact-form" data-challenge="<?php echo esc_url( rest_url( 'edc/v1/cf7-challenge' ) ); ?>"<?php echo $package ? ' data-package="' . esc_attr( $package['label'] ) . '"' : ''; ?>>
+			<?php if ( $package && $paid ) : ?>
+      <p class="booking-note" role="status">Payment received for <b><?php echo esc_html( $package['name'] ); ?></b>. Send the details below (site URL, platform, what's going on) and I'll get started.</p>
+			<?php elseif ( $package ) : ?>
+      <p class="booking-note" role="status">You're booking <b><?php echo esc_html( $package['label'] ); ?></b>. Tell me about the site and I'll confirm the scope and how to pay.</p>
+			<?php endif; ?>
       <h2 class="sr-only">Send a message</h2>
       <?php edc_contact_form(); ?>
     </div>

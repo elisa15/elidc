@@ -64,11 +64,44 @@ function edc_seed_key( $group, $name ) {
 }
 
 /**
- * Write fields by name for one group. Empty strings / arrays clear the field.
+ * Whether a seed value counts as "nothing to write" (⏳ fields are seeded empty).
+ */
+function edc_seed_is_empty( $value ) {
+	return null === $value || '' === $value || array() === $value || false === $value;
+}
+
+/**
+ * Write fields by name for one group. Empty seed values never clear what is already
+ * there, so anything Elisa fills in wp-admin (CV, links, payment links…) survives
+ * a re-run. Repeater rows get the same rule per sub-field, matched by row position.
  */
 function edc_seed_fields( $group, $post_id, $values ) {
 	foreach ( $values as $name => $value ) {
-		update_field( edc_seed_key( $group, $name ), $value, $post_id );
+		$key     = edc_seed_key( $group, $name );
+		$current = get_field( $key, $post_id, false );
+
+		if ( edc_seed_is_empty( $value ) && ! edc_seed_is_empty( $current ) ) {
+			continue;
+		}
+
+		if ( is_array( $value ) && isset( $value[0] ) && is_array( $value[0] ) && is_array( $current ) ) {
+			$field = acf_get_field( $key );
+			$subs  = array();
+			foreach ( (array) ( isset( $field['sub_fields'] ) ? $field['sub_fields'] : array() ) as $sub ) {
+				$subs[ $sub['name'] ] = $sub['key'];
+			}
+			$rows = array_values( $current );
+			foreach ( $value as $i => $row ) {
+				foreach ( $row as $sub_name => $sub_value ) {
+					$old = isset( $rows[ $i ], $subs[ $sub_name ], $rows[ $i ][ $subs[ $sub_name ] ] ) ? $rows[ $i ][ $subs[ $sub_name ] ] : null;
+					if ( edc_seed_is_empty( $sub_value ) && ! edc_seed_is_empty( $old ) && ! is_array( $old ) ) {
+						$value[ $i ][ $sub_name ] = $old;
+					}
+				}
+			}
+		}
+
+		update_field( $key, $value, $post_id );
 	}
 }
 
@@ -617,6 +650,56 @@ edc_seed_fields( 'group_edc_page_about', $page_ids['about'], array(
 	'about_lessons'    => array(), // ⏳
 	'about_more'       => '',      // ⏳
 ) );
+
+// Service terms: created once as a DRAFT for Elisa to review and publish. Never overwritten.
+$terms_page = get_page_by_path( 'service-terms' );
+if ( ! $terms_page ) {
+	$terms_id = wp_insert_post( wp_slash( array(
+		'post_type'    => 'page',
+		'post_status'  => 'draft',
+		'post_name'    => 'service-terms',
+		'post_title'   => 'Service terms',
+		'post_content' => implode( "\n\n", array(
+			'<!-- wp:paragraph --><p><strong>Draft for Elisa to review. Lines marked [confirm] are suggestions, not commitments yet.</strong></p><!-- /wp:paragraph -->',
+			'<!-- wp:heading --><h2>What a fixed price covers</h2><!-- /wp:heading -->',
+			'<!-- wp:paragraph --><p>Each package covers what is listed under "Included", for one website on the platform named. Anything outside that list is quoted separately, and nothing extra is charged without your written OK.</p><!-- /wp:paragraph -->',
+			'<!-- wp:heading --><h2>When work starts</h2><!-- /wp:heading -->',
+			'<!-- wp:paragraph --><p>Work starts once payment is received and I have the access I need. Turnaround times are counted in working days (Monday to Friday, Philippine time) from that point. [confirm]</p><!-- /wp:paragraph -->',
+			'<!-- wp:heading --><h2>Access and backups</h2><!-- /wp:heading -->',
+			'<!-- wp:paragraph --><p>I will ask for a separate admin or collaborator account rather than your own login, and send you a secure way to share it. Please do not email passwords. I take a backup before changing anything. You can remove my access as soon as the work is done.</p><!-- /wp:paragraph -->',
+			'<!-- wp:heading --><h2>Malware removal cover</h2><!-- /wp:heading -->',
+			'<!-- wp:paragraph --><p>If the same site is reinfected within 30 days of a cleanup, I clean it again at no cost, provided the hardening steps have not been undone and the site has been kept updated. [confirm]</p><!-- /wp:paragraph -->',
+			'<!-- wp:heading --><h2>Care plan</h2><!-- /wp:heading -->',
+			'<!-- wp:paragraph --><p>Billed monthly in advance. Unused hours do not roll over. Cancel any time before the next billing date. [confirm]</p><!-- /wp:paragraph -->',
+			'<!-- wp:heading --><h2>Refunds</h2><!-- /wp:heading -->',
+			'<!-- wp:paragraph --><p>If I cannot take on the work after you pay, you get a full refund. Once work has started, refunds are considered case by case. [confirm]</p><!-- /wp:paragraph -->',
+		) ),
+	) ), true );
+	if ( is_wp_error( $terms_id ) ) {
+		WP_CLI::error( $terms_id->get_error_message() );
+	}
+	WP_CLI::log( "Created draft page #{$terms_id}: Service terms" );
+} else {
+	$terms_id = (int) $terms_page->ID;
+}
+
+// Packages are seeded once (while the list is empty); after that they belong to Elisa in wp-admin.
+if ( edc_seed_is_empty( get_field( edc_seed_key( 'group_edc_page_services', 'services_packages' ), $page_ids['services'], false ) ) ) {
+	edc_seed_fields( 'group_edc_page_services', $page_ids['services'], array(
+	// Fixed-price packages: SUGGESTED by Claude (6 Nov 2026), not confirmed by Elisa.
+		// Hidden until she switches show_services_packages on in wp-admin (seeded empty, so never overwritten).
+		'show_services_packages'    => '',
+		'services_packages_heading' => 'Fixed-price fixes',
+		'services_packages_intro'   => 'Small, clearly scoped jobs you can book straight away. Bigger work, like migrations and custom builds, starts with a conversation.',
+		'services_packages'         => edc_seed_rows( array( 'name', 'price', 'unit', 'turnaround', 'note', 'included', 'excluded', 'pay_url', 'button_label' ), array(
+			array( 'Site audit', '$350', 'per site', 'Written report in 3 working days', 'Credited toward your project if you hire me within 30 days.', "Speed and Core Web Vitals check\nSecurity and malware scan\nTechnical SEO check\nPlugin, app and theme review\nWritten report with prioritised fixes\n30-minute call to walk through it", 'Fixing the issues (quoted separately)', '', 'Book an audit' ),
+			array( 'Malware removal', '$450', 'per WordPress site', 'Starts within 1 working day', 'Free re-clean if the same site is reinfected within 30 days.', "Malware and backdoor cleanup\nCore, plugin and theme integrity check\nHardening and security settings\nBlacklist and Search Console review requests\nReport of what was found and fixed", "Rebuilding lost content\nHosting changes", '', 'Book a cleanup' ),
+			array( 'Speed fix', '$500', 'per site', 'Done in 5 working days', 'Before and after Lighthouse scores included.', "Audit of the homepage and key templates\nImage, script and caching fixes\nSafe plugin and app clean-up\nBefore and after report", "Theme rebuilds\nHosting migration", '', 'Book a speed fix' ),
+			array( 'Care plan', '$150', '/ month', 'Starts the next working day', 'Cancel any time.', "Core, plugin and theme updates\nBackups checked\nUptime monitoring\nUp to 1 hour of small fixes\nMonthly report", "New features\nUnused hours don't roll over", '', 'Start a care plan' ),
+		) ),
+		'services_terms_page'       => $terms_id,
+	) );
+}
 
 // From the 2026 portfolio PDF (pages 1 and 18) and the projects above. Pricing and hours stay out until Elisa confirms them.
 edc_seed_fields( 'group_edc_page_services', $page_ids['services'], array(

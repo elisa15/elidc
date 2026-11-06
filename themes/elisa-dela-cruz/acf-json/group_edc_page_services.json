@@ -43,6 +43,298 @@
             "new_lines": ""
         },
         {
+            "key": "field_edc_s_pkg_show",
+            "label": "Show fixed-price packages",
+            "name": "show_services_packages",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Turn on only once the prices and scope are final.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_edc_s_pkg_h",
+            "label": "Packages heading",
+            "name": "services_packages_heading",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Fixed-price fixes",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_edc_s_pkg_sub",
+            "label": "Packages intro",
+            "name": "services_packages_intro",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 2,
+            "new_lines": ""
+        },
+        {
+            "key": "field_edc_s_pkg",
+            "label": "Packages",
+            "name": "services_packages",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Fixed-scope services people can book and pay for online. Prices are commitments: only enter what you will honour.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "pagination": 0,
+            "min": 0,
+            "max": 4,
+            "collapsed": "field_edc_s_pkg_n",
+            "button_label": "Add package",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_edc_s_pkg_n",
+                    "label": "Name",
+                    "name": "name",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "40",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "parent_repeater": "field_edc_s_pkg"
+                },
+                {
+                    "key": "field_edc_s_pkg_p",
+                    "label": "Price",
+                    "name": "price",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "e.g. $350",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "20",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "parent_repeater": "field_edc_s_pkg"
+                },
+                {
+                    "key": "field_edc_s_pkg_u",
+                    "label": "Unit",
+                    "name": "unit",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "e.g. per site, / month",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "20",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "parent_repeater": "field_edc_s_pkg"
+                },
+                {
+                    "key": "field_edc_s_pkg_t",
+                    "label": "Turnaround",
+                    "name": "turnaround",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "e.g. Report in 3 working days",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "20",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "parent_repeater": "field_edc_s_pkg"
+                },
+                {
+                    "key": "field_edc_s_pkg_note",
+                    "label": "Note",
+                    "name": "note",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Short line under the price, e.g. Credited toward your project if you hire me.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "parent_repeater": "field_edc_s_pkg"
+                },
+                {
+                    "key": "field_edc_s_pkg_inc",
+                    "label": "Included",
+                    "name": "included",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "One item per line.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "rows": 4,
+                    "new_lines": "",
+                    "parent_repeater": "field_edc_s_pkg"
+                },
+                {
+                    "key": "field_edc_s_pkg_exc",
+                    "label": "Not included",
+                    "name": "excluded",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "One item per line. Keeps the scope clear.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "rows": 4,
+                    "new_lines": "",
+                    "parent_repeater": "field_edc_s_pkg"
+                },
+                {
+                    "key": "field_edc_s_pkg_url",
+                    "label": "Payment link",
+                    "name": "pay_url",
+                    "aria-label": "",
+                    "type": "url",
+                    "instructions": "Stripe Payment Link (or similar). Empty: the button opens the Contact form with this package filled in.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "60",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "parent_repeater": "field_edc_s_pkg"
+                },
+                {
+                    "key": "field_edc_s_pkg_btn",
+                    "label": "Button label",
+                    "name": "button_label",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "40",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "Book now",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "parent_repeater": "field_edc_s_pkg"
+                }
+            ]
+        },
+        {
+            "key": "field_edc_s_pkg_terms",
+            "label": "Terms page",
+            "name": "services_terms_page",
+            "aria-label": "",
+            "type": "page_link",
+            "instructions": "Linked under the packages. Hidden while the page is not published.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "page"
+            ],
+            "taxonomy": "",
+            "allow_null": 1,
+            "allow_archives": 0,
+            "multiple": 0
+        },
+        {
             "key": "field_edc_s_eng",
             "label": "Engagement types",
             "name": "services_engagements",
@@ -398,5 +690,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1793620000
+    "modified": 1793938414
 }

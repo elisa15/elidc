@@ -237,3 +237,12 @@ Source: Elisa's 2026 portfolio PDF (`Elisa-Dela-Cruz-Portfolio-2026.pdf`) and he
 
 - Services page filled from the portfolio (pages 1 and 18): lede, four engagements with related projects, process steps, agencies text and four FAQs. Pricing and hours are still ⏳ (Elisa to confirm).
 - Screenshots for Château Tanunda, Seppeltsfield, All Saints (labelled "new design"), the Winehub and PerkRunner app prototypes and DCX Commerce, cropped from the portfolio PDF. On /projects/, cards without a screenshot sort last.
+
+## Fixed-price packages (added 6 Nov 2026, NOT confirmed)
+
+Services → "Fixed-price fixes": four packages suggested by Claude (Site audit $350, Malware removal $450, Speed fix $500, Care plan $150/month). **Hidden** until Elisa reviews the prices and scope and switches on *Show fixed-price packages* on the Services page in wp-admin.
+
+- The import adds the packages only while the list is empty; after that they are Elisa's to edit.
+- The import never clears a field that already has a value, so anything filled in wp-admin (CV, links, payment links) survives future deploys. Fields the import fills with text are still updated by it.
+- **Payment:** create a Stripe Payment Link per package (in Elisa's Stripe account), paste it into the package's *Payment link* field. In Stripe, set the link's "after payment" redirect to `https://elisaarmas.com/contact/?package=<slug>&paid=1` (slugs: `site-audit`, `malware-removal`, `speed-fix`, `care-plan`) so the client lands on the Contact form with a "Payment received" note. Without a link, the button opens the Contact form with the package filled in.
+- **Service terms:** draft page `/service-terms/` with [confirm] lines. Linked under the packages once published.
