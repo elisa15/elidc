@@ -2,8 +2,8 @@
 /**
  * "Recent projects" horizontal case-study carousel.
  * Pulls from the 'project' custom post type via WP_Query.
- * Falls back to 5 static placeholder slides matching the mockup content
- * if no projects have been published yet.
+ * Renders nothing until at least one project is published: the section
+ * never shows placeholder projects or invented outcomes.
  *
  * @package elisa-dela-cruz
  */
@@ -19,46 +19,11 @@ $projects_query = new WP_Query( array(
 	'order'          => 'ASC',
 ) );
 
-$default_projects = array(
-	array(
-		'title'    => 'Maria Nicola',
-		'gradient' => 'linear-gradient(135deg,var(--magenta),var(--violet))',
-		'badges'   => array( array( 'label' => 'Luxury Fashion', 'alt' => false ), array( 'label' => 'Shopify', 'alt' => true ) ),
-		'role'     => 'Ongoing design & optimisation partner',
-		'summary'  => "Elevated an established fashion brand's storefront through custom design and ongoing conversion optimisation.",
-	),
-	array(
-		'title'    => 'Grand Teton',
-		'gradient' => 'linear-gradient(135deg,var(--violet),var(--coral))',
-		'badges'   => array( array( 'label' => 'Ecommerce Retail', 'alt' => false ), array( 'label' => 'WooCommerce → Shopify', 'alt' => true ) ),
-		'role'     => 'Full platform migration',
-		'summary'  => 'Migrated a full WooCommerce catalogue to Shopify while keeping SEO equity intact.',
-	),
-	array(
-		'title'    => 'Flat Stacks',
-		'gradient' => 'linear-gradient(135deg,var(--coral),var(--magenta))',
-		'badges'   => array( array( 'label' => 'B2B Wholesale', 'alt' => false ), array( 'label' => 'Shopify', 'alt' => true ) ),
-		'role'     => 'Custom development',
-		'summary'  => 'Built custom B2B ordering functionality no off-the-shelf app could handle.',
-	),
-	array(
-		'title'    => 'Stanno',
-		'gradient' => 'linear-gradient(135deg,var(--magenta),var(--coral))',
-		'badges'   => array( array( 'label' => 'Sportswear Wholesale', 'alt' => false ), array( 'label' => 'Shopify Plus', 'alt' => true ) ),
-		'role'     => 'B2B storefront build',
-		'summary'  => 'Delivered a Shopify Plus B2B storefront built for wholesale buyers with tiered pricing.',
-	),
-	array(
-		'title'    => "Boat O'Craigo",
-		'gradient' => 'linear-gradient(135deg,var(--violet),var(--magenta))',
-		'badges'   => array( array( 'label' => 'Wine & Beverage', 'alt' => false ), array( 'label' => 'Shopify Migration', 'alt' => true ) ),
-		'role'     => 'Platform migration',
-		'summary'  => "Migrated a boutique winery's storefront with zero disruption to ongoing wine club sales.",
-	),
-);
 
-$has_projects = $projects_query->have_posts();
-$slide_count  = $has_projects ? $projects_query->post_count : count( $default_projects );
+if ( ! $projects_query->have_posts() ) {
+	return;
+}
+$slide_count = $projects_query->post_count;
 ?>
 <section id="work">
   <div class="wrap">
@@ -69,7 +34,6 @@ $slide_count  = $has_projects ? $projects_query->post_count : count( $default_pr
 
     <div class="case-carousel" data-reveal="up">
       <div class="case-track" id="caseTrack">
-        <?php if ( $has_projects ) : ?>
           <?php while ( $projects_query->have_posts() ) : $projects_query->the_post();
             $industry_badge = edc_field( 'industry_badge', '' );
             $platform_badge = edc_field( 'platform_badge', '' );
@@ -104,24 +68,6 @@ $slide_count  = $has_projects ? $projects_query->post_count : count( $default_pr
               </div>
             </article>
           <?php endwhile; wp_reset_postdata(); ?>
-        <?php else : ?>
-          <?php foreach ( $default_projects as $project ) : ?>
-            <article class="case-slide">
-              <div class="case-visual" style="background:<?php echo esc_attr( $project['gradient'] ); ?>;"><div class="img-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Add project screenshot</span></div></div>
-              <div class="case-text">
-                <div class="case-badges">
-                  <?php foreach ( $project['badges'] as $badge ) : ?>
-                    <span class="p-badge<?php echo $badge['alt'] ? ' alt' : ''; ?>"><?php echo esc_html( $badge['label'] ); ?></span>
-                  <?php endforeach; ?>
-                </div>
-                <h3 class="case-title"><?php echo esc_html( $project['title'] ); ?></h3>
-                <div class="case-role"><?php echo esc_html( $project['role'] ); ?></div>
-                <p class="case-summary"><?php echo esc_html( $project['summary'] ); ?></p>
-                <a href="#" class="work-link" data-ga-event="view_case_study" data-ga-label="View case study placeholder">View case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-              </div>
-            </article>
-          <?php endforeach; ?>
-        <?php endif; ?>
       </div>
 
       <div class="case-controls">

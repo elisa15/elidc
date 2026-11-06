@@ -12,9 +12,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$default_testimonials = array( 1, 2, 3 );
-$rows = edc_repeater( 'testimonials', array() );
-$count = ! empty( $rows ) ? count( $rows ) : count( $default_testimonials );
+$rows  = edc_repeater( 'testimonials', array() );
+$count = count( $rows );
+
+// Nothing real to show yet: render no section rather than placeholder quotes.
+if ( 0 === $count ) {
+	return;
+}
 ?>
 <section>
   <div class="wrap">
@@ -30,11 +34,13 @@ $count = ! empty( $rows ) ? count( $rows ) : count( $default_testimonials );
         <span class="testi-sep"></span>
         <span class="testi-company" id="testiCompany"></span>
       </div>
+      <?php if ( $count > 1 ) : ?>
       <div class="testi-nav" id="testiNav">
         <?php for ( $i = 0; $i < $count; $i++ ) : ?>
           <div class="testi-dot<?php echo ( 0 === $i ) ? ' active' : ''; ?>" data-i="<?php echo intval( $i ); ?>"></div>
         <?php endfor; ?>
       </div>
+      <?php endif; ?>
     </div>
   </div>
 </section>

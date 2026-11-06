@@ -19,46 +19,32 @@ if ( ! defined( 'ABSPATH' ) ) {
 </head>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
+<a class="skip" href="#main">Skip to content</a>
 
-<svg width="0" height="0" style="position:absolute">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <defs><linearGradient id="iconGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ff2fb1"/><stop offset="55%" stop-color="#8b2fff"/><stop offset="100%" stop-color="#ff8a5c"/></linearGradient></defs>
 </svg>
 
-<?php
-$loader_image = edc_opt( 'loader_icon', EDC_URI . '/assets/images/elisaarmas-logo-icon-final.png' );
-?>
-<div class="loader" id="loader"><img src="<?php echo esc_url( $loader_image ); ?>" alt="Loading"></div>
-<div class="cursor-glow" id="cursorGlow"></div>
-<div class="grain"></div>
-
-<nav id="nav" aria-label="Primary">
-  <div class="wrap">
-    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="logo">
-      <?php
-      $logo_mark = edc_opt( 'logo_icon', EDC_URI . '/assets/images/elisaarmas-logo-icon-final.png' );
-      ?>
-      <img src="<?php echo esc_url( $logo_mark ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" class="logo-mark">
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <?php $logo_mark = edc_opt( 'logo_icon', EDC_URI . '/assets/images/elisaarmas-logo-icon-final.png' ); ?>
+    <a class="logo" href="<?php echo esc_url( home_url( '/' ) ); ?>">
+      <img src="<?php echo esc_url( $logo_mark ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>"<?php echo edc_image_size_attrs( $logo_mark ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- integers only. ?>>
     </a>
-    <button type="button" class="nav-toggle" id="navToggle" aria-label="Open menu" aria-controls="navPanel" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-
-    <div class="nav-panel" id="navPanel">
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><span aria-hidden="true">☰</span></button>
+    <nav aria-label="Primary">
       <?php
       if ( has_nav_menu( 'primary' ) ) {
         wp_nav_menu( array(
           'theme_location' => 'primary',
           'container'      => false,
-          'items_wrap'     => '<ul>%3$s</ul>',
+          'items_wrap'     => '<ul id="menu">%3$s' . str_replace( '%', '%%', edc_nav_cta_item() ) . '</ul>',
           'depth'          => 1,
         ) );
       } else {
         edc_primary_menu_fallback();
       }
       ?>
-      <?php if ( edc_should_show_section( 'show_cta' ) || edc_should_show_section( 'show_contact_modal' ) ) : ?>
-      <a href="#contact" class="btn btn-fill btn-sm js-open-contact" data-ga-event="nav_schedule_call" data-ga-label="Nav Schedule a call"><?php echo esc_html( edc_opt( 'nav_cta_label', 'Schedule a call' ) ); ?></a>
-      <?php endif; ?>
-    </div>
+    </nav>
   </div>
-</nav>
+</header>

@@ -1,0 +1,694 @@
+{
+    "key": "group_edc_page_services",
+    "title": "Services page",
+    "fields": [
+        {
+            "key": "field_edc_s_h1",
+            "label": "H1",
+            "name": "services_h1",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Ways to work with me",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_edc_s_lede",
+            "label": "Intro",
+            "name": "services_lede",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 2,
+            "new_lines": ""
+        },
+        {
+            "key": "field_edc_s_pkg_show",
+            "label": "Show fixed-price packages",
+            "name": "show_services_packages",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Turn on only once the prices and scope are final.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_edc_s_pkg_h",
+            "label": "Packages heading",
+            "name": "services_packages_heading",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Fixed-price fixes",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_edc_s_pkg_sub",
+            "label": "Packages intro",
+            "name": "services_packages_intro",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 2,
+            "new_lines": ""
+        },
+        {
+            "key": "field_edc_s_pkg",
+            "label": "Packages",
+            "name": "services_packages",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Fixed-scope services people can book and pay for online. Prices are commitments: only enter what you will honour.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "pagination": 0,
+            "min": 0,
+            "max": 4,
+            "collapsed": "field_edc_s_pkg_n",
+            "button_label": "Add package",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_edc_s_pkg_n",
+                    "label": "Name",
+                    "name": "name",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "40",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "parent_repeater": "field_edc_s_pkg"
+                },
+                {
+                    "key": "field_edc_s_pkg_p",
+                    "label": "Price",
+                    "name": "price",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "e.g. $350",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "20",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "parent_repeater": "field_edc_s_pkg"
+                },
+                {
+                    "key": "field_edc_s_pkg_u",
+                    "label": "Unit",
+                    "name": "unit",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "e.g. per site, / month",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "20",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "parent_repeater": "field_edc_s_pkg"
+                },
+                {
+                    "key": "field_edc_s_pkg_t",
+                    "label": "Turnaround",
+                    "name": "turnaround",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "e.g. Report in 3 working days",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "20",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "parent_repeater": "field_edc_s_pkg"
+                },
+                {
+                    "key": "field_edc_s_pkg_note",
+                    "label": "Note",
+                    "name": "note",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Short line under the price, e.g. Credited toward your project if you hire me.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "parent_repeater": "field_edc_s_pkg"
+                },
+                {
+                    "key": "field_edc_s_pkg_inc",
+                    "label": "Included",
+                    "name": "included",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "One item per line.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "rows": 4,
+                    "new_lines": "",
+                    "parent_repeater": "field_edc_s_pkg"
+                },
+                {
+                    "key": "field_edc_s_pkg_exc",
+                    "label": "Not included",
+                    "name": "excluded",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "One item per line. Keeps the scope clear.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "rows": 4,
+                    "new_lines": "",
+                    "parent_repeater": "field_edc_s_pkg"
+                },
+                {
+                    "key": "field_edc_s_pkg_url",
+                    "label": "Payment link",
+                    "name": "pay_url",
+                    "aria-label": "",
+                    "type": "url",
+                    "instructions": "Stripe Payment Link (or similar). Empty: the button opens the Contact form with this package filled in.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "60",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "parent_repeater": "field_edc_s_pkg"
+                },
+                {
+                    "key": "field_edc_s_pkg_btn",
+                    "label": "Button label",
+                    "name": "button_label",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "40",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "Book now",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "parent_repeater": "field_edc_s_pkg"
+                }
+            ]
+        },
+        {
+            "key": "field_edc_s_pkg_terms",
+            "label": "Terms page",
+            "name": "services_terms_page",
+            "aria-label": "",
+            "type": "page_link",
+            "instructions": "Linked under the packages. Hidden while the page is not published.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "page"
+            ],
+            "taxonomy": "",
+            "allow_null": 1,
+            "allow_archives": 0,
+            "multiple": 0
+        },
+        {
+            "key": "field_edc_s_eng",
+            "label": "Engagement types",
+            "name": "services_engagements",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "pagination": 0,
+            "min": 0,
+            "max": 4,
+            "collapsed": "field_edc_s_eng_t",
+            "button_label": "Add engagement",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_edc_s_eng_key",
+                    "label": "Type",
+                    "name": "key",
+                    "aria-label": "",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "20",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "build": "Build",
+                        "move": "Move",
+                        "rescue": "Rescue",
+                        "care": "Look after"
+                    },
+                    "default_value": "",
+                    "return_format": "value",
+                    "multiple": 0,
+                    "allow_null": 0,
+                    "ui": 0,
+                    "ajax": 0,
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_edc_s_eng_t",
+                    "label": "Title",
+                    "name": "title",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "80",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_edc_s_eng_who",
+                    "label": "Who it's for",
+                    "name": "who",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "rows": 2,
+                    "new_lines": ""
+                },
+                {
+                    "key": "field_edc_s_eng_inc",
+                    "label": "What's included",
+                    "name": "included",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "One item per line.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "rows": 4,
+                    "new_lines": ""
+                },
+                {
+                    "key": "field_edc_s_eng_proc",
+                    "label": "How it usually runs",
+                    "name": "process",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "rows": 2,
+                    "new_lines": ""
+                },
+                {
+                    "key": "field_edc_s_eng_rel",
+                    "label": "Related projects",
+                    "name": "related",
+                    "aria-label": "",
+                    "type": "relationship",
+                    "instructions": "Shown as links under the engagement.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "post_type": [
+                        "project"
+                    ],
+                    "post_status": [
+                        "publish"
+                    ],
+                    "taxonomy": "",
+                    "filters": [
+                        "search",
+                        "taxonomy"
+                    ],
+                    "return_format": "id",
+                    "min": "",
+                    "max": 4,
+                    "elements": "",
+                    "bidirectional": 0,
+                    "bidirectional_target": []
+                }
+            ]
+        },
+        {
+            "key": "field_edc_s_proc",
+            "label": "Process steps",
+            "name": "services_process",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 5,
+            "collapsed": "",
+            "button_label": "Add step",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_edc_s_proc_t",
+                    "label": "Step",
+                    "name": "title",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "e.g. Diagnose",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "30",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_edc_s_proc_p",
+                    "label": "Text",
+                    "name": "text",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "70",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "rows": 2,
+                    "new_lines": ""
+                }
+            ]
+        },
+        {
+            "key": "field_edc_s_ag_h",
+            "label": "Agencies heading",
+            "name": "services_agencies_heading",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "White-label and overflow development for agencies.",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_edc_s_ag_p",
+            "label": "Agencies text",
+            "name": "services_agencies_text",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "Hidden while empty.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 3,
+            "new_lines": ""
+        },
+        {
+            "key": "field_edc_s_faq",
+            "label": "FAQ",
+            "name": "services_faq",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Answers must be confirmed by Elisa (pricing, hours).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "field_edc_s_faq_q",
+            "button_label": "Add question",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_edc_s_faq_q",
+                    "label": "Question",
+                    "name": "q",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_edc_s_faq_a",
+                    "label": "Answer",
+                    "name": "a",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "rows": 3,
+                    "new_lines": ""
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-templates/services.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "the_content"
+    ],
+    "active": true,
+    "description": "Ways to work with me.",
+    "show_in_rest": 0,
+    "display_title": "",
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1793938414
+}

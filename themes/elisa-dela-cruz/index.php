@@ -1,7 +1,6 @@
 <?php
 /**
- * Fallback template — used when no more specific template matches
- * (e.g. blog listing, search results, if front-page.php doesn't apply).
+ * Fallback for blog, search and 404 views.
  *
  * @package elisa-dela-cruz
  */
@@ -10,31 +9,42 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+if ( is_search() ) {
+	/* translators: %s: search query. */
+	$edc_title = sprintf( __( 'Results for "%s"', 'elisa-dela-cruz' ), get_search_query() );
+} elseif ( is_404() ) {
+	$edc_title = __( 'Page not found', 'elisa-dela-cruz' );
+} elseif ( is_archive() ) {
+	$edc_title = wp_strip_all_tags( get_the_archive_title() );
+} else {
+	$edc_title = __( 'Posts', 'elisa-dela-cruz' );
+}
+
 get_header();
 ?>
-<section style="padding-top:170px;">
-	<div class="wrap">
-		<?php if ( have_posts() ) : ?>
-			<div class="section-head" data-reveal="up">
-				<div class="eyebrow"><?php echo is_search() ? 'Search results' : 'Latest'; ?></div>
-				<h2><?php echo is_search() ? sprintf( 'Results for "%s"', esc_html( get_search_query() ) ) : 'Recent posts'; ?></h2>
-			</div>
-			<div style="max-width:760px;">
-				<?php while ( have_posts() ) : the_post(); ?>
-					<article style="padding:24px 0;border-bottom:1px solid var(--border);">
-						<h3 style="font-family:'Fraunces',serif;font-size:22px;margin-bottom:8px;"><a href="<?php the_permalink(); ?>" style="color:#fff;"><?php the_title(); ?></a></h3>
-						<div style="color:var(--dim);font-size:14px;line-height:1.6;"><?php the_excerpt(); ?></div>
-					</article>
-				<?php endwhile; ?>
-			</div>
-			<?php the_posts_pagination(); ?>
-		<?php else : ?>
-			<div class="section-head" data-reveal="up">
-				<h2>Nothing found</h2>
-				<p>Try a different search, or head back to the <a href="<?php echo esc_url( home_url( '/' ) ); ?>" style="color:#fff;text-decoration:underline;">homepage</a>.</p>
-			</div>
-		<?php endif; ?>
-	</div>
+<main id="main">
+<section class="page-hero">
+  <div class="wrap">
+    <h1><?php echo esc_html( $edc_title ); ?></h1>
+  </div>
 </section>
+<section class="sec light page-sec">
+  <div class="wrap">
+    <?php if ( have_posts() && ! is_404() ) : ?>
+    <div class="post-list">
+      <?php while ( have_posts() ) : the_post(); ?>
+      <article>
+        <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+        <div class="prose"><?php the_excerpt(); ?></div>
+      </article>
+      <?php endwhile; ?>
+    </div>
+    <?php the_posts_pagination(); ?>
+    <?php else : ?>
+    <p class="empty-note"><?php esc_html_e( 'Nothing here.', 'elisa-dela-cruz' ); ?> <a class="link-arrow" href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Back to the homepage', 'elisa-dela-cruz' ); ?> <span class="arr" aria-hidden="true">→</span></a></p>
+    <?php endif; ?>
+  </div>
+</section>
+</main>
 <?php
 get_footer();

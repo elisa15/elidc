@@ -1,0 +1,283 @@
+{
+    "key": "group_edc_page_about",
+    "title": "About page",
+    "fields": [
+        {
+            "key": "field_edc_a_h1",
+            "label": "H1",
+            "name": "about_h1",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Hi, I'm Elisa.",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_edc_a_lede",
+            "label": "Intro",
+            "name": "about_lede",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 2,
+            "new_lines": ""
+        },
+        {
+            "key": "field_edc_a_photo",
+            "label": "Hero photo",
+            "name": "about_photo",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Shown in the hex next to the H1. Falls back to Profile & Links → Portrait.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "id",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "jpg,jpeg,png,webp,avif",
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_edc_a_story",
+            "label": "Story",
+            "name": "about_story",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "Three short paragraphs: the start, the agency years, why problems became the thing, today. Leave empty if not confirmed: empty fields render nothing, never a placeholder.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 1
+        },
+        {
+            "key": "field_edc_a_lead",
+            "label": "Leadership",
+            "name": "about_leadership",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "Leave empty if not confirmed: empty fields render nothing, never a placeholder.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 1
+        },
+        {
+            "key": "field_edc_a_princ",
+            "label": "How I work",
+            "name": "about_principles",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Fuller version of the homepage principles.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 6,
+            "collapsed": "",
+            "button_label": "Add principle",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_edc_a_princ_t",
+                    "label": "Title",
+                    "name": "title",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "40",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_edc_a_princ_p",
+                    "label": "Text",
+                    "name": "text",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "60",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "rows": 3,
+                    "new_lines": ""
+                }
+            ]
+        },
+        {
+            "key": "field_edc_a_lessons",
+            "label": "Things I've learned",
+            "name": "about_lessons",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "One-liners in Elisa's own words. Section hidden while empty.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 6,
+            "collapsed": "",
+            "button_label": "Add lesson",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_edc_a_lessons_t",
+                    "label": "Lesson",
+                    "name": "text",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                }
+            ]
+        },
+        {
+            "key": "field_edc_a_more",
+            "label": "A little more",
+            "name": "about_more",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "Personal paragraph. Hidden while empty.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 3,
+            "new_lines": ""
+        },
+        {
+            "key": "field_edc_a_names",
+            "label": "Names paragraph",
+            "name": "about_names",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "You may have worked with me as Elisa Dela Cruz, Elisa Armas Dela Cruz or Eli DC.",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 2,
+            "new_lines": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-templates/about.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "the_content"
+    ],
+    "active": true,
+    "description": "The career timeline comes from Profile & Links → Career log.",
+    "show_in_rest": 0,
+    "display_title": "",
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1793926026
+}
