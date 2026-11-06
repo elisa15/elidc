@@ -99,6 +99,13 @@ add_action( 'template_redirect', function () {
 	if ( ! $page || ! ( is_shop() || is_product() || is_product_category() || is_product_tag() ) ) {
 		return;
 	}
+	// While /fixes/ is still a draft, send visitors to the packages on Services instead of a 404.
+	if ( ! edc_shop_is_open() ) {
+		$services = get_page_by_path( 'services' );
+		$target   = $services ? get_permalink( $services ) . '#packages' : home_url( '/' );
+		wp_safe_redirect( $target, 302 );
+		exit;
+	}
 	$target = get_permalink( $page );
 	if ( is_product() ) {
 		$target .= '#fix-' . get_post_field( 'post_name', get_queried_object_id() );
