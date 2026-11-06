@@ -173,7 +173,7 @@ edc_seed_fields( $profile, 'option', array(
 	'profile_name'       => 'Elisa A. Dela Cruz',
 	'profile_short_name' => 'Elisa Dela Cruz',
 	'profile_title'      => 'Senior WordPress & Shopify Developer',
-	'portrait'           => '', // The illustrated portrait lives only in the live Media Library.
+	'portrait'           => edc_seed_image( 'portrait-elisa.jpg', 'Elisa A. Dela Cruz' ), // Elisa's photo shoot, Nov 2026.
 	'availability'       => '', // ⏳
 	'location_line'      => 'Manila, working with AU / US / UK time zones',
 	'reply_promise'      => 'Replies within one working day',
@@ -604,6 +604,7 @@ foreach ( $pages as $slug => $title ) {
 }
 
 edc_seed_fields( 'group_edc_page_about', $page_ids['about'], array(
+	'about_photo'      => edc_seed_image( 'portrait-elisa-about.jpg', 'Elisa A. Dela Cruz at her desk' ),
 	'about_lede'       => '', // ⏳
 	'about_story'      => '', // ⏳
 	'about_leadership' => '', // ⏳
@@ -635,6 +636,7 @@ edc_seed_fields( 'group_edc_page_services', $page_ids['services'], array(
 ) );
 
 edc_seed_fields( 'group_edc_page_contact', $page_ids['contact'], array(
+	'contact_photo'      => edc_seed_image( 'photo-elisa-call.jpg', 'Elisa A. Dela Cruz on a client call' ),
 	'contact_lede'       => '',      // ⏳
 	'contact_next_steps' => array(), // ⏳
 ) );

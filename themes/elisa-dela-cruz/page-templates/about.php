@@ -30,7 +30,8 @@ while ( have_posts() ) :
 	$more       = edc_lines( edc_field( 'about_more', '', $id ) );
 	$names      = trim( (string) edc_field( 'about_names', '', $id ) );
 	$log        = edc_career_log();
-	$portrait   = (int) edc_profile( 'portrait', 0 );
+	$portrait   = (int) edc_field( 'about_photo', 0, $id );
+	$portrait   = $portrait ? $portrait : (int) edc_profile( 'portrait', 0 );
 	$portrait   = ( $portrait && wp_attachment_is_image( $portrait ) ) ? $portrait : 0;
 	?>
 <section class="page-hero<?php echo $portrait ? ' with-portrait' : ''; ?>">

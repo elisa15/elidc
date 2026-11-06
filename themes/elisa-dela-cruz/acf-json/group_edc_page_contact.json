@@ -43,6 +43,31 @@
             "new_lines": ""
         },
         {
+            "key": "field_edc_c_photo",
+            "label": "Photo",
+            "name": "contact_photo",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Shown above \"Or reach me directly\". Landscape, about 3:2.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "id",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "jpg,jpeg,png,webp,avif",
+            "preview_size": "medium"
+        },
+        {
             "key": "field_edc_c_next",
             "label": "What happens next",
             "name": "contact_next_steps",
@@ -110,5 +135,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1793620000
+    "modified": 1793926026
 }

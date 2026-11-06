@@ -29,6 +29,8 @@ while ( have_posts() ) :
 	$email    = is_email( $email ) ? $email : '';
 	$linkedin = edc_profile( 'linkedin_url' ) ? edc_profile( 'linkedin_url' ) : edc_footer_social_url( 'linkedin' );
 	$linkedin = edc_link_is_usable( $linkedin ) ? $linkedin : '';
+	$photo    = (int) edc_field( 'contact_photo', 0, $id );
+	$photo    = ( $photo && wp_attachment_is_image( $photo ) ) ? $photo : 0;
 	$meta     = implode( ' · ', array_filter( array( trim( (string) edc_profile( 'reply_promise' ) ), trim( (string) edc_profile( 'location_line' ) ) ) ) );
 	?>
 <section class="page-hero">
@@ -41,7 +43,7 @@ while ( have_posts() ) :
   </div>
 </section>
 
-	<?php if ( $has_form || $email || $linkedin || $steps || $meta ) : ?>
+	<?php if ( $has_form || $email || $linkedin || $steps || $meta || $photo ) : ?>
 <section class="sec light page-sec">
   <div class="wrap contact-layout<?php echo $has_form ? '' : ' no-form'; ?>">
 		<?php if ( $has_form ) : ?>
@@ -51,6 +53,9 @@ while ( have_posts() ) :
     </div>
 		<?php endif; ?>
     <div class="contact-side">
+		<?php if ( $photo ) : ?>
+      <figure class="contact-photo" data-reveal><?php echo wp_get_attachment_image( $photo, 'large', false, array( 'loading' => 'lazy' ) ); ?></figure>
+		<?php endif; ?>
 		<?php if ( $email || $linkedin ) : ?>
       <h2><?php echo $has_form ? 'Or reach me directly' : 'Reach me directly'; ?></h2>
       <div class="alt">
