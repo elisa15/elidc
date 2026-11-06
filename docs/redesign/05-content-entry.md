@@ -246,3 +246,20 @@ Services → "Fixed-price fixes": four packages suggested by Claude (Site audit 
 - The import never clears a field that already has a value, so anything filled in wp-admin (CV, links, payment links) survives future deploys. Fields the import fills with text are still updated by it.
 - **Payment:** create a Stripe Payment Link per package (in Elisa's Stripe account), paste it into the package's *Payment link* field. In Stripe, set the link's "after payment" redirect to `https://elisaarmas.com/contact/?package=<slug>&paid=1` (slugs: `site-audit`, `malware-removal`, `speed-fix`, `care-plan`) so the client lands on the Contact form with a "Payment received" note. Without a link, the button opens the Contact form with the package filled in.
 - **Service terms:** draft page `/service-terms/` with [confirm] lines. Linked under the packages once published.
+
+## Fixes shop (/fixes/, WooCommerce) — built 6 Nov 2026
+
+Set up by `docs/redesign/tools/shop-setup.php` (deploy stage `shop`). Products are only created by the script; after that, prices and text are edited in wp-admin → Products.
+
+| Product | Price | Status |
+|---|---|---|
+| Site audit | $350 per site | confirmed |
+| Malware removal | $450 per WordPress site (qty 1–5) | confirmed |
+| Speed fix | $500 per site (qty 1–5) | confirmed |
+| 1 hour of fixes | $75 per hour (1–5 hours) | **suggested, ⏳ Elisa to confirm** |
+| Custom section or template | $350 per section | **suggested, ⏳ Elisa to confirm** |
+| Care plan | $150 / month (external: Stripe subscription link) | confirmed; ⏳ link |
+
+Also ⏳ for Elisa: the promises on the two new items ("Unused time is refunded", "Starts within 2 working days", "One round of changes"), tax settings (off for now), and connecting a payment provider (WooCommerce → Settings → Payments). `/fixes/` is created as a **draft**; publish it once payments work. When it's published, the Services page swaps its package cards for a "Need a quick fix?" block linking to it.
+
+Checkout: guest only, no postal address, company or phone; asks for Website URL (required) and "What's going on?" (optional). Shop/product URLs redirect to `/fixes/`.

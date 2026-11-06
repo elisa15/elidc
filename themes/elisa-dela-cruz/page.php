@@ -21,7 +21,7 @@ while ( have_posts() ) :
     <h1><?php the_title(); ?></h1>
   </div>
 </section>
-	<?php if ( '' !== trim( wp_strip_all_tags( get_the_content() ) ) ) : ?>
+	<?php if ( '' !== trim( wp_strip_all_tags( get_the_content() ) ) || has_blocks() || has_shortcode( get_the_content(), 'woocommerce_checkout' ) || has_shortcode( get_the_content(), 'woocommerce_cart' ) ) : ?>
 <section class="sec light page-sec">
   <div class="wrap">
     <div class="prose entry"><?php the_content(); ?></div>

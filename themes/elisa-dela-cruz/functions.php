@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'EDC_VERSION', '1.6.1' );
+define( 'EDC_VERSION', '1.7.0' );
 define( 'EDC_DIR', get_template_directory() );
 define( 'EDC_URI', get_template_directory_uri() );
 
@@ -190,6 +190,9 @@ require_once EDC_DIR . '/inc/visibility.php';
 require_once EDC_DIR . '/inc/contact-form.php';
 require_once EDC_DIR . '/inc/security.php';
 require_once EDC_DIR . '/inc/seo-names.php';
+if ( class_exists( 'WooCommerce' ) ) {
+	require_once EDC_DIR . '/inc/shop.php';
+}
 
 /**
  * Drop the core emoji script/styles; the site uses native emoji only.

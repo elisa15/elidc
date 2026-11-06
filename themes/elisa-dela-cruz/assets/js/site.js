@@ -350,6 +350,60 @@
 		apply(state, false);
 	}
 
+	/* ---------- Fixes shop: "Add to order" via the WooCommerce Store API (no reload) ---------- */
+	var shop = window.edcShop;
+	var orderBar = $('.order-bar');
+	if (shop && orderBar && window.fetch) {
+		var paintOrder = function (cart) {
+			var count = cart.items_count || 0;
+			var minor = Math.pow(10, (cart.totals && cart.totals.currency_minor_unit) || 0);
+			var total = cart.totals ? parseInt(cart.totals.total_items, 10) / minor : 0;
+			$('.order-count', orderBar).textContent = String(count);
+			$('.order-noun', orderBar).textContent = count === 1 ? 'item' : 'items';
+			$('.order-total', orderBar).textContent = (cart.totals && cart.totals.currency_symbol || shop.currency) + Math.round(total).toLocaleString();
+			orderBar.hidden = count === 0;
+			if (count && !reduceMotion.matches) { orderBar.classList.remove('bump'); void orderBar.offsetWidth; orderBar.classList.add('bump'); }
+		};
+		$$('.fix-buy').forEach(function (form) {
+			var add = $('.add-to-order', form);
+			if (!add) { return; }
+			add.hidden = false;
+			add.addEventListener('click', function () {
+				var qtyField = form.querySelector('[name="quantity"]');
+				var label = add.innerHTML;
+				add.disabled = true;
+				fetch(shop.api + 'cart/add-item', {
+					method: 'POST',
+					credentials: 'same-origin',
+					headers: { 'Content-Type': 'application/json', 'Nonce': shop.nonce },
+					body: JSON.stringify({ id: parseInt(form.getAttribute('data-product'), 10), quantity: parseInt(qtyField ? qtyField.value : '1', 10) || 1 })
+				})
+					.then(function (r) {
+						var nonce = r.headers.get('Nonce');
+						if (nonce) { shop.nonce = nonce; }
+						return r.json().then(function (data) { return { ok: r.ok, data: data }; });
+					})
+					.then(function (res) {
+						if (!res.ok) { throw new Error((res.data && res.data.message) || 'Could not add that.'); }
+						paintOrder(res.data);
+						add.innerHTML = 'Added ✓';
+						setTimeout(function () { add.innerHTML = label; add.disabled = false; }, 1600);
+					})
+					.catch(function (err) {
+						add.disabled = false;
+						add.innerHTML = label;
+						var msg = document.createElement('p');
+						msg.className = 'fix-error';
+						msg.setAttribute('role', 'alert');
+						msg.textContent = String(err.message || err).replace(/<[^>]+>/g, '');
+						var old = $('.fix-error', form);
+						if (old) { old.remove(); }
+						form.appendChild(msg);
+					});
+			});
+		});
+	}
+
 	/* ---------- Contact modal ---------- */
 	var modal = $('#contactModal');
 	var lastFocus = null;

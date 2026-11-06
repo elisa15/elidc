@@ -5,6 +5,7 @@
 #
 # Stages, in order: preflight · backup · upload · migrate · verify · cleanup
 # Re-send only the scripts and screenshots: upload-tools
+# Shop (once, with Elisa's OK): shop  installs WooCommerce, creates the products, /fixes/ as a DRAFT
 # Undo:             rollback-theme · rollback-db <backup-dir>
 #
 # Only touches public_html/wp-content (themes/elisa-dela-cruz*, a temporary
@@ -103,6 +104,15 @@ verify() {
 	[[ $fail == 0 ]] && say "Verify passed" || { say "Verify FAILED: see above"; exit 1; }
 }
 
+shop() {
+	local t="wp-content/edc-deploy-tmp/docs/redesign/tools"
+	say "WooCommerce (installed from wordpress.org by WP-CLI on the server)"
+	remote 'wp plugin is-installed woocommerce || wp plugin install woocommerce; wp plugin activate woocommerce'
+	say "Shop settings, products and /fixes/ (draft until Elisa publishes it)"
+	remote "test -f $t/shop-setup.php || { echo 'Run upload-tools first.'; exit 1; }; wp eval-file $t/shop-setup.php"
+	remote 'wp cache flush; wp rewrite flush'
+}
+
 cleanup() {
 	say "Remove $TMP (the old theme copy stays until Elisa confirms)"
 	remote 'rm -rf wp-content/edc-deploy-tmp && echo removed'
@@ -124,6 +134,7 @@ rollback_db() {
 case "${1:-}" in
 	preflight|backup|upload|migrate|verify|cleanup) "$1" ;;
 	upload-tools) upload_tools ;;
+	shop) shop ;;
 	rollback-theme) rollback_theme ;;
 	rollback-db) rollback_db "${2:-}" ;;
 	*) sed -n '2,10p' "$0"; exit 1 ;;

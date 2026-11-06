@@ -27,7 +27,9 @@ while ( have_posts() ) :
 	$agency_h    = trim( (string) edc_field( 'services_agencies_heading', '', $id ) );
 	$agency_text = edc_lines( edc_field( 'services_agencies_text', '', $id ) );
 	$faq         = edc_filled_rows( edc_repeater( 'services_faq', array(), $id ), array( 'q', 'a' ) );
-	$packages    = edc_service_packages();
+	$shop_open   = function_exists( 'edc_shop_is_open' ) && edc_shop_is_open();
+	$fixes       = $shop_open ? array_map( 'edc_fix_product', edc_fix_products() ) : array();
+	$packages    = $shop_open ? array() : edc_service_packages();
 	$pkg_heading = trim( (string) edc_field( 'services_packages_heading', '', $id ) );
 	$pkg_intro   = trim( (string) edc_field( 'services_packages_intro', '', $id ) );
 	$terms       = (string) edc_field( 'services_terms_page', '', $id );
@@ -44,6 +46,21 @@ while ( have_posts() ) :
     <?php endif; ?>
   </div>
 </section>
+
+	<?php if ( $fixes ) : ?>
+<section class="sec page-sec packages-sec fixes-cta" id="packages">
+  <div class="wrap">
+    <h2 data-reveal>Need a quick fix?</h2>
+    <p class="sub" data-reveal>Fixed-price jobs you can buy online, no call needed.</p>
+    <ul class="fix-list" data-reveal>
+		<?php foreach ( $fixes as $fix ) : ?>
+      <li><a href="<?php echo esc_url( get_permalink( edc_fixes_page() ) . '#fix-' . $fix['slug'] ); ?>"><b><?php echo esc_html( $fix['name'] ); ?></b><span><?php echo wp_kses_post( $fix['price_html'] ); ?><?php echo $fix['unit'] ? ' ' . esc_html( $fix['unit'] ) : ''; ?></span></a></li>
+		<?php endforeach; ?>
+    </ul>
+    <a class="btn btn-primary" href="<?php echo esc_url( get_permalink( edc_fixes_page() ) ); ?>" data-ga-event="fixes_open">See all fixes <span class="arr" aria-hidden="true">→</span></a>
+  </div>
+</section>
+	<?php endif; ?>
 
 	<?php if ( $packages ) : ?>
 <section class="sec page-sec packages-sec" id="packages">
