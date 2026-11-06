@@ -462,11 +462,11 @@ $selected = array(
 	array( 'proserveus', 'ProServeUS', array( 'built' ), array( 'shopify' ), 'United States', 'Shopify design & build', 'Preparedness & government supply', 'Designed from the ground up and built on Shopify for a US preparedness and government contract supplier, with a catalogue of 80,000+ SKUs hidden from non-members. The store is currently on hiatus.', array( '80K SKUs', 'Members-only' ), '', '', '' ),
 	array( 'stanno', 'Stanno', array( 'built' ), array( 'shopify' ), '', 'B2B storefront build', 'Sportswear', "Delivered a Shopify Plus B2B storefront for a sportswear brand's wholesale buyers, with tiered pricing.", array( 'Shopify Plus', 'B2B wholesale' ), '', '', '' ),
 	array( 'capability-partners', 'Capability Partners', array( 'built' ), array( 'wordpress' ), 'Australia', 'Sole web developer since 2020', 'Asset management consulting', 'Sole web developer since 2020 for an Australian asset management consultancy and its training college: three company websites and a public learning management system.', array( 'LMS', 'Support' ), '', '', '' ),
-	array( 'chateau-tanunda', 'Château Tanunda', array( 'built' ), array( 'shopify' ), 'Barossa Valley, AU', 'Shopify migration & UI/UX', 'Wine', "Finishing a WordPress to Shopify migration for one of the Barossa's historic estates: a 30-page UI/UX review and designs for the homepage, mega menu, shop filters, product page, cart drawer, Wine Club and Loyalty pages, and the wine club sign-up flow.", array( 'In progress', 'Wine club' ), '', '', '' ),
-	array( 'seppeltsfield', 'Seppeltsfield', array( 'built' ), array( 'shopify' ), 'Barossa Valley, AU', 'Shopify store work', 'Wine', "Restructuring a landmark winery's Shopify store: six main collections with Centennial as a featured range, collection landing pages, rebuilt gifting and voucher pages, and a new mega menu.", array( 'In progress', 'Collections' ), '', '', '' ),
-	array( 'all-saints-estate', 'All Saints Estate, St Leonards Vineyard & Mount Ophir Estate', array( 'built' ), array( 'shopify' ), 'Victoria, AU', 'Three-site Shopify rebuild', 'Wine & hospitality', 'Full Shopify rebuilds of three sister winery and hospitality sites, moving off VinCreative onto Shopify with wine club integration. Discovery review and redesign for all three, with All Saints as the lead site.', array( 'In progress', 'Redesign' ), '', '', '' ),
-	array( 'winehub-app', 'Winehub app UI/UX (prototype)', array( 'built' ), array(), '', 'Product & app design', 'SaaS', 'Several weeks of UX and UI work on a clickable prototype of the Winehub admin app: dashboard, wine clubs, club editor, products, club runs, allocations, loyalty tiers and subscriptions, on one shared design system.', array( 'UI/UX', 'Prototype' ), '', '', '' ),
-	array( 'perkrunner-app', 'PerkRunner app UI/UX (prototype)', array( 'built' ), array(), '', 'Product & app design', 'SaaS', 'UX and UI redesign of a Shopify embedded app for subscriptions, loyalty and bundles. I set up its design system and UI library, then redesigned the screens one by one as connected prototypes handed off to the development team.', array( 'UI/UX', 'Design system' ), '', '', '' ),
+	array( 'chateau-tanunda', 'Château Tanunda', array( 'built' ), array( 'shopify' ), 'Barossa Valley, AU', 'Shopify migration & UI/UX', 'Wine', "Finishing a WordPress to Shopify migration for one of the Barossa's historic estates: a 30-page UI/UX review and designs for the homepage, mega menu, shop filters, product page, cart drawer, Wine Club and Loyalty pages, and the wine club sign-up flow.", array( 'In progress', 'Wine club' ), 'chateau-tanunda-design.jpg', 'chateautanunda.com · new design', '' ),
+	array( 'seppeltsfield', 'Seppeltsfield', array( 'built' ), array( 'shopify' ), 'Barossa Valley, AU', 'Shopify store work', 'Wine', "Restructuring a landmark winery's Shopify store: six main collections with Centennial as a featured range, collection landing pages, rebuilt gifting and voucher pages, and a new mega menu.", array( 'In progress', 'Collections' ), 'seppeltsfield-design.jpg', 'seppeltsfield.com.au · new design', '' ),
+	array( 'all-saints-estate', 'All Saints Estate, St Leonards Vineyard & Mount Ophir Estate', array( 'built' ), array( 'shopify' ), 'Victoria, AU', 'Three-site Shopify rebuild', 'Wine & hospitality', 'Full Shopify rebuilds of three sister winery and hospitality sites, moving off VinCreative onto Shopify with wine club integration. Discovery review and redesign for all three, with All Saints as the lead site.', array( 'In progress', 'Redesign' ), 'allsaints-design.jpg', 'allsaintswine.com.au · new design', '' ),
+	array( 'winehub-app', 'Winehub app UI/UX (prototype)', array( 'built' ), array(), '', 'Product & app design', 'SaaS', 'Several weeks of UX and UI work on a clickable prototype of the Winehub admin app: dashboard, wine clubs, club editor, products, club runs, allocations, loyalty tiers and subscriptions, on one shared design system.', array( 'UI/UX', 'Prototype' ), 'winehub-app.jpg', 'Prototype · Dashboard', '' ),
+	array( 'perkrunner-app', 'PerkRunner app UI/UX (prototype)', array( 'built' ), array(), '', 'Product & app design', 'SaaS', 'UX and UI redesign of a Shopify embedded app for subscriptions, loyalty and bundles. I set up its design system and UI library, then redesigned the screens one by one as connected prototypes handed off to the development team.', array( 'UI/UX', 'Design system' ), 'perkrunner-app.jpg', 'Prototype · Billing schedule', '' ),
 	array( 'vertical-green', 'Vertical Green', array( 'built' ), array( 'wordpress' ), 'Philippines', 'Company website', 'Vertical gardens', 'Website for a vertical garden and green wall company, showcasing its HyGro wall, moss and mat systems, project gallery and industry solutions for hotels, offices and developers.', array( 'Brand site', 'Lead gen' ), 'verticalgreen.jpg', 'verticalgreen.com.ph', 'https://verticalgreen.com.ph/' ),
 	array( 'dd-music', 'D&D Music', array( 'built' ), array( 'woocommerce', 'wordpress' ), 'Philippines', 'Online store', 'Music gear', 'WooCommerce store for a Filipino guitar and music gear brand, with nationwide shipping, GCash, Maya and card payments, a custom shop, news and a store directory.', array( 'Local payments' ), 'ddmusic.jpg', 'ddmusic.ph', 'https://ddmusic.ph/' ),
 	array( 'futbol-funatics', 'Futbol Funatics', array( 'built' ), array( 'wordpress' ), 'Philippines', 'Academy website', 'Sports', 'Website for a youth football academy, covering training programs, services, updates and sponsors, with a clear path for families to join.', array( 'Sports programs' ), 'futbol.jpg', 'futbolfunatics.com', 'https://futbolfunatics.com/' ),
@@ -474,11 +474,12 @@ $selected = array(
 	array( 'tvi-pacific', 'TVI Pacific', array( 'built' ), array( 'wordpress' ), 'Canada / Philippines', 'Investor website', 'Mining & resources', 'Investor-facing website for a TSX-V listed company with Philippine projects: holdings, investor resources, news and live share and metals price tickers.', array( 'Investor relations', 'Live market data' ), 'tvipacific.jpg', 'tvipacific.com', 'https://tvipacific.com/' ),
 	array( 'st-augustine-gold-copper', 'St. Augustine Gold & Copper', array( 'built' ), array( 'wordpress' ), 'Mindanao, PH', 'Corporate & investor website', 'Mining & resources', 'Corporate and investor website for the company behind a major copper-gold project in Mindanao, with company, project, responsibility and investor portal sections.', array( 'Investor portal' ), 'sagc.jpg', 'sagcmining.com', 'https://sagcmining.com/' ),
 	array( 'sorini-strategic-advisors', 'Sorini Strategic Advisors', array( 'built' ), array( 'wordpress' ), 'Washington, DC, US', 'Firm website', 'Trade advisory', 'Website for a Washington, DC international trade advisory firm, covering trade and tariff policy, market access and customs compliance services, plus regular trade updates.', array( 'Professional services' ), 'sorini.jpg', 'ssa-dc.com', 'https://ssa-dc.com/' ),
-	array( 'dcx-commerce', 'DCX Commerce', array( 'built' ), array( 'wordpress' ), '', 'Agency website · co-founder', 'Own brand', 'The site for my Shopify migration agency: a custom theme, full technical SEO setup, and a Migration Academy content hub that brings in organic leads.', array( 'Custom theme', 'SEO' ), '', 'dcxcommerce.com', 'https://dcxcommerce.com/' ),
+	array( 'dcx-commerce', 'DCX Commerce', array( 'built' ), array( 'wordpress' ), '', 'Agency website · co-founder', 'Own brand', 'The site for my Shopify migration agency: a custom theme, full technical SEO setup, and a Migration Academy content hub that brings in organic leads.', array( 'Custom theme', 'SEO' ), 'dcx.jpg', 'dcxcommerce.com', 'https://dcxcommerce.com/' ),
 );
 $sel_ids = array();
 foreach ( $selected as $i => $s ) {
 	list( $slug, $title, $kinds, $platforms, $region, $role, $industry, $summary, $chip_labels, $shot, $label, $url ) = $s;
+	$alt = false !== strpos( $label, 'new design' ) ? $title . ' new homepage design' : ( 0 === strpos( $label, 'Prototype' ) ? str_replace( ' UI/UX (prototype)', ' prototype', $title ) . ': ' . trim( substr( $label, strpos( $label, '·' ) + 2 ) ) . ' screen' : $title . ' homepage' );
 	$sel_ids[ $slug ] = edc_seed_project( $slug, $title, 10 + $i, $kinds, $platforms, array(
 		'tier'                => 'selected',
 		'client_display_name' => $title,
@@ -488,7 +489,7 @@ foreach ( $selected as $i => $s ) {
 		'summary'             => $summary,
 		'chips'               => $chips( $chip_labels ),
 		'visual_mode'         => 'screenshot',
-		'screenshot'          => $shot ? edc_seed_image( $shot, $title . ' homepage' ) : '',
+		'screenshot'          => $shot ? edc_seed_image( $shot, $alt ) : '',
 		'browser_label'       => $label,
 		'live_url'            => $url,
 	) );
@@ -617,22 +618,56 @@ edc_seed_fields( 'group_edc_page_about', $page_ids['about'], array(
 	'about_more'       => '',      // ⏳
 ) );
 
+// From the 2026 portfolio PDF (pages 1 and 18) and the projects above. Pricing and hours stay out until Elisa confirms them.
 edc_seed_fields( 'group_edc_page_services', $page_ids['services'], array(
-	'services_lede'          => '', // ⏳
+	'services_lede'          => 'Shopify and WordPress, from the first audit to the final handover. One person, one point of contact, nothing lost between departments.',
 	'services_engagements'   => edc_seed_rows( array( 'key', 'title', 'who', 'included', 'process', 'related' ), array(
-		array( 'build', 'Build', '', '', '', array() ),
-		array( 'move', 'Move', '', '', '', array() ),
-		array( 'rescue', 'Rescue', '', '', '', array() ),
-		array( 'care', 'Look after', '', '', '', array() ),
+		array(
+			'move',
+			'Move to Shopify',
+			'Stores on WooCommerce, Magento, Wix, Squarespace, VinCreative or WordPress that need to move to Shopify without losing rankings or sales.',
+			"Audit of the current store, content and integrations\nProduct, customer and order migration\n301 redirect map and SEO checks\nWine club and subscription integration where needed\nDNS, launch and Search Console",
+			'Audit and plan first, then a documented migration, a staged build, testing on every device, and a launch with redirects already in place.',
+			array( $p_boat, $sel_ids['enerco'], $sel_ids['grand-teton-collection'], $p_frankland ),
+		),
+		array(
+			'build',
+			'Custom builds',
+			"Brands and SaaS teams that need a Shopify or WordPress site built properly, or a feature no app can handle.",
+			"UI/UX design and design systems\nCustom Shopify themes and sections in Liquid\nWine clubs and B2B ordering\nCustom WordPress themes and API integrations\nMarketing sites for SaaS products",
+			"From the first audit to the final handover: plan it, document it, design it, build it, test it, ship it, and train your team on it.",
+			array( $p_winehub, $p_perk, $sel_ids['flat-stacks'], $sel_ids['suubee-premium'] ),
+		),
+		array(
+			'rescue',
+			'Fix, secure and speed up',
+			"Sites that are slow, hacked, or breaking in ways nobody can explain.",
+			"Malware cleanup, recovery and hardening\nCore Web Vitals and Lighthouse audits\nPlugin and script audits\nTechnical SEO",
+			'Diagnose first: find the real problem, fix it, then document what changed and what to watch.',
+			array( $sel_ids['66-site-performance'] ),
+		),
+		array(
+			'care',
+			'Look after',
+			'Businesses that want one developer who knows their site, for the long term.',
+			"Updates, fixes and changes as the business needs them\nConversion and performance monitoring\nNew features and launches with your team\nTraining and handover docs",
+			'Ongoing, with one point of contact who already knows how your site is put together.',
+			array( $sel_ids['maria-nicola'], $sel_ids['capability-partners'] ),
+		),
 	) ),
 	'services_process'       => edc_seed_rows( array( 'title', 'text' ), array(
-		array( 'Diagnose', '' ),
-		array( 'Plan', '' ),
-		array( 'Build or fix', '' ),
-		array( 'Hand over', '' ),
+		array( 'Diagnose', "Audit the site, the data and what's actually wrong." ),
+		array( 'Plan', 'Document the scope, the risks and the steps before anything changes.' ),
+		array( 'Build or fix', 'Design, build and test on every device.' ),
+		array( 'Hand over', 'Deploy safely, then train your team and leave docs they can run with.' ),
 	) ),
-	'services_agencies_text' => '',      // ⏳
-	'services_faq'           => array(), // ⏳
+	'services_agencies_text' => 'I have worked inside and alongside agencies in Australia and the US since 2015, from custom WordPress themes to Shopify builds and a 66-site performance programme. I can work under your brand, with your process and your clients.',
+	'services_faq'           => edc_seed_rows( array( 'q', 'a' ), array(
+		array( 'Which platforms do you work on?', 'Shopify and Shopify Plus, WordPress and WooCommerce, with Liquid, PHP, HTML, CSS and JavaScript.' ),
+		array( 'Can you move my store without losing SEO?', 'Every migration includes a 301 redirect map and SEO checks before and after launch, so rankings and links carry over.' ),
+		array( 'Do you work with agencies?', 'Yes, including white-label and overflow work for agencies in Australia and the US.' ),
+		array( 'Where are you based?', 'Manila, working with AU / US / UK time zones.' ),
+	) ),
 ) );
 
 edc_seed_fields( 'group_edc_page_contact', $page_ids['contact'], array(

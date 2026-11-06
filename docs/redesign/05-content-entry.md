@@ -234,3 +234,6 @@ Source: Elisa's 2026 portfolio PDF (`Elisa-Dela-Cruz-Portfolio-2026.pdf`) and he
 - Stats: 13+ years, 150+ projects, 5 countries (portfolio page 1).
 - New homepage Toolbox section: tools (portfolio page 3), roles (page 1) and skills (pages 1 and 18).
 - Still anonymous: the US beauty brand. The portfolio names it, but the site keeps it unnamed until Elisa says otherwise.
+
+- Services page filled from the portfolio (pages 1 and 18): lede, four engagements with related projects, process steps, agencies text and four FAQs. Pricing and hours are still ⏳ (Elisa to confirm).
+- Screenshots for Château Tanunda, Seppeltsfield, All Saints (labelled "new design"), the Winehub and PerkRunner app prototypes and DCX Commerce, cropped from the portfolio PDF. On /projects/, cards without a screenshot sort last.

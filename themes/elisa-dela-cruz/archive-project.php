@@ -29,6 +29,19 @@ while ( have_posts() ) {
 }
 rewind_posts();
 
+// Selected work: projects with a screenshot or visual first, text-only cards after (menu order kept within each group).
+$with_visual = array();
+$text_only   = array();
+foreach ( $tiers['selected'] as $post_id ) {
+	$visual = edc_project_visual( $post_id, (bool) edc_field( 'confidential', false, $post_id ) );
+	if ( 'none' === $visual['mode'] ) {
+		$text_only[] = $post_id;
+	} else {
+		$with_visual[] = $post_id;
+	}
+}
+$tiers['selected'] = array_merge( $with_visual, $text_only );
+
 /*
  * One filter row per taxonomy, built from terms that have at least one project.
  * Each link keeps the other filter's value.
