@@ -470,6 +470,14 @@ html:not(.js) .copy-email,html.js .mailto-email{display:none!important}
 .chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
 .chips li{font:500 13.5px/1 var(--font-mono);padding:10px 13px;border:1px solid var(--line-strong);border-radius:var(--radius-pill);color:var(--fg);background:rgba(255,255,255,.03);transition:border-color var(--dur-ui),transform var(--dur-ui) var(--ease)}
 .chips li:hover{border-color:var(--magenta);transform:translateY(-2px)}
+.tool-list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:14px 26px}
+.tool-list li{display:flex;align-items:center;gap:10px;font:500 14px/1.2 var(--font-mono);color:var(--fg)}
+.tool-list .tool-ico,.tool-list .tool-mono{flex:none;width:20px;height:20px;color:var(--mist);transition:color var(--dur-ui),transform var(--dur-ui) var(--ease)}
+.tool-list .tool-mono{display:grid;place-items:center;font:600 10px/1 var(--font-mono);border:1px solid var(--line-strong);border-radius:5px}
+.tool-list li:hover .tool-ico,.tool-list li:hover .tool-mono{color:var(--paper);transform:translateY(-2px)}
+.skill-list{list-style:none;margin:0;padding:0;columns:3 240px;column-gap:40px}
+.skill-list li{break-inside:avoid;display:flex;align-items:baseline;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);font-size:16px;color:var(--fg)}
+.skill-list li::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:var(--grad);transform:translateY(-2px)}
 .orbit{position:relative;aspect-ratio:1;width:100%;max-width:460px;justify-self:center}
 .orbit .core{position:absolute;inset:36%;border-radius:50%;display:grid;place-content:center;text-align:center;background:radial-gradient(circle at 35% 30%,#2a1840,#120c1c 70%);border:1px solid rgba(255,255,255,.14);box-shadow:0 0 60px rgba(139,47,255,.35)}
 .orbit .core span{font:500 22px var(--font-mono);background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -477,7 +485,12 @@ html:not(.js) .copy-email,html.js .mailto-email{display:none!important}
 .ring{position:absolute;border:1px dashed rgba(255,255,255,.14);border-radius:50%}
 .ring.r1{inset:22%}.ring.r2{inset:10%}.ring.r3{inset:0}
 .sat{position:absolute;inset:0;transform:rotate(var(--a))}
-.sat i{position:absolute;left:50%;top:0;font:500 11.5px/1 var(--font-mono);font-style:normal;white-space:nowrap;color:var(--paper);background:var(--night-800);border:1px solid rgba(255,255,255,.16);border-radius:var(--radius-pill);padding:6px 9px;transform:translate(-50%,-50%) rotate(calc(-1 * var(--a)))}
+.sat i{position:absolute;left:50%;top:0;width:46px;height:46px;display:grid;place-items:center;font-style:normal;color:var(--paper);background:radial-gradient(circle at 35% 30%,#22182f,var(--night-800) 70%);border:1px solid rgba(255,255,255,.16);border-radius:50%;box-shadow:0 6px 18px rgba(0,0,0,.35);transform:translate(-50%,-50%) rotate(calc(-1 * var(--a)));transition:color var(--dur-ui),border-color var(--dur-ui),box-shadow var(--dur-ui)}
+.sat i .tool-ico{width:21px;height:21px}
+.sat i .tool-mono{font:600 12px/1 var(--font-mono)}
+.sat i::after{content:attr(data-name);position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);font:500 11px/1 var(--font-mono);white-space:nowrap;color:var(--paper);background:var(--night-900);border:1px solid var(--line-strong);border-radius:6px;padding:5px 7px;opacity:0;pointer-events:none;transition:opacity var(--dur-ui)}
+.sat i:hover{color:#fff;border-color:var(--magenta);box-shadow:0 0 24px rgba(255,47,177,.35)}
+.sat i:hover::after{opacity:1}
 .ring.r1 .sat i{border-color:rgba(255,47,177,.5)}
 .ring.r2 .sat i{border-color:rgba(139,47,255,.5)}
 .ring.r3 .sat i{border-color:rgba(255,138,92,.45)}
@@ -489,9 +502,8 @@ html:not(.js) .copy-email,html.js .mailto-email{display:none!important}
 .roles b{font-size:18px;font-weight:700;color:var(--paper)}
 .roles i{font:400 13px var(--font-mono);font-style:normal;color:var(--fg-subtle)}
 .skills-block{margin-top:48px}
-.skills li{background:transparent}
 @media (max-width:980px){.tool-top{grid-template-columns:1fr}.orbit{max-width:380px}.roles{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:480px){.orbit{max-width:270px;margin-block:12px}.sat i{font-size:10px;padding:5px 7px}.roles li{padding:16px}.roles b{font-size:16px}}
+@media (max-width:480px){.orbit{max-width:290px;margin-block:12px}.sat i{width:36px;height:36px}.sat i .tool-ico{width:17px;height:17px}.roles li{padding:16px}.roles b{font-size:16px}}
 
 /* ---------- Motion (only when the visitor allows it; transform/opacity only) ---------- */
 .scroll-progress{position:fixed;left:0;top:0;right:0;height:2px;z-index:calc(var(--z-nav) + 1);background:var(--grad);transform-origin:0 50%;transform:scaleX(0);pointer-events:none}

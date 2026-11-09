@@ -51,8 +51,8 @@ $ring           = 0;
           <?php foreach ( $groups as $key => $group ) : ?>
           <div class="tool-group">
             <h3><?php echo esc_html( $group['label'] ); ?></h3>
-            <ul class="chips">
-              <?php foreach ( $group['tools'] as $tool ) : ?><li><?php echo esc_html( $tool ); ?></li><?php endforeach; ?>
+            <ul class="tool-list">
+              <?php foreach ( $group['tools'] as $tool ) : ?><li><?php echo edc_tool_icon( $tool ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static SVG or escaped monogram. ?><span><?php echo esc_html( $tool ); ?></span></li><?php endforeach; ?>
             </ul>
           </div>
           <?php endforeach; ?>
@@ -63,13 +63,28 @@ $ring           = 0;
       <div class="orbit" aria-hidden="true" data-reveal>
         <div class="core"><span>{%}</span><b>elisa.os</b></div>
         <?php
+        $seen = array();
         foreach ( $groups as $group ) :
           $ring++;
-          $count = count( $group['tools'] );
+          // One badge per logo: Shopify and Shopify Plus share a mark.
+          $sats = array();
+          foreach ( $group['tools'] as $tool ) {
+            $key = edc_tool_icon_key( $tool );
+            $id  = $key ? $key : strtolower( $tool );
+            if ( isset( $seen[ $id ] ) ) {
+              continue;
+            }
+            $seen[ $id ] = true;
+            $sats[]      = $tool;
+          }
+          $count = count( $sats );
+          if ( ! $count ) {
+            continue;
+          }
           ?>
         <div class="ring r<?php echo (int) $ring; ?>">
-          <?php foreach ( $group['tools'] as $i => $tool ) : ?>
-          <span class="sat" style="--a:<?php echo esc_attr( round( 360 / $count * $i + $ring * 23 ) ); ?>deg"><i><?php echo esc_html( $tool ); ?></i></span>
+          <?php foreach ( $sats as $i => $tool ) : ?>
+          <span class="sat" style="--a:<?php echo esc_attr( round( 360 / $count * $i + $ring * 23 ) ); ?>deg"><i data-name="<?php echo esc_attr( $tool ); ?>"><?php echo edc_tool_icon( $tool ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static SVG or escaped monogram. ?></i></span>
           <?php endforeach; ?>
         </div>
         <?php endforeach; ?>
@@ -95,7 +110,7 @@ $ring           = 0;
       <?php if ( $skills_heading ) : ?>
       <h3 class="block-h"><?php echo esc_html( $skills_heading ); ?></h3>
       <?php endif; ?>
-      <ul class="chips skills">
+      <ul class="skill-list">
         <?php foreach ( $skills as $row ) : ?><li><?php echo esc_html( trim( $row['name'] ) ); ?></li><?php endforeach; ?>
       </ul>
     </div>

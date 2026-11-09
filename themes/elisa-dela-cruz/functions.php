@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'EDC_VERSION', '1.7.0' );
+define( 'EDC_VERSION', '1.8.0' );
 define( 'EDC_DIR', get_template_directory() );
 define( 'EDC_URI', get_template_directory_uri() );
 
@@ -185,6 +185,7 @@ function edc_contact_form() {
 
 require_once EDC_DIR . '/inc/content-model.php';
 require_once EDC_DIR . '/inc/template-helpers.php';
+require_once EDC_DIR . '/inc/tool-icons.php';
 require_once EDC_DIR . '/inc/projects-query.php';
 require_once EDC_DIR . '/inc/visibility.php';
 require_once EDC_DIR . '/inc/contact-form.php';
