@@ -183,6 +183,8 @@ get_header();
   </div>
 </section>
 
+<?php get_template_part( 'template-parts/work/graphics' ); ?>
+
 <?php
 get_template_part( 'template-parts/common/cta-strip', null, array(
 	'heading' => 'Got one like these? Tell me about it.',

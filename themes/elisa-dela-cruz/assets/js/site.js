@@ -503,6 +503,29 @@
 		}
 	});
 
+	/* ---------- Graphic design lightbox (links still open the image without JS) ---------- */
+	var lightbox = $('.lightbox');
+	if (lightbox && typeof lightbox.showModal === 'function') {
+		var lbImg = $('img', lightbox);
+		var lbCap = $('.lightbox-cap', lightbox);
+		var lbFrom = null;
+		$$('.gfx-link').forEach(function (link) {
+			link.addEventListener('click', function (e) {
+				if (e.metaKey || e.ctrlKey || e.shiftKey) { return; }
+				e.preventDefault();
+				var img = link.querySelector('img');
+				lbImg.src = link.href;
+				lbImg.alt = img ? img.alt : '';
+				lbCap.textContent = link.getAttribute('data-caption') || '';
+				lbFrom = link;
+				lightbox.showModal();
+			});
+		});
+		$('.lightbox-close', lightbox).addEventListener('click', function () { lightbox.close(); });
+		lightbox.addEventListener('click', function (e) { if (e.target === lightbox) { lightbox.close(); } });
+		lightbox.addEventListener('close', function () { lbImg.src = 'data:,'; if (lbFrom) { lbFrom.focus(); } });
+	}
+
 	/* ---------- Back to top ---------- */
 	var toTop = $('#backToTop');
 	if (toTop) {

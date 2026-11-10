@@ -6,6 +6,7 @@
 # Stages, in order: preflight · backup · upload · migrate · verify · cleanup
 # Re-send only the scripts and screenshots: upload-tools
 # Shop (once, with Elisa's OK): shop  installs WooCommerce, creates the products, /fixes/ as a DRAFT
+# New content (create-only):  showcase  ACF sync + Win Win project, graphics gallery, conferences
 # Undo:             rollback-theme · rollback-db <backup-dir>
 #
 # Only touches public_html/wp-content (themes/elisa-dela-cruz*, a temporary
@@ -113,6 +114,15 @@ shop() {
 	remote 'wp cache flush; wp rewrite flush'
 }
 
+showcase() {
+	local t="wp-content/edc-deploy-tmp/docs/redesign/tools"
+	say "ACF field groups (dry run, then sync)"
+	remote "test -f $t/seed-showcase.php || { echo 'Run upload-tools first.'; exit 1; }; wp eval-file $t/acf-sync.php --exec=\"define('EDC_DRY_RUN', true);\" && wp eval-file $t/acf-sync.php"
+	say "Win Win project, graphic design gallery, conferences (create-only)"
+	remote "wp eval-file $t/seed-showcase.php"
+	remote 'wp cache flush'
+}
+
 cleanup() {
 	say "Remove $TMP (the old theme copy stays until Elisa confirms)"
 	remote 'rm -rf wp-content/edc-deploy-tmp && echo removed'
@@ -135,6 +145,7 @@ case "${1:-}" in
 	preflight|backup|upload|migrate|verify|cleanup) "$1" ;;
 	upload-tools) upload_tools ;;
 	shop) shop ;;
+	showcase) showcase ;;
 	rollback-theme) rollback_theme ;;
 	rollback-db) rollback_db "${2:-}" ;;
 	*) sed -n '2,10p' "$0"; exit 1 ;;

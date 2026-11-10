@@ -263,3 +263,13 @@ Set up by `docs/redesign/tools/shop-setup.php` (deploy stage `shop`). Products a
 Also ⏳ for Elisa: the promises on the two new items ("Unused time is refunded", "Starts within 2 working days", "One round of changes"), tax settings (off for now), and connecting a payment provider (WooCommerce → Settings → Payments). `/fixes/` is created as a **draft**; publish it once payments work. When it's published, the Services page swaps its package cards for a "Need a quick fix?" block linking to it.
 
 Checkout: guest only, no postal address, company or phone; asks for Website URL (required) and "What's going on?" (optional). Shop/product URLs redirect to `/fixes/`.
+
+## Showcase (Nov 2026)
+
+Added by `docs/redesign/tools/seed-showcase.php` (create-only: never overwrites what's already filled).
+
+| Where in wp-admin | What | Elisa to check |
+|---|---|---|
+| Projects → The Win Win Services | Selected work card, WordPress · Elementor, Sarasota, Florida | Role is written as "Website & brochure design". Correct it if you did more or less. |
+| Site content → Graphic design (Work page) | 11 pieces: the Win Win brochure plus the 10 graphics from the 2026 portfolio PDF | Titles and client names; switch the gallery off with "Show the graphic design gallery". |
+| Pages → About → Conferences & seminars | UX+ 2025 (Sep 2025) and SaaSCon PH '25 (Apr 2025), with photos | The "what I took from it" lines are a first draft in your voice; the older UX+ group photo has no year yet. |

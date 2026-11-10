@@ -254,6 +254,248 @@
             "maxlength": "",
             "rows": 2,
             "new_lines": ""
+        },
+        {
+            "key": "field_edc_a_ev_h",
+            "label": "Events heading",
+            "name": "about_events_heading",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Conferences and seminars section. Hidden while there are no events.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_edc_a_ev_intro",
+            "label": "Events intro",
+            "name": "about_events_intro",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 3,
+            "new_lines": ""
+        },
+        {
+            "key": "field_edc_a_ev",
+            "label": "Conferences & seminars",
+            "name": "about_events",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "pagination": 0,
+            "min": 0,
+            "max": 20,
+            "collapsed": "",
+            "button_label": "Add event",
+            "rows_per_page": 40,
+            "sub_fields": [
+                {
+                    "key": "field_edc_a_ev_name",
+                    "label": "Event",
+                    "name": "name",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "parent_repeater": "field_edc_a_ev"
+                },
+                {
+                    "key": "field_edc_a_ev_when",
+                    "label": "When",
+                    "name": "when",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "e.g. September 2025",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "25",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "parent_repeater": "field_edc_a_ev"
+                },
+                {
+                    "key": "field_edc_a_ev_where",
+                    "label": "Where",
+                    "name": "where",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "25",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "parent_repeater": "field_edc_a_ev"
+                },
+                {
+                    "key": "field_edc_a_ev_theme",
+                    "label": "Theme",
+                    "name": "theme",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Optional: the event's theme or tagline",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "parent_repeater": "field_edc_a_ev"
+                },
+                {
+                    "key": "field_edc_a_ev_note",
+                    "label": "What I took from it",
+                    "name": "note",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "rows": 3,
+                    "new_lines": "",
+                    "parent_repeater": "field_edc_a_ev"
+                },
+                {
+                    "key": "field_edc_a_ev_photo",
+                    "label": "Photo",
+                    "name": "photo",
+                    "aria-label": "",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "id",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "jpg,jpeg,png,webp,avif",
+                    "preview_size": "medium",
+                    "parent_repeater": "field_edc_a_ev"
+                },
+                {
+                    "key": "field_edc_a_ev_photo2",
+                    "label": "Second photo",
+                    "name": "photo_2",
+                    "aria-label": "",
+                    "type": "image",
+                    "instructions": "Optional",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "id",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "jpg,jpeg,png,webp,avif",
+                    "preview_size": "medium",
+                    "parent_repeater": "field_edc_a_ev"
+                },
+                {
+                    "key": "field_edc_a_ev_cap2",
+                    "label": "Second photo caption",
+                    "name": "caption_2",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Optional",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "parent_repeater": "field_edc_a_ev"
+                }
+            ]
         }
     ],
     "location": [
@@ -279,5 +521,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1793926026
+    "modified": 1794293882
 }

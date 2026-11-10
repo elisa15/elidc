@@ -30,6 +30,11 @@ while ( have_posts() ) :
 	$more       = edc_lines( edc_field( 'about_more', '', $id ) );
 	$names      = trim( (string) edc_field( 'about_names', '', $id ) );
 	$log        = edc_career_log();
+	$events     = array_filter( edc_repeater( 'about_events', array(), $id ), function ( $row ) {
+		return ! empty( $row['name'] ) && '' !== trim( (string) $row['name'] );
+	} );
+	$ev_heading = trim( (string) edc_field( 'about_events_heading', '', $id ) );
+	$ev_intro   = trim( (string) edc_field( 'about_events_intro', '', $id ) );
 	$portrait   = (int) edc_field( 'about_photo', 0, $id );
 	$portrait   = $portrait ? $portrait : (int) edc_profile( 'portrait', 0 );
 	$portrait   = ( $portrait && wp_attachment_is_image( $portrait ) ) ? $portrait : 0;
@@ -106,6 +111,51 @@ while ( have_posts() ) :
 		<?php if ( '' !== $names ) : ?>
     <p class="small-mono gap-top"><?php echo esc_html( $names ); ?></p>
 		<?php endif; ?>
+  </div>
+</section>
+	<?php endif; ?>
+
+	<?php if ( $events ) : ?>
+<section class="sec page-sec events" id="events" aria-labelledby="events-h">
+  <div class="wrap">
+    <?php get_template_part( 'template-parts/common/path-eyebrow', null, array( 'path' => 'events' ) ); ?>
+    <h2 id="events-h"><?php echo esc_html( '' !== $ev_heading ? $ev_heading : 'Conferences & seminars' ); ?></h2>
+		<?php if ( '' !== $ev_intro ) : ?>
+    <p class="sub"><?php echo esc_html( $ev_intro ); ?></p>
+		<?php endif; ?>
+    <div class="event-list">
+		<?php
+		foreach ( $events as $i => $event ) :
+			$photo  = ! empty( $event['photo'] ) && wp_attachment_is_image( (int) $event['photo'] ) ? (int) $event['photo'] : 0;
+			$photo2 = ! empty( $event['photo_2'] ) && wp_attachment_is_image( (int) $event['photo_2'] ) ? (int) $event['photo_2'] : 0;
+			$meta   = array_filter( array( trim( (string) ( $event['when'] ?? '' ) ), trim( (string) ( $event['where'] ?? '' ) ) ) );
+			?>
+      <article class="event<?php echo $photo ? '' : ' no-photo'; ?><?php echo $i % 2 ? ' flip' : ''; ?>" data-reveal>
+			<?php if ( $photo ) : ?>
+        <div class="event-photos<?php echo $photo2 ? ' two' : ''; ?>">
+          <figure class="ph-main"><?php echo wp_get_attachment_image( $photo, 'large', false, array( 'loading' => 'lazy', 'sizes' => '(max-width: 900px) 100vw, 50vw' ) ); ?></figure>
+				<?php if ( $photo2 ) : ?>
+          <figure class="ph-second"><?php echo wp_get_attachment_image( $photo2, 'large', false, array( 'loading' => 'lazy', 'sizes' => '(max-width: 900px) 60vw, 25vw' ) ); ?>
+					<?php if ( ! empty( $event['caption_2'] ) ) : ?><figcaption><?php echo esc_html( trim( (string) $event['caption_2'] ) ); ?></figcaption><?php endif; ?>
+          </figure>
+				<?php endif; ?>
+        </div>
+			<?php endif; ?>
+        <div class="event-body">
+			<?php if ( $meta ) : ?>
+          <p class="event-meta"><?php echo esc_html( implode( ' · ', $meta ) ); ?></p>
+			<?php endif; ?>
+          <h3><?php echo esc_html( trim( (string) $event['name'] ) ); ?></h3>
+			<?php if ( ! empty( $event['theme'] ) ) : ?>
+          <p class="event-theme">“<?php echo esc_html( trim( (string) $event['theme'] ) ); ?>”</p>
+			<?php endif; ?>
+			<?php foreach ( edc_lines( $event['note'] ?? '' ) as $paragraph ) : ?>
+          <p><?php echo esc_html( $paragraph ); ?></p>
+			<?php endforeach; ?>
+        </div>
+      </article>
+		<?php endforeach; ?>
+    </div>
   </div>
 </section>
 	<?php endif; ?>
