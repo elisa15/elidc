@@ -203,7 +203,7 @@ if ( ! $about ) {
 				'where'     => 'Philippines',
 				'theme'     => 'SaaS 2.0: Surviving and Thriving in the Age of AI',
 				'note'      => 'Founders, enterprises and investors talking about building SaaS products as AI changes the game. Useful context for the SaaS teams I build for, from marketing sites to the apps themselves.',
-				'photo'     => $img( 'event-saascon-2025.jpg', "Elisa with colleagues at SaaSCon PH '25" ),
+				'photo'     => $img( 'event-saascon-2025-b.jpg', "Elisa with colleagues at SaaSCon PH '25" ),
 				'photo_2'   => '',
 				'caption_2' => '',
 			),
