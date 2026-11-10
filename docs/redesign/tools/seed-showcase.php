@@ -61,15 +61,18 @@ $keys = function ( $group ) {
 	return $map;
 };
 
-/** Write only the fields that are still empty. */
-$fill = function ( $group, $target, $values ) use ( $keys ) {
+/**
+ * Write only the fields that are still empty. $force writes every value: used for a
+ * post created in this run, where ACF reports field defaults as if they were filled.
+ */
+$fill = function ( $group, $target, $values, $force = false ) use ( $keys ) {
 	$map = $keys( $group );
 	foreach ( $values as $name => $value ) {
 		if ( ! isset( $map[ $name ] ) ) {
 			WP_CLI::warning( "No field {$name} in {$group}" );
 			continue;
 		}
-		$current = get_field( $map[ $name ], $target, false );
+		$current = $force ? null : get_field( $map[ $name ], $target, false );
 		if ( ! empty( $current ) || ( is_string( $current ) && '' !== trim( $current ) ) ) {
 			WP_CLI::log( "Kept {$name} (already filled)" );
 			continue;
@@ -125,7 +128,7 @@ if ( get_page_by_path( $slug, OBJECT, 'project' ) ) {
 		'screenshot'          => $img( 'winwin-live.jpg', 'The Win Win Services homepage' ),
 		'browser_label'       => 'thewinwinservices.com',
 		'live_url'            => 'https://thewinwinservices.com/',
-	) );
+	), true );
 	WP_CLI::log( "Created project #{$id}: The Win Win Services" );
 }
 
