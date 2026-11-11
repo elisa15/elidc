@@ -110,7 +110,7 @@ add_action( 'template_redirect', function () {
 	if ( is_product() ) {
 		$target .= '#fix-' . get_post_field( 'post_name', get_queried_object_id() );
 	}
-	wp_safe_redirect( $target, 302 );
+	wp_safe_redirect( $target, 301 );
 	exit;
 } );
 

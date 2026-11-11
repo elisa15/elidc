@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'EDC_VERSION', '1.10.0' );
+define( 'EDC_VERSION', '1.11.0' );
 define( 'EDC_DIR', get_template_directory() );
 define( 'EDC_URI', get_template_directory_uri() );
 
@@ -192,6 +192,7 @@ require_once EDC_DIR . '/inc/visibility.php';
 require_once EDC_DIR . '/inc/contact-form.php';
 require_once EDC_DIR . '/inc/security.php';
 require_once EDC_DIR . '/inc/seo-names.php';
+require_once EDC_DIR . '/inc/seo-index.php';
 require_once EDC_DIR . '/inc/performance.php';
 if ( class_exists( 'WooCommerce' ) ) {
 	require_once EDC_DIR . '/inc/shop.php';

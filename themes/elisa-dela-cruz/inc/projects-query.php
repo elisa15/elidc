@@ -51,7 +51,7 @@ function edc_project_case_study_redirect() {
 	if ( ! $post || edc_project_has_case_study( $post->ID ) ) {
 		return;
 	}
-	wp_safe_redirect( get_post_type_archive_link( 'project' ) . '#project-' . $post->post_name, 302 );
+	wp_safe_redirect( get_post_type_archive_link( 'project' ) . '#project-' . $post->post_name, 301 );
 	exit;
 }
 add_action( 'template_redirect', 'edc_project_case_study_redirect' );
