@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'EDC_VERSION', '1.9.0' );
+define( 'EDC_VERSION', '1.10.0' );
 define( 'EDC_DIR', get_template_directory() );
 define( 'EDC_URI', get_template_directory_uri() );
 
@@ -40,6 +40,7 @@ function edc_setup() {
 
 	// Project screenshots (cropped from the top of the page) and the hex portrait.
 	add_image_size( 'edc-shot', 1200, 705, array( 'center', 'top' ) );
+	add_image_size( 'edc-shot-md', 600, 352, array( 'center', 'top' ) ); // Phone-sized card images.
 	add_image_size( 'edc-portrait', 600, 672, true );
 
 	register_nav_menus( array(
@@ -191,6 +192,7 @@ require_once EDC_DIR . '/inc/visibility.php';
 require_once EDC_DIR . '/inc/contact-form.php';
 require_once EDC_DIR . '/inc/security.php';
 require_once EDC_DIR . '/inc/seo-names.php';
+require_once EDC_DIR . '/inc/performance.php';
 if ( class_exists( 'WooCommerce' ) ) {
 	require_once EDC_DIR . '/inc/shop.php';
 }
@@ -214,13 +216,6 @@ add_action( 'init', 'edc_disable_emojis' );
  * Assets
  * ---------------------------------------------------------------------- */
 function edc_enqueue_assets() {
-	wp_enqueue_style(
-		'edc-google-fonts',
-		'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap',
-		array(),
-		null
-	);
-
 	wp_enqueue_style( 'edc-tokens', EDC_URI . '/assets/css/tokens.css', array(), EDC_VERSION );
 	wp_enqueue_style( 'edc-site', EDC_URI . '/assets/css/site.css', array( 'edc-tokens' ), EDC_VERSION );
 
@@ -258,18 +253,4 @@ add_filter( 'excerpt_more', function () {
 // Keep the block editor's default width sane for standard pages.
 add_theme_support( 'wp-block-styles' );
 
-/**
- * Open the Google Fonts connections early (the font files are versioned by
- * Google, so they can't be preloaded by URL).
- */
-function edc_font_preconnect( $urls, $relation ) {
-	if ( 'preconnect' === $relation ) {
-		$urls[] = 'https://fonts.googleapis.com';
-		$urls[] = array(
-			'href'        => 'https://fonts.gstatic.com',
-			'crossorigin' => 'anonymous',
-		);
-	}
-	return $urls;
-}
-add_filter( 'wp_resource_hints', 'edc_font_preconnect', 10, 2 );
+// Fonts are self-hosted: see inc/performance.php.

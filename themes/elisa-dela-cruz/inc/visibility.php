@@ -348,7 +348,8 @@ function edc_image_size_attrs( $url ) {
 }
 
 /**
- * Google Analytics 4 (gtag) — printed early in <head> per Google's snippet.
+ * Google Analytics 4 (gtag). The queue starts in <head>; the library itself is
+ * loaded on first interaction (see the inline note) to keep it off the critical path.
  */
 function edc_print_google_analytics() {
 	if ( is_admin() ) {
@@ -364,14 +365,15 @@ function edc_print_google_analytics() {
 	$send_hits = 'local' !== wp_get_environment_type();
 	?>
 <!-- Google tag (gtag.js) -->
-<?php if ( $send_hits ) : ?>
-<script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo rawurlencode( $measurement_id ); ?>"></script>
-<?php endif; ?>
 <script>
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', '<?php echo esc_js( $measurement_id ); ?>');
+<?php if ( $send_hits ) : ?>
+/* gtag.js (170 KB) loads on the first scroll, tap or key press, or a few seconds after the page settles, so it never slows the first view. Hits queued above are sent then. */
+(function(){var done=false,ev=['scroll','pointerdown','keydown','touchstart'];function load(){if(done)return;done=true;ev.forEach(function(e){removeEventListener(e,load,{passive:true})});var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=<?php echo rawurlencode( $measurement_id ); ?>';document.head.appendChild(s)}ev.forEach(function(e){addEventListener(e,load,{passive:true,once:true})});addEventListener('load',function(){setTimeout(load,6000)})})();
+<?php endif; ?>
 </script>
 	<?php
 }

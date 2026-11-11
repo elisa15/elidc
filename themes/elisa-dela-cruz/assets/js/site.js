@@ -44,7 +44,7 @@
 	if (nav) {
 		var onScroll = function () { nav.classList.toggle('scrolled', window.scrollY > 30); };
 		window.addEventListener('scroll', onScroll, { passive: true });
-		onScroll();
+		window.requestAnimationFrame(onScroll); // Not inline: avoids a forced layout during start-up.
 	}
 
 	function setMenu(open, returnFocus) {
@@ -96,7 +96,7 @@
 		window.addEventListener('scroll', function () {
 			if (!ticking) { ticking = true; window.requestAnimationFrame(paint); }
 		}, { passive: true });
-		paint();
+		window.requestAnimationFrame(paint);
 
 		// Stats count up once when they come into view ("13+" counts 0 to 13, then keeps the "+").
 		var stats = $$('.stat b');

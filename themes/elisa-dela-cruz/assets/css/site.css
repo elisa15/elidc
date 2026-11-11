@@ -91,7 +91,8 @@ section{position:relative}
 @media (prefers-reduced-motion:no-preference){
   .rise{animation:rise .6s var(--ease) both}
   .rise.d1{animation-delay:.06s}.rise.d2{animation-delay:.12s}.rise.d3{animation-delay:.18s}.rise.d4{animation-delay:.24s}
-  @keyframes rise{from{opacity:0;transform:translateY(14px)}}
+  /* Slide only: text stays visible from the first paint (fading from 0 delays LCP). */
+  @keyframes rise{from{transform:translateY(14px)}}
 }
 
 /* ---------- Terminal ---------- */

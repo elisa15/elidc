@@ -7,10 +7,12 @@
 # Re-send only the scripts and screenshots: upload-tools
 # Shop (once, with Elisa's OK): shop  installs WooCommerce, creates the products, /fixes/ as a DRAFT
 # New content (create-only):  showcase  ACF sync + Win Win project, graphics gallery, conferences
-# Undo:             rollback-theme · rollback-db <backup-dir>
+# Speed (after upload):       speed  wp-content/.htaccess cache rules, WebP image sizes, warm the page cache
+# Undo:             rollback-theme · rollback-db <backup-dir> · rollback-speed
 #
 # Only touches public_html/wp-content (themes/elisa-dela-cruz*, a temporary
-# edc-deploy-tmp folder, and uploads via the media import) and this site's database.
+# edc-deploy-tmp folder, uploads via the media import, wp-content/.htaccess and
+# wp-content/cache/edc-pages) and this site's database.
 set -euo pipefail
 
 HOST="${EDC_HOST:-dcx}"
@@ -123,6 +125,28 @@ showcase() {
 	remote 'wp cache flush'
 }
 
+speed() {
+	say "Browser caching for wp-content (a different existing file is kept as .htaccess.edc-backup)"
+	remote 'test -f wp-content/.htaccess && ! grep -q "elisaarmas.com: long browser caching" wp-content/.htaccess && cp -p wp-content/.htaccess wp-content/.htaccess.edc-backup-$(date +%Y%m%d%H%M); true'
+	rsync -a -e "ssh ${SSH_OPTS[*]}" "$REPO/docs/redesign/tools/wp-content.htaccess" "$HOST:$ROOT/wp-content/.htaccess"
+	say "Check a theme file still loads with the new rules"
+	printf '%s\n' "$(curl -s -A "$UA" -o /dev/null -w '%{http_code} %{content_type}' "$SITE/wp-content/themes/elisa-dela-cruz/assets/fonts/manrope-latin.woff2")"
+	curl -sI -A "$UA" "$SITE/wp-content/themes/elisa-dela-cruz/style.css" | grep -i '^cache-control' || true
+	say "WebP image sizes (old files are kept, so nothing that links to them breaks)"
+	remote 'wp media regenerate --yes --skip-delete 2>&1 | tail -5'
+	say "Clear and warm the page cache"
+	remote 'wp option delete edc_page_cache_off >/dev/null 2>&1; wp edc-cache clear; wp cache flush'
+	for p in / /projects/ /about/ /services/ /contact/; do
+		curl -s -A "$UA" -o /dev/null "$SITE$p"
+		printf '%-14s %s\n' "$p" "$(curl -s -A "$UA" -o /dev/null -D - "$SITE$p" | tr -d '\r' | grep -i '^x-edc-cache' || echo 'no cache header')"
+	done
+}
+
+rollback_speed() {
+	say "Remove the wp-content cache rules (restores a backed-up original if there was one) and switch the page cache off"
+	remote 'b=$(ls -t wp-content/.htaccess.edc-backup-* 2>/dev/null | head -1); if [ -n "$b" ]; then cp -p "$b" wp-content/.htaccess; elif grep -q "elisaarmas.com: long browser caching" wp-content/.htaccess 2>/dev/null; then rm wp-content/.htaccess; fi; wp option update edc_page_cache_off 1; wp edc-cache clear; echo done'
+}
+
 cleanup() {
 	say "Remove $TMP (the old theme copy stays until Elisa confirms)"
 	remote 'rm -rf wp-content/edc-deploy-tmp && echo removed'
@@ -146,6 +170,8 @@ case "${1:-}" in
 	upload-tools) upload_tools ;;
 	shop) shop ;;
 	showcase) showcase ;;
+	speed) speed ;;
+	rollback-speed) rollback_speed ;;
 	rollback-theme) rollback_theme ;;
 	rollback-db) rollback_db "${2:-}" ;;
 	*) sed -n '2,10p' "$0"; exit 1 ;;

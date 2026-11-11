@@ -13,8 +13,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
@@ -27,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <header class="nav" id="nav">
   <div class="wrap nav-in">
-    <?php $logo_mark = edc_opt( 'logo_icon', EDC_URI . '/assets/images/elisaarmas-logo-icon-final.png' ); ?>
+    <?php $logo_mark = edc_opt( 'logo_icon', EDC_URI . '/assets/images/elisaarmas-logo-icon.webp' ); ?>
     <a class="logo" href="<?php echo esc_url( home_url( '/' ) ); ?>">
       <img src="<?php echo esc_url( $logo_mark ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>"<?php echo edc_image_size_attrs( $logo_mark ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- integers only. ?>>
     </a>
