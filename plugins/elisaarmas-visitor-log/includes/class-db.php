@@ -196,6 +196,74 @@ class EA_VL_DB {
 		);
 	}
 
+	/**
+	 * SQL condition that leaves out search engines, bots and test tools.
+	 */
+	public static function human_sql() {
+		return "user_agent NOT REGEXP 'bot|crawl|spider|slurp|lighthouse|headless|pagespeed|preview|python|curl|wget|httpclient|facebookexternalhit|scan'";
+	}
+
+	/**
+	 * Page views and unique visitors since a site-time datetime (people only).
+	 *
+	 * @param string $since Y-m-d H:i:s, or '' for all time.
+	 * @return array{views:int,visitors:int}
+	 */
+	public static function visit_totals( $since = '' ) {
+		global $wpdb;
+		$table = self::activity_table();
+		$where = "event_type = 'page_view' AND " . self::human_sql();
+		if ( $since ) {
+			$where .= $wpdb->prepare( ' AND created_at >= %s', $since );
+		}
+		$row = $wpdb->get_row( "SELECT COUNT(*) AS views, COUNT(DISTINCT COALESCE(NULLIF(session_id, ''), ip)) AS visitors FROM {$table} WHERE {$where}" ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		return array(
+			'views'    => $row ? (int) $row->views : 0,
+			'visitors' => $row ? (int) $row->visitors : 0,
+		);
+	}
+
+	/**
+	 * Page views per day for the last $days days (people, plus bots counted apart).
+	 */
+	public static function visits_by_day( $days = 30 ) {
+		global $wpdb;
+		$table = self::activity_table();
+		$since = gmdate( 'Y-m-d 00:00:00', strtotime( current_time( 'Y-m-d' ) . ' -' . ( (int) $days - 1 ) . ' days' ) );
+		$human = self::human_sql();
+		return $wpdb->get_results( // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+			$wpdb->prepare(
+				"SELECT DATE(created_at) AS day,
+					SUM({$human}) AS views,
+					COUNT(DISTINCT CASE WHEN {$human} THEN COALESCE(NULLIF(session_id, ''), ip) END) AS visitors,
+					SUM(NOT ({$human})) AS bots
+				FROM {$table}
+				WHERE event_type = 'page_view' AND created_at >= %s
+				GROUP BY DATE(created_at) ORDER BY day DESC",
+				$since
+			)
+		);
+	}
+
+	/**
+	 * Most viewed pages (people only) in the last $days days.
+	 */
+	public static function top_pages( $days = 30, $limit = 10 ) {
+		global $wpdb;
+		$table = self::activity_table();
+		$since = gmdate( 'Y-m-d 00:00:00', strtotime( current_time( 'Y-m-d' ) . ' -' . ( (int) $days - 1 ) . ' days' ) );
+		return $wpdb->get_results( // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+			$wpdb->prepare(
+				"SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(page_url, '#', 1), '?', 1) AS url, COUNT(*) AS views
+				FROM {$table}
+				WHERE event_type = 'page_view' AND created_at >= %s AND " . self::human_sql() . '
+				GROUP BY url ORDER BY views DESC LIMIT %d',
+				$since,
+				(int) $limit
+			)
+		);
+	}
+
 	public static function count_logs() {
 		global $wpdb;
 		$table = self::table();
