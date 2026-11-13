@@ -3,13 +3,107 @@
     "title": "Project Details",
     "fields": [
         {
-            "key": "field_edc_industry_badge",
-            "label": "Industry Badge",
-            "name": "industry_badge",
+            "key": "field_edc_p_tab_card",
+            "label": "Card",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_edc_p_kind",
+            "label": "Kind of work",
+            "name": "project_kind",
+            "aria-label": "",
+            "type": "taxonomy",
+            "instructions": "Tick Built, Solved or both. Drives the Built / Solved filter and the coloured tags.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "project_type",
+            "add_term": 0,
+            "save_terms": 1,
+            "load_terms": 1,
+            "return_format": "id",
+            "field_type": "checkbox",
+            "allow_null": 0,
+            "bidirectional": 0,
+            "multiple": 0,
+            "bidirectional_target": []
+        },
+        {
+            "key": "field_edc_p_platforms",
+            "label": "Platforms",
+            "name": "project_platforms",
+            "aria-label": "",
+            "type": "taxonomy",
+            "instructions": "Drives the platform filter and the neutral tags.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "project_platform",
+            "add_term": 0,
+            "save_terms": 1,
+            "load_terms": 1,
+            "return_format": "id",
+            "field_type": "checkbox",
+            "allow_null": 0,
+            "bidirectional": 0,
+            "multiple": 0,
+            "bidirectional_target": []
+        },
+        {
+            "key": "field_edc_p_tier",
+            "label": "Tier",
+            "name": "tier",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "Where this project appears on /projects/.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "featured": "Featured (large card, can have a case study)",
+                "selected": "Selected work (compact card)",
+                "highlight": "Technical highlight (short problem → fix note)"
+            },
+            "default_value": "selected",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_edc_p_client_display",
+            "label": "Public client name",
+            "name": "client_display_name",
             "aria-label": "",
             "type": "text",
-            "instructions": "e.g. Luxury Fashion — first pill on card + single page",
-            "required": 0,
+            "instructions": "Exactly what visitors see. Use an anonymous label when the client must not be named, e.g. \"US beauty brand\".",
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
@@ -23,16 +117,56 @@
             "maxlength": ""
         },
         {
-            "key": "field_edc_platform_badge",
-            "label": "Platform Badge",
-            "name": "platform_badge",
+            "key": "field_edc_p_confidential",
+            "label": "Confidential client",
+            "name": "confidential",
             "aria-label": "",
-            "type": "text",
-            "instructions": "e.g. Shopify — second (accent) pill",
+            "type": "true_false",
+            "instructions": "On: never output the client's real name, logo, live URL or screenshots. Use the illustrated or terminal visual.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_edc_industry_badge",
+            "label": "Industry",
+            "name": "industry_badge",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "e.g. Wine, Beauty, Smart home & AV",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_edc_p_region",
+            "label": "Region",
+            "name": "region",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "e.g. Australia, US, Philippines",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -44,15 +178,77 @@
         },
         {
             "key": "field_edc_role",
-            "label": "Role",
+            "label": "Your role",
             "name": "role",
             "aria-label": "",
             "type": "text",
-            "instructions": "e.g. Ongoing design & optimisation partner",
+            "instructions": "e.g. Shopify developer, Design & development",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_edc_p_engaged_via",
+            "label": "Engaged via",
+            "name": "engaged_via",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Employer of record or agency, e.g. \"via Microsourcing\". Leave empty for direct clients.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_edc_p_year_start",
+            "label": "Year started",
+            "name": "year_start",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "Four digits. Leave empty if not confirmed: empty fields render nothing, never a placeholder.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": 2011,
+            "max": 2100,
+            "step": ""
+        },
+        {
+            "key": "field_edc_p_year_end",
+            "label": "Year finished",
+            "name": "year_end",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Four digits, or \"now\" for ongoing. Shown as 2020–22 or 2022 →.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -64,12 +260,12 @@
         },
         {
             "key": "field_edc_summary",
-            "label": "Summary",
+            "label": "Card summary",
             "name": "summary",
             "aria-label": "",
             "type": "textarea",
-            "instructions": "Short 1–2 sentence card summary. Falls back to post excerpt if empty.",
-            "required": 0,
+            "instructions": "One or two sentences, plain words. Falls back to the excerpt.",
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
@@ -83,16 +279,387 @@
             "new_lines": ""
         },
         {
-            "key": "field_edc_gradient_start",
-            "label": "Gradient Start",
-            "name": "gradient_start",
+            "key": "field_edc_p_names",
+            "label": "Projects in this group",
+            "name": "names",
             "aria-label": "",
-            "type": "color_picker",
-            "instructions": "Placeholder background if no Featured Image",
+            "type": "repeater",
+            "instructions": "Only for grouped cards such as \"Three wineries\". Each shows as → Name · Note.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Add name",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_edc_p_names_name",
+                    "label": "Name",
+                    "name": "name",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "e.g. Boat O'Craigo",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_edc_p_names_note",
+                    "label": "Note",
+                    "name": "note",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "e.g. Yarra Valley",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                }
+            ]
+        },
+        {
+            "key": "field_edc_p_chips",
+            "label": "Extra tags",
+            "name": "chips",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Shown after the kind and platform tags. Keep it to three.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 3,
+            "collapsed": "",
+            "button_label": "Add tag",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_edc_p_chips_label",
+                    "label": "Tag",
+                    "name": "label",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "e.g. Liquid, 1,000+ SKUs, Migration",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                }
+            ]
+        },
+        {
+            "key": "field_edc_p_span",
+            "label": "Card width on the homepage grid",
+            "name": "card_span",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "Use Wide for the first featured project only.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "auto": "Standard (one third)",
+                "wide": "Wide lead card (two thirds)",
+                "half": "Half"
+            },
+            "default_value": "auto",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_edc_p_tab_visual",
+            "label": "Visual",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_edc_p_visual",
+            "label": "Visual type",
+            "name": "visual_mode",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "Confidential projects must use Illustration or Terminal.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "screenshot": "One screenshot",
+                "split": "Two screenshots side by side",
+                "illustration": "Illustration (confidential clients)",
+                "terminal": "Terminal text (security, performance)"
+            },
+            "default_value": "screenshot",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_edc_p_shot1",
+            "label": "Screenshot",
+            "name": "screenshot",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "1600×940 or larger, top of the homepage. Uploaded as WebP or AVIF if possible.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_edc_p_visual",
+                        "operator": "==",
+                        "value": "screenshot"
+                    }
+                ],
+                [
+                    {
+                        "field": "field_edc_p_visual",
+                        "operator": "==",
+                        "value": "split"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "id",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "jpg,jpeg,png,webp,avif",
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_edc_p_shot2",
+            "label": "Second screenshot",
+            "name": "screenshot_secondary",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_edc_p_visual",
+                        "operator": "==",
+                        "value": "split"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "id",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "jpg,jpeg,png,webp,avif",
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_edc_p_illustration",
+            "label": "Illustration",
+            "name": "illustration",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "Add new illustrations in template-parts/project/visual-*.php.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_edc_p_visual",
+                        "operator": "==",
+                        "value": "illustration"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "swatches": "Colour swatches + filters (beauty / product catalogue)"
+            },
+            "default_value": "swatches",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_edc_p_terminal_line",
+            "label": "Terminal line",
+            "name": "terminal_line",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "e.g. $ grep -r \"eval(base64_decode\" ./wp-content",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_edc_p_visual",
+                        "operator": "==",
+                        "value": "terminal"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_edc_p_browser_label",
+            "label": "Browser bar label",
+            "name": "browser_label",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "The mono text in the fake browser bar, e.g. boatocraigo.com.au. For confidential projects use a description, e.g. us-beauty-brand · 4 storefronts.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_edc_p_visual_badge",
+            "label": "Badge on the visual",
+            "name": "visual_badge",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Optional, e.g. + 2 more wineries",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_edc_p_live_url",
+            "label": "Live site URL",
+            "name": "live_url",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "Only if the site is still your work and the client is not confidential.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_edc_gradient_start",
+            "label": "Gradient start (legacy)",
+            "name": "gradient_start",
+            "aria-label": "",
+            "type": "color_picker",
+            "instructions": "Used only when no visual is set.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -105,15 +672,15 @@
         },
         {
             "key": "field_edc_gradient_end",
-            "label": "Gradient End",
+            "label": "Gradient end (legacy)",
             "name": "gradient_end",
             "aria-label": "",
             "type": "color_picker",
-            "instructions": "Paired with Gradient Start",
+            "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -123,6 +690,520 @@
             "custom_palette_source": "",
             "palette_colors": "",
             "show_color_wheel": true
+        },
+        {
+            "key": "field_edc_platform_badge",
+            "label": "Platform badge (legacy)",
+            "name": "platform_badge",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Old field. Platforms now come from the Platforms taxonomy; this is only read if no platform is ticked.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_edc_p_tab_behind",
+            "label": "Behind panel",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_edc_p_behind_meta",
+            "label": "Panel label",
+            "name": "behind_meta",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Right side of the panel header, e.g. built · 2020–22, solved · confidential",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_edc_p_behind",
+            "label": "Behind rows",
+            "name": "behind_rows",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Shown as key: value in the mono panel. Usual keys: needed, tricky, did, stack, with, from, to, moved, symptom, cause, fix, after, outcome. Leave empty if not confirmed: empty fields render nothing, never a placeholder.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 6,
+            "collapsed": "",
+            "button_label": "Add row",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_edc_p_behind_k",
+                    "label": "Key",
+                    "name": "key",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Lowercase, no colon",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_edc_p_behind_v",
+                    "label": "Value",
+                    "name": "value",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "One line",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                }
+            ]
+        },
+        {
+            "key": "field_edc_p_tab_cs",
+            "label": "Case study",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_edc_p_has_cs",
+            "label": "Has a case study page",
+            "name": "has_case_study",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Off: the card does not link anywhere and /projects/{slug}/ redirects to the archive.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_edc_p_cs_h1",
+            "label": "Case-study headline",
+            "name": "cs_headline",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Plain words: what happened. Falls back to the title.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_edc_p_has_cs",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_edc_p_cs_lede",
+            "label": "Intro",
+            "name": "cs_lede",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "Two or three sentences under the headline.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_edc_p_has_cs",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 3,
+            "new_lines": ""
+        },
+        {
+            "key": "field_edc_p_glance",
+            "label": "At a glance",
+            "name": "at_a_glance",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "The mono sidebar box. Leave empty if not confirmed: empty fields render nothing, never a placeholder.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_edc_p_has_cs",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 8,
+            "collapsed": "",
+            "button_label": "Add line",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_edc_p_glance_k",
+                    "label": "Label",
+                    "name": "label",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "client, role, stack, timeline, team",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_edc_p_glance_v",
+                    "label": "Value",
+                    "name": "value",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                }
+            ]
+        },
+        {
+            "key": "field_edc_p_situation",
+            "label": "1. The situation",
+            "name": "situation",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "What was wrong or needed, in the client's terms.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_edc_p_has_cs",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 1
+        },
+        {
+            "key": "field_edc_p_tricky",
+            "label": "2. What made it tricky",
+            "name": "tricky",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "The real constraint.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_edc_p_has_cs",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 1
+        },
+        {
+            "key": "field_edc_p_steps",
+            "label": "3. What I did",
+            "name": "approach",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Three to five steps.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_edc_p_has_cs",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 8,
+            "collapsed": "",
+            "button_label": "Add step",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_edc_p_steps_t",
+                    "label": "Step",
+                    "name": "step",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "rows": 2,
+                    "new_lines": ""
+                }
+            ]
+        },
+        {
+            "key": "field_edc_p_tech",
+            "label": "4. Technical breakdown",
+            "name": "technical_breakdown",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "Shown inside a collapsed <details>. Code allowed (sanitised, nothing proprietary, no credentials).",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_edc_p_has_cs",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 0,
+            "delay": 1
+        },
+        {
+            "key": "field_edc_p_result",
+            "label": "5. The result",
+            "name": "result",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "Only verified outcomes. If nothing was measured, describe what was delivered.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_edc_p_has_cs",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 1
+        },
+        {
+            "key": "field_edc_p_learned",
+            "label": "6. What I learned (optional)",
+            "name": "learned",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_edc_p_has_cs",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 2,
+            "new_lines": ""
+        },
+        {
+            "key": "field_edc_p_cs_testi",
+            "label": "Testimonial",
+            "name": "cs_testimonial",
+            "aria-label": "",
+            "type": "post_object",
+            "instructions": "Only testimonials with permission confirmed are shown.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_edc_p_has_cs",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "testimonial"
+            ],
+            "post_status": [
+                "publish"
+            ],
+            "taxonomy": "",
+            "return_format": "id",
+            "multiple": 0,
+            "allow_null": 1,
+            "bidirectional": 0,
+            "ui": 1,
+            "bidirectional_target": []
         }
     ],
     "location": [
@@ -139,12 +1220,14 @@
     "style": "default",
     "label_placement": "top",
     "instruction_placement": "label",
-    "hide_on_screen": "",
+    "hide_on_screen": [
+        "the_content"
+    ],
     "active": true,
-    "description": "Case-study fields for the Project CPT. Matches SCHEMA.md section 1.",
+    "description": "Project card, behind panel and case study. See docs/redesign/03-acf-schema.md.",
     "show_in_rest": 0,
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1783686308
+    "modified": 1793620000
 }

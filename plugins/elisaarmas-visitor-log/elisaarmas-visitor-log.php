@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Elisa Armas Visitor Log
  * Description: Private contact-form + activity log and IP blocker for elisaarmas.com only. Admin-only.
- * Version: 1.1.0
+ * Version: 1.2.0
  * Author: Elisa Armas
  * Requires at least: 6.0
  * Requires PHP: 7.4
@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'EA_VL_VERSION', '1.1.0' );
+define( 'EA_VL_VERSION', '1.2.0' );
 define( 'EA_VL_FILE', __FILE__ );
 define( 'EA_VL_DIR', plugin_dir_path( __FILE__ ) );
 define( 'EA_VL_URL', plugin_dir_url( __FILE__ ) );

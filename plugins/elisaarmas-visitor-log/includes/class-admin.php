@@ -64,7 +64,7 @@ class EA_VL_Admin {
 		EA_VL_DB::activate();
 
 		$tab     = isset( $_GET['tab'] ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : 'messages';
-		if ( ! in_array( $tab, array( 'messages', 'activity' ), true ) ) {
+		if ( ! in_array( $tab, array( 'messages', 'activity', 'visits' ), true ) ) {
 			$tab = 'messages';
 		}
 
@@ -93,6 +93,23 @@ class EA_VL_Admin {
 				<div class="notice notice-success is-dismissible"><p><?php echo esc_html( self::notice_text( $notice ) ); ?></p></div>
 			<?php endif; ?>
 
+			<?php
+			$today = current_time( 'Y-m-d' );
+			$spans = array(
+				'Today'        => $today . ' 00:00:00',
+				'Last 7 days'  => gmdate( 'Y-m-d 00:00:00', strtotime( $today . ' -6 days' ) ),
+				'Last 30 days' => gmdate( 'Y-m-d 00:00:00', strtotime( $today . ' -29 days' ) ),
+				'All time'     => '',
+			);
+			?>
+			<h2 style="margin-bottom:0;">Website visits</h2>
+			<p style="margin-top:4px;color:#646970;">Page views by people (search engines and bots not counted; your own visits while logged in are skipped). Unique visitors in brackets.</p>
+			<div class="ea-vl-stats">
+				<?php foreach ( $spans as $label => $since ) : $t = EA_VL_DB::visit_totals( $since ); ?>
+					<div class="ea-vl-stat"><strong><?php echo esc_html( number_format_i18n( $t['views'] ) ); ?></strong><?php echo esc_html( $label ); ?> <span style="color:#646970;">(<?php echo esc_html( number_format_i18n( $t['visitors'] ) ); ?>)</span></div>
+				<?php endforeach; ?>
+			</div>
+
 			<div class="ea-vl-stats">
 				<div class="ea-vl-stat"><strong><?php echo esc_html( (string) $total_msg ); ?></strong>Form messages</div>
 				<div class="ea-vl-stat"><strong><?php echo esc_html( (string) EA_VL_DB::count_activities() ); ?></strong>Activity events</div>
@@ -102,6 +119,7 @@ class EA_VL_Admin {
 			<nav class="nav-tab-wrapper ea-vl-nav">
 				<a class="nav-tab <?php echo 'messages' === $tab ? 'nav-tab-active' : ''; ?>" href="<?php echo esc_url( $base . '&tab=messages' ); ?>">Messages</a>
 				<a class="nav-tab <?php echo 'activity' === $tab ? 'nav-tab-active' : ''; ?>" href="<?php echo esc_url( $base . '&tab=activity' ); ?>">Activity</a>
+				<a class="nav-tab <?php echo 'visits' === $tab ? 'nav-tab-active' : ''; ?>" href="<?php echo esc_url( $base . '&tab=visits' ); ?>">Visits by day</a>
 			</nav>
 
 			<div class="ea-vl-blocked-box">
@@ -127,11 +145,58 @@ class EA_VL_Admin {
 				<?php endif; ?>
 			</div>
 
-			<?php if ( 'activity' === $tab ) : ?>
+			<?php if ( 'visits' === $tab ) : ?>
+				<?php self::render_visits_tab(); ?>
+			<?php elseif ( 'activity' === $tab ) : ?>
 				<?php self::render_activity_tab( $per, $offset, $page, $total_act, $filter_ip, $base ); ?>
 			<?php else : ?>
 				<?php self::render_messages_tab( $per, $offset, $page, $total_msg, $view, $base ); ?>
 			<?php endif; ?>
+		</div>
+		<?php
+	}
+
+	private static function render_visits_tab() {
+		$days = EA_VL_DB::visits_by_day( 30 );
+		$top  = EA_VL_DB::top_pages( 30, 10 );
+		?>
+		<div style="display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start;">
+			<div style="flex:1 1 420px;">
+				<h2>Last 30 days</h2>
+				<table class="widefat striped ea-vl-table">
+					<thead><tr><th>Day</th><th>Page views</th><th>Visitors</th><th>Bot views</th></tr></thead>
+					<tbody>
+					<?php if ( ! $days ) : ?>
+						<tr><td colspan="4">No visits recorded yet.</td></tr>
+					<?php endif; ?>
+					<?php foreach ( $days as $d ) : ?>
+						<tr>
+							<td><?php echo esc_html( date_i18n( 'D j M Y', strtotime( $d->day ) ) ); ?></td>
+							<td><strong><?php echo esc_html( number_format_i18n( (int) $d->views ) ); ?></strong></td>
+							<td><?php echo esc_html( number_format_i18n( (int) $d->visitors ) ); ?></td>
+							<td style="color:#646970;"><?php echo esc_html( number_format_i18n( (int) $d->bots ) ); ?></td>
+						</tr>
+					<?php endforeach; ?>
+					</tbody>
+				</table>
+			</div>
+			<div style="flex:1 1 360px;">
+				<h2>Top pages (30 days)</h2>
+				<table class="widefat striped ea-vl-table">
+					<thead><tr><th>Page</th><th>Views</th></tr></thead>
+					<tbody>
+					<?php if ( ! $top ) : ?>
+						<tr><td colspan="2">No visits recorded yet.</td></tr>
+					<?php endif; ?>
+					<?php foreach ( $top as $row ) : ?>
+						<tr>
+							<td class="ea-vl-mono"><?php echo esc_html( (string) wp_parse_url( $row->url, PHP_URL_PATH ) ?: '/' ); ?></td>
+							<td><?php echo esc_html( number_format_i18n( (int) $row->views ) ); ?></td>
+						</tr>
+					<?php endforeach; ?>
+					</tbody>
+				</table>
+			</div>
 		</div>
 		<?php
 	}

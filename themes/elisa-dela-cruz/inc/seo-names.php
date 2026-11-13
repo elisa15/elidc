@@ -46,6 +46,32 @@ function edc_person_knows_about() {
 }
 
 /**
+ * Profile URLs for schema sameAs, taken from the footer social links in ACF.
+ * Only real http(s) profiles count; email and "#" placeholders are skipped.
+ *
+ * @return string[]
+ */
+function edc_person_same_as() {
+	if ( ! function_exists( 'edc_repeater' ) ) {
+		return array();
+	}
+	$urls = array();
+	foreach ( array( 'linkedin_url', 'github_url' ) as $field ) {
+		$urls[] = trim( (string) edc_opt( $field, '' ) );
+	}
+	foreach ( edc_repeater( 'footer_social', array() ) as $social ) {
+		$urls[] = isset( $social['url'] ) ? trim( (string) $social['url'] ) : '';
+	}
+	$out = array();
+	foreach ( $urls as $url ) {
+		if ( preg_match( '#^https?://#i', $url ) ) {
+			$out[] = esc_url_raw( $url );
+		}
+	}
+	return array_values( array_unique( $out ) );
+}
+
+/**
  * Enrich Yoast Person schema with aliases, role, and topics.
  *
  * @param array $data Person graph piece.
@@ -55,6 +81,8 @@ function edc_enrich_person_schema( $data ) {
 	if ( ! is_array( $data ) ) {
 		return $data;
 	}
+
+	$data['name'] = edc_opt( 'profile_name', ! empty( $data['name'] ) ? $data['name'] : 'Elisa A. Dela Cruz' );
 
 	$names = edc_person_alternate_names();
 	if ( ! empty( $data['name'] ) ) {
@@ -69,9 +97,24 @@ function edc_enrich_person_schema( $data ) {
 		);
 	}
 	$data['alternateName'] = $names;
-	$data['jobTitle']     = 'WordPress & Shopify Developer';
+	$data['jobTitle']     = edc_opt( 'profile_title', 'Senior WordPress & Shopify Developer' );
 	$data['description']  = 'Web developer and WordPress specialist focused on Shopify development, Shopify migrations, WordPress security, and custom builds.';
 	$data['knowsAbout']   = edc_person_knows_about();
+
+	$portrait = (int) edc_opt( 'portrait', 0 );
+	if ( $portrait && wp_attachment_is_image( $portrait ) ) {
+		$data['image'] = array(
+			'@type'      => 'ImageObject',
+			'url'        => wp_get_attachment_image_url( $portrait, 'full' ),
+			'contentUrl' => wp_get_attachment_image_url( $portrait, 'full' ),
+			'caption'    => $data['name'],
+		);
+	}
+
+	$same_as = edc_person_same_as();
+	if ( $same_as ) {
+		$data['sameAs'] = array_values( array_unique( array_merge( isset( $data['sameAs'] ) ? (array) $data['sameAs'] : array(), $same_as ) ) );
+	}
 
 	return $data;
 }

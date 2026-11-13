@@ -1,0 +1,471 @@
+{
+    "key": "group_edc_profile",
+    "title": "Profile & Links",
+    "fields": [
+        {
+            "key": "field_edc_pr_tab_id",
+            "label": "Identity",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_edc_pr_name",
+            "label": "Full public name",
+            "name": "profile_name",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Used in schema and the footer.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Elisa A. Dela Cruz",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_edc_pr_short",
+            "label": "Short name",
+            "name": "profile_short_name",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Used in copy.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Elisa Dela Cruz",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_edc_pr_title",
+            "label": "Job title",
+            "name": "profile_title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Senior WordPress & Shopify Developer",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_edc_pr_portrait",
+            "label": "Portrait",
+            "name": "portrait",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Used on About, the homepage hex and Person schema.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "id",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "jpg,jpeg,png,webp,avif",
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_edc_pr_avail",
+            "label": "Availability",
+            "name": "availability",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Terminal status line, e.g. Open to projects and senior roles. Leave empty if not confirmed: empty fields render nothing, never a placeholder.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_edc_pr_location",
+            "label": "Location and hours line",
+            "name": "location_line",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "e.g. Manila, working with AU / US / UK time zones",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_edc_pr_reply",
+            "label": "Reply promise",
+            "name": "reply_promise",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "e.g. Replies within one working day",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_edc_pr_tab_links",
+            "label": "Links",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_edc_pr_cv",
+            "label": "CV (PDF)",
+            "name": "cv_file",
+            "aria-label": "",
+            "type": "file",
+            "instructions": "Every \"Download CV\" link is hidden while this is empty.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_size": "",
+            "max_size": "",
+            "mime_types": "pdf"
+        },
+        {
+            "key": "field_edc_pr_li",
+            "label": "LinkedIn URL",
+            "name": "linkedin_url",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "Hidden everywhere while empty. Also used for schema sameAs.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_edc_pr_gh",
+            "label": "GitHub URL",
+            "name": "github_url",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "Hidden everywhere while empty. Also used for schema sameAs.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_edc_pr_tab_career",
+            "label": "Career log",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_edc_pr_log",
+            "label": "Career log (newest first)",
+            "name": "career_log",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Feeds the git-log timeline on the homepage (5 newest + \"git log --all\") and the full list on About.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "field_edc_pr_log_msg",
+            "button_label": "Add entry",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_edc_pr_log_type",
+                    "label": "Type",
+                    "name": "type",
+                    "aria-label": "",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "15",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "feat": "feat",
+                        "fix": "fix",
+                        "chore": "chore",
+                        "refactor": "refactor",
+                        "init": "init"
+                    },
+                    "default_value": "feat",
+                    "return_format": "value",
+                    "multiple": 0,
+                    "allow_null": 0,
+                    "ui": 0,
+                    "ajax": 0,
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_edc_pr_log_msg",
+                    "label": "Message",
+                    "name": "message",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "e.g. Shopify at scale, four storefronts",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "45",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_edc_pr_log_ctx",
+                    "label": "Context",
+                    "name": "context",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Shown dimmed in brackets, e.g. US beauty brand, via Microsourcing",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "40",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_edc_pr_log_when",
+                    "label": "When",
+                    "name": "when",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "e.g. 2020–22 or 2022 →",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "20",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_edc_pr_log_meta",
+                    "label": "Role line",
+                    "name": "meta",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "e.g. Shopify Developer · US account",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "40",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_edc_pr_log_hash",
+                    "label": "Hash",
+                    "name": "hash",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Optional 7 characters; generated if empty.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "20",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": 7
+                },
+                {
+                    "key": "field_edc_pr_log_head",
+                    "label": "Current (HEAD)",
+                    "name": "is_head",
+                    "aria-label": "",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "20",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                },
+                {
+                    "key": "field_edc_pr_log_body",
+                    "label": "Description",
+                    "name": "body",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "rows": 3,
+                    "new_lines": ""
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "edc-site-content"
+            }
+        ]
+    ],
+    "menu_order": 1,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Who Elisa is, links, CV and the career log. Read by the homepage, About, footer and schema.",
+    "show_in_rest": 0,
+    "display_title": "",
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1793620000
+}

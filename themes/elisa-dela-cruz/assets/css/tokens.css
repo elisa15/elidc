@@ -1,0 +1,119 @@
+/* Elisa Dela Cruz — generated from design/tokens.json by docs/redesign/tools/build-tokens.py. Do not edit. */
+
+:root {
+  --magenta: #ff2fb1;
+  --violet: #8b2fff;
+  --coral: #ff8a5c;
+  --mint: #7ee2b8;
+  --btn-start: #d1148f;
+  --btn-mid: #7a24e6;
+  --btn-end: #c2410c;
+  --night-900: #09090d;
+  --night-800: #111116;
+  --night-700: #16161c;
+  --cream-100: #f3eee4;
+  --cream-50: #faf6ee;
+  --ink-900: #14141a;
+  --ink-700: #3b3842;
+  --ink-600: #55525c;
+  --paper: #f2f2f5;
+  --lede: #c9c9d2;
+  --term-text: #e6e6ec;
+  --mist: #a3a3ad;
+  --haze: #83838f;
+  --employer: #c9a8ff;
+  --surface: var(--night-900);
+  --surface-raised: var(--night-800);
+  --fg: var(--paper);
+  --fg-muted: var(--mist);
+  --fg-subtle: var(--haze);
+  --accent-ink: var(--magenta);
+  --focus: var(--magenta);
+  --line: rgba(255,255,255,0.09);
+  --line-strong: rgba(255,255,255,0.16);
+  --chip-bg: rgba(255,255,255,0.06);
+  --tag-built-fg: #5b1fb0;
+  --tag-built-bg: rgba(139,47,255,0.1);
+  --tag-solved-fg: #a3106e;
+  --tag-solved-bg: rgba(255,47,177,0.1);
+  --shot-bar: #15151b;
+  --overlay: rgba(5,5,8,0.72);
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 22px;
+  --space-6: 28px;
+  --space-7: 40px;
+  --space-8: 64px;
+  --section-y: 140px;
+  --wrap: 1180px;
+  --nav-h: 72px;
+  --tap: 44px;
+  --radius-xs: 6px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 22px;
+  --radius-pill: 999px;
+  --shadow-card-hover: 0 24px 50px -28px rgba(20,20,26,0.35);
+  --shadow-terminal: 0 30px 80px -30px rgba(139,47,255,0.35);
+  --shadow-float: 0 10px 30px rgba(0,0,0,0.4);
+  --z-nav: 50;
+  --z-modal: 80;
+  --z-skip: 100;
+  --font-sans: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-serif: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --fs-hero-h1: clamp(44px, 7vw, 92px);
+  --fs-contact-h2: clamp(40px, 6.4vw, 80px);
+  --fs-page-h1: clamp(38px, 6vw, 74px);
+  --fs-section-h2: clamp(34px, 5vw, 56px);
+  --fs-card-h3: clamp(21px, 2vw, 25px);
+  --fs-card-h3-lead: clamp(24px, 2.6vw, 32px);
+  --fs-bridge: clamp(28px, 4vw, 48px);
+  --fs-quote: clamp(19px, 1.8vw, 22px);
+  --fs-stat: clamp(44px, 6vw, 72px);
+  --fs-lede: clamp(18px, 1.8vw, 21px);
+  --gutter: clamp(16px, 4vw, 40px);
+  --section-pad: clamp(80px, 11vw, 140px);
+  --grid-gap: clamp(18px, 2.5vw, 28px);
+
+  --grad: linear-gradient(120deg, var(--magenta) 0%, var(--violet) 55%, var(--coral) 100%);
+  --grad-btn: linear-gradient(120deg, var(--btn-start) 0%, var(--btn-mid) 55%, var(--btn-end) 100%);
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  --dur-ui: 200ms;
+  --dur-panel: 300ms;
+  --dur-reveal: 450ms;
+
+  /* Legacy names used by the pre-redesign style.css */
+  --bg: var(--night-900);
+  --bg-2: var(--night-800);
+  --bg-3: var(--night-700);
+  --bg-light: var(--cream-100);
+  --card-warm: var(--cream-50);
+  --ink: var(--ink-900);
+  --text: var(--paper);
+  --dim: var(--mist);
+  --dim-2: var(--haze);
+  --border: rgba(255,255,255,0.09);
+  --border-2: rgba(255,255,255,0.16);
+}
+
+/* cream sections: add class="light" or data-surface="cream" to the section */
+.light,
+[data-surface="cream"] {
+  --surface: var(--cream-100);
+  --surface-raised: var(--cream-50);
+  --fg: var(--ink-900);
+  --fg-muted: var(--ink-600);
+  --fg-subtle: var(--ink-600);
+  --accent-ink: #b0127a;
+  --focus: var(--violet);
+  --line: rgba(20,20,26,0.12);
+  --line-strong: rgba(20,20,26,0.2);
+  --chip-bg: rgba(20,20,26,0.06);
+}

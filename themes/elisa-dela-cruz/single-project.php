@@ -1,6 +1,8 @@
 <?php
 /**
- * Single project (case study) template.
+ * Case study. Only reached when has_case_study is on: inc/projects-query.php
+ * redirects every other project to its card on /projects/.
+ * See docs/redesign/04-build-spec.md §3.
  *
  * @package elisa-dela-cruz
  */
@@ -10,62 +12,136 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 get_header();
-
+?>
+<main id="main">
+<?php
 while ( have_posts() ) :
 	the_post();
 
-	$industry_badge = edc_field( 'industry_badge', '' );
-	$platform_badge = edc_field( 'platform_badge', '' );
-	$role           = edc_field( 'role', '' );
-	$gradient_start = edc_field( 'gradient_start', '' );
-	$gradient_end   = edc_field( 'gradient_end', '' );
-	$thumb_url      = get_the_post_thumbnail_url( get_the_ID(), 'edc-project-hero' );
-
-	if ( $thumb_url ) {
-		$visual_style = 'background-image:url(' . esc_url( $thumb_url ) . ');';
-	} elseif ( $gradient_start && $gradient_end ) {
-		$visual_style = 'background:linear-gradient(135deg,' . esc_attr( $gradient_start ) . ',' . esc_attr( $gradient_end ) . ');';
-	} else {
-		$visual_style = 'background:linear-gradient(135deg,var(--magenta),var(--violet));';
+	$id      = get_the_ID();
+	$project = edc_project( $id );
+	if ( ! $project ) {
+		continue;
 	}
+	$archive = get_post_type_archive_link( 'project' );
+
+	$headline = trim( (string) edc_field( 'cs_headline', '', $id ) );
+	$lede     = trim( (string) edc_field( 'cs_lede', '', $id ) );
+	$glance   = edc_filled_rows( edc_repeater( 'at_a_glance', array(), $id ), array( 'label', 'value' ) );
+	$approach = edc_filled_rows( edc_repeater( 'approach', array(), $id ), array( 'step' ) );
+	$learned  = trim( (string) edc_field( 'learned', '', $id ) );
+	$quote    = edc_testimonial( (int) edc_field( 'cs_testimonial', 0, $id ) );
+
+	$situation = edc_rich_field( 'situation', $id );
+	$tricky    = edc_rich_field( 'tricky', $id );
+	$technical = edc_rich_field( 'technical_breakdown', $id );
+	$result    = edc_rich_field( 'result', $id );
+
+	$next = edc_next_case_study( $id );
+
+	$contact_url = edc_contact_url();
+	$has_modal   = edc_should_show_section( 'show_contact_modal' );
 	?>
-	<section class="single-project-hero">
-		<div class="wrap" style="max-width:900px;">
-			<a href="<?php echo esc_url( home_url( '/#work' ) ); ?>" class="single-project-back" data-reveal="up">
-				<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-				Back to work
-			</a>
-			<div class="case-badges" data-reveal="up">
-				<?php if ( $industry_badge ) : ?><span class="p-badge"><?php echo esc_html( $industry_badge ); ?></span><?php endif; ?>
-				<?php if ( $platform_badge ) : ?><span class="p-badge alt"><?php echo esc_html( $platform_badge ); ?></span><?php endif; ?>
-			</div>
-			<h1 class="case-title" style="font-size:clamp(32px,5vw,54px);" data-reveal="up"><?php the_title(); ?></h1>
-			<?php if ( $role ) : ?><div class="case-role" data-reveal="up"><?php echo esc_html( $role ); ?></div><?php endif; ?>
+<section class="cs-hero">
+  <div class="wrap">
+    <p class="crumbs"><a href="<?php echo esc_url( $archive ); ?>">~/elisa/work</a> / <?php echo esc_html( $project['slug'] ); ?></p>
+    <?php if ( $project['kinds'] || $project['platforms'] || $project['chips'] ) : ?>
+    <div class="tags">
+      <?php foreach ( $project['kinds'] as $kind ) : ?><span class="tag <?php echo esc_attr( $kind['slug'] ); ?>"><?php echo esc_html( $kind['name'] ); ?></span><?php endforeach; ?>
+      <?php foreach ( $project['platforms'] as $platform ) : ?><span class="tag"><?php echo esc_html( $platform['name'] ); ?></span><?php endforeach; ?>
+      <?php foreach ( $project['chips'] as $chip ) : ?><span class="tag"><?php echo esc_html( $chip ); ?></span><?php endforeach; ?>
+    </div>
+    <?php endif; ?>
+    <h1><?php echo '' !== $headline ? edc_inline_html( $headline ) : esc_html( $project['title'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_kses. ?></h1>
+    <?php if ( '' !== $lede ) : ?>
+    <p class="lede"><?php echo esc_html( $lede ); ?></p>
+    <?php endif; ?>
+  </div>
+</section>
 
-			<div class="single-project-visual" style="<?php echo esc_attr( $visual_style ); ?>" data-reveal="scale">
-				<?php if ( ! $thumb_url ) : ?>
-					<div class="img-placeholder" style="position:static;height:100%;"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Add project screenshot</span></div>
-				<?php endif; ?>
-			</div>
+<section class="sec cs-main">
+  <div class="wrap">
+    <?php if ( 'none' !== $project['visual']['mode'] ) : ?>
+    <figure class="cs-shot">
+      <div class="shot">
+        <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i><?php if ( $project['visual']['browser_label'] ) : ?><span><?php echo esc_html( $project['visual']['browser_label'] ); ?></span><?php endif; ?></div>
+        <?php get_template_part( 'template-parts/project/visual', null, array( 'project' => $project ) ); ?>
+      </div>
+    </figure>
+    <?php endif; ?>
 
-			<?php if ( $industry_badge || $platform_badge || $role ) : ?>
-			<div class="single-project-meta" data-reveal="up">
-				<?php if ( $industry_badge ) : ?><div><span>Industry</span><strong><?php echo esc_html( $industry_badge ); ?></strong></div><?php endif; ?>
-				<?php if ( $platform_badge ) : ?><div><span>Platform</span><strong><?php echo esc_html( $platform_badge ); ?></strong></div><?php endif; ?>
-				<?php if ( $role ) : ?><div><span>Role</span><strong><?php echo esc_html( $role ); ?></strong></div><?php endif; ?>
-			</div>
-			<?php endif; ?>
+    <div class="cs-layout<?php echo $glance ? '' : ' no-glance'; ?>">
+      <?php if ( $glance ) : ?>
+      <aside class="glance" aria-labelledby="glance-h">
+        <h2 id="glance-h">At a glance</h2>
+        <dl>
+          <?php foreach ( $glance as $row ) : ?>
+          <div><dt><?php echo esc_html( rtrim( trim( $row['label'] ), ':' ) ); ?>:</dt><dd><?php echo esc_html( $row['value'] ); ?></dd></div>
+          <?php endforeach; ?>
+        </dl>
+      </aside>
+      <?php endif; ?>
 
-			<div class="single-project-body" data-reveal="up">
-				<?php the_content(); ?>
-			</div>
+      <article class="cs-body">
+        <?php if ( $situation ) : ?>
+        <h2>The situation</h2>
+        <?php echo $situation; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_kses_post. ?>
+        <?php endif; ?>
 
-			<div style="text-align:center;margin-top:56px;">
-				<a href="#contact" class="btn btn-fill js-open-contact">Start a project like this</a>
-			</div>
-		</div>
-	</section>
+        <?php if ( $tricky ) : ?>
+        <h2>What made it tricky</h2>
+        <?php echo $tricky; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_kses_post. ?>
+        <?php endif; ?>
+
+        <?php if ( $approach ) : ?>
+        <h2>What I did</h2>
+        <ol>
+          <?php foreach ( $approach as $row ) : ?>
+          <li><?php echo edc_inline_html( nl2br( trim( $row['step'] ) ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_kses. ?></li>
+          <?php endforeach; ?>
+        </ol>
+        <?php endif; ?>
+
+        <?php if ( $technical ) : ?>
+        <details class="tech">
+          <summary>▸ Technical breakdown</summary>
+          <div class="in"><?php echo $technical; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_kses_post. ?></div>
+        </details>
+        <?php endif; ?>
+
+        <?php if ( $result ) : ?>
+        <h2>The result</h2>
+        <?php echo $result; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_kses_post. ?>
+        <?php endif; ?>
+
+        <?php if ( '' !== $learned ) : ?>
+        <h2>What I'd tell the next client</h2>
+        <p class="voice-person"><?php echo esc_html( $learned ); ?></p>
+        <?php endif; ?>
+
+        <?php if ( $quote ) : ?>
+        <div class="cs-quote">
+          <?php get_template_part( 'template-parts/common/testimonial', null, array( 'testimonial' => $quote ) ); ?>
+        </div>
+        <?php endif; ?>
+
+        <?php if ( $next || $contact_url || $has_modal ) : ?>
+        <div class="cs-next">
+          <?php if ( $next ) : ?>
+          <a href="<?php echo esc_url( get_permalink( $next ) ); ?>" data-ga-event="case_study_open" data-ga-label="Next <?php echo esc_attr( get_the_title( $next ) ); ?>"><small>Next case study</small><strong><?php echo esc_html( get_the_title( $next ) ); ?> →</strong></a>
+          <?php endif; ?>
+          <?php if ( $contact_url || $has_modal ) : ?>
+          <a class="<?php echo $has_modal ? 'js-open-contact' : ''; ?>" href="<?php echo esc_url( $contact_url ? $contact_url : home_url( '/' ) ); ?>" data-ga-event="cta_start_project" data-ga-label="Case study Start a project"><small>Got one like this?</small><strong>Start a project →</strong></a>
+          <?php endif; ?>
+        </div>
+        <?php endif; ?>
+      </article>
+    </div>
+  </div>
+</section>
 	<?php
 endwhile;
-
+?>
+</main>
+<?php
 get_footer();

@@ -1,0 +1,38 @@
+---
+description: elisaarmas.com B− redesign — rules for every change in this repo
+globs:
+alwaysApply: true
+---
+
+# elisaarmas.com redesign rules
+
+You are implementing the approved B− redesign of Elisa A. Dela Cruz's portfolio theme (`themes/elisa-dela-cruz`, WordPress + ACF PRO). The full spec is in `docs/redesign/` — read `docs/redesign/README.md` first, then the numbered files. Follow `docs/redesign/06-tasks-and-qa.md` in order.
+
+## Content integrity (highest priority)
+- Never invent achievements, statistics, testimonials, client names, project outcomes, dates or relationships — not in templates, not in JS, not in fallbacks, not in seed data, not in alt text.
+- Empty ACF field → the element does not render. No placeholders, no "Lorem ipsum", no `href="#"`.
+- Only the defaults already stored in `acf-json/*.json` may appear as fallback copy.
+- Items marked ⏳ in `docs/redesign/05-content-entry.md` stay empty.
+- Testimonials render only through `edc_testimonial()` (checks `permission_confirmed`). Stats render only when `verified`.
+- `confidential` projects never output the real client name, domain, logo or screenshot anywhere (HTML, alt, schema, data attributes, filenames). The lead project is only ever "US beauty brand".
+- The public name is "Elisa A. Dela Cruz" / "Elisa Dela Cruz". Never write "Elisa Armas" as her name.
+
+## Safety
+- Never deploy, never connect to or run anything against elisaarmas.com or its database, never push to `main`. Work on a branch and open a pull request.
+- Seed scripts must refuse to run when `home_url()` contains `elisaarmas.com`, unless run through the approved deploy runbook (`docs/redesign/07-deploy-plan.md`).
+- Do not delete ACF data or legacy field groups; retired templates move to `template-parts/legacy/`.
+
+## Code
+- PHP 7.4 compatible; no build step; vanilla JS (no jQuery, no GSAP).
+- Read ACF only via `edc_opt()`, `edc_field()`, `edc_repeater()` and the helpers in `inc/template-helpers.php`. Everything must work with ACF deactivated (no fatals).
+- Escape all output (`esc_html`, `esc_attr`, `esc_url`, `edc_inline_html()` for "Allowed HTML" fields).
+- Pass data to template parts with `get_template_part( $slug, null, $args )`.
+- Don't rename ACF field names or keys. If a field must change, change the JSON in `acf-json/`, then run `python3 docs/redesign/tools/acf-tables.py`.
+
+## Design
+- Colours, sizes, radii, shadows: only via CSS custom properties from `assets/css/tokens.css`. Never hand-edit `tokens.css`; edit `design/tokens.json` and run `python3 docs/redesign/tools/build-tokens.py`.
+- Write section CSS against semantic tokens (`--surface`, `--fg`, `--fg-muted`, `--line`, `--accent-ink`, `--focus`); cream sections get `class="light"`.
+- Buttons with white text use `--grad-btn`, never `--grad`. Never put `.grad-text` on cream.
+- Match `docs/redesign/reference/prototype/b-creative.html` and `case-study.html` (ignore yellow review notes).
+- Motion: CSS only, `transform`/`opacity` only, content visible without JS, full `prefers-reduced-motion` support, no loader, nothing auto-rotates.
+- Accessibility: WCAG 2.2 AA, visible `:focus-visible`, nothing hover-only, 44px tap targets, one H1 per page.

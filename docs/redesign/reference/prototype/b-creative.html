@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Elisa A. Dela Cruz · Senior WordPress & Shopify Developer — Prototype B−</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/proto.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="#top" aria-label="Elisa Dela Cruz, home"><img src="https://elisaarmas.com/wp-content/themes/elisa-dela-cruz/assets/images/elisaarmas-logo-icon-final.png" alt="" width="39" height="30"></a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="menu" aria-label="Open menu">☰</button>
+    <ul id="menu">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a class="btn btn-primary" href="#contact" data-open-contact>Start a project</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="main">
+<!-- 1. HERO -->
+<section class="hero" id="top">
+  <div class="grain" aria-hidden="true"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <h1>
+        <span class="title-line rise">Senior WordPress &amp; Shopify Developer</span>
+        <span class="rise d1">Websites are the <em class="voice grad-text">easy</em> part.</span>
+      </h1>
+      <p class="lede rise d2">I'm Elisa Dela Cruz. I build them, and <strong>I solve the problems behind them</strong>: migrations, rescues, integrations, and the bugs nobody else could find.</p>
+      <div class="hero-ctas rise d3">
+        <a class="btn btn-primary" href="#work">See the work <span class="arr">→</span></a>
+        <a class="btn btn-ghost" href="#contact" data-open-contact>Start a project</a>
+      </div>
+      <p class="hero-sub rise d4">Hiring? <a href="#" class="pending" title="Needs your current CV PDF">Download my CV ↓</a></p>
+    </div>
+
+    <div class="terminal rise d2" aria-label="Terminal summary">
+      <div class="term-bar" aria-hidden="true"><i></i><i></i><i></i><span>~/elisa</span></div>
+      <div class="term-body">
+        <div class="ln p" style="animation-delay:.3s">$ whoami</div>
+        <div class="ln o" style="animation-delay:.55s">Elisa A. Dela Cruz · Senior WordPress &amp; Shopify Developer</div>
+        <div class="ln p" style="animation-delay:.9s">$ uptime</div>
+        <div class="ln o" style="animation-delay:1.15s"><span class="pending" title="CV says April 2011, so 15 years. Confirm.">15 years</span>, since 2011</div>
+        <div class="ln p" style="animation-delay:1.5s">$ stack</div>
+        <div class="ln o" style="animation-delay:1.75s">WordPress · Shopify · WooCommerce · PHP · Liquid · JS</div>
+        <div class="ln p" style="animation-delay:2.1s">$ last_fixed</div>
+        <div class="ln o" style="animation-delay:2.35s">✔ <a href="case-study.html">One beauty brand, four storefronts</a></div>
+        <div class="ln o" style="animation-delay:2.5s">✔ <a href="#work">Three wineries, moved to Shopify</a></div>
+        <div class="ln o" style="animation-delay:2.65s">✔ <span class="placeholder">[security recovery story pending]</span></div>
+        <div class="ln p" style="animation-delay:3s">$ status</div>
+        <div class="ln ok" style="animation-delay:3.25s"><span class="pending" title="Confirm your availability wording">Open to projects and senior roles</span><span class="cursor" aria-hidden="true"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Bridge (kept from the live site) -->
+<section class="bridge" aria-label="Philosophy">
+  <div class="wrap" data-reveal>
+    <p>Good websites are beautiful.<br>Great websites solve problems.<br>The best websites do <em class="grad-text">both</em>.</p>
+  </div>
+</section>
+
+<!-- 2. WORK -->
+<section class="sec light" id="work">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <div class="eyebrow path"><b>~/elisa</b>/work</div>
+      <h2>The work <em class="voice">behind</em> the websites.</h2>
+      <p>Some of these you can see. Most of the interesting parts you can't.</p>
+    </div>
+    <nav class="filters" aria-label="Filter projects">
+      <a href="?type=all" data-type="all" aria-current="true">All</a>
+      <a href="?type=built" data-type="built">Built</a>
+      <a href="?type=solved" data-type="solved">Solved</a>
+    </nav>
+    <p class="hint">Hover or focus a project to see what's behind it.</p>
+    <p class="sr-only" id="filter-status" aria-live="polite"></p>
+    <p class="swipe-hint" aria-hidden="true">← swipe for more →</p>
+    <div class="work-grid swipe v2" tabindex="0" role="region" aria-label="Featured projects">
+      <article class="card flip lead span-4" data-type="built" data-reveal>
+        <div class="shot">
+          <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i><span>us-beauty-brand · 4 storefronts</span></div>
+          <div class="shot-img"><div class="swatch-art" role="img" aria-label="Illustration: colour swatches with product filters"><div class="side"><b>Filter</b><span class="chk on">Pinks</span><span class="chk">Nudes</span><span class="chk on">Glitter</span><span class="chk">New in</span><b style="margin-top:10px">Region</b><span class="chk on">US</span><span class="chk on">AU</span><span class="chk on">EU</span><span class="chk on">CA</span></div><div class="dots"><i style="background:#e8505b"></i><i style="background:#f19a9a"></i><i style="background:#c2185b"></i><i style="background:#8e24aa"></i><i style="background:#5e35b1"></i><i style="background:#3949ab" class="sel"></i><i style="background:#1e88e5"></i><i style="background:#00acc1"></i><i style="background:#43a047"></i><i style="background:#c0ca33"></i><i style="background:#fdd835"></i><i style="background:#fb8c00"></i><i style="background:#6d4c41"></i><i style="background:#d7ccc8"></i><i style="background:#212121"></i><i style="background:#f8bbd0"></i><i style="background:#ff7043"></i><i style="background:#ab47bc"></i><i style="background:#26a69a"></i><i style="background:#9ccc65"></i><i style="background:#ffca28"></i><i style="background:#8d6e63"></i><i style="background:#ec407a"></i><i style="background:#7e57c2"></i><i style="background:#29b6f6"></i><i style="background:#66bb6a"></i><i style="background:#ffa726"></i><i style="background:#bdbdbd"></i><i style="background:#e57373"></i><i style="background:#ba68c8"></i><i style="background:#4db6ac"></i><i style="background:#aed581"></i></div></div><span class="badge">illustration · client not named</span></div>
+        </div>
+        <div class="card-body">
+          <div class="tags"><span class="tag built">Built</span><span class="tag ">Shopify</span><span class="tag ">Liquid</span><span class="tag ">1,000+ SKUs</span></div>
+          <h3><a href="case-study.html">One beauty brand, four Shopify storefronts</a></h3>
+          <p>Two years on a US beauty brand. I replicated the US store into Australia, Europe and Canada, and built product filtering and colour swatches in custom code instead of apps, across more than 1,000 SKUs. I worked alongside the marketing team on launches, sales and pricing.</p>
+          <div class="role">Shopify developer · via Microsourcing · 2020–22</div>
+          <button class="behind-toggle" type="button" aria-expanded="false">What's behind it ↓</button>
+        </div>
+        <div class="behind">
+          <div class="head"><span>$ cat behind.log</span><span>built · 2020–22</span></div>
+          <dl><dt>needed:</dt><dd>the US store, replicated for AU, EU and CA</dd><dt>tricky:</dt><dd>1,000+ SKUs, four regions, and no apps for filtering or swatches</dd><dt>did:</dt><dd>store replication, custom filtering, colour swatches, launch + sale + pricing support</dd><dt>stack:</dt><dd>Shopify · Liquid · JavaScript</dd><dt>with:</dt><dd>the marketing team</dd></dl>
+          <button class="behind-close" type="button">Close ×</button>
+        </div>
+      </article>
+      <article class="card flip " data-type="solved built" data-reveal>
+        <div class="shot">
+          <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i><span>boatocraigo.com.au</span></div>
+          <div class="shot-img"><img src="assets/shots/boatocraigo.jpg" alt="Boat O'Craigo homepage" width="800" height="499" loading="lazy"><span class="badge">+ 2 more wineries</span></div>
+        </div>
+        <div class="card-body">
+          <div class="tags"><span class="tag solved">Solved</span><span class="tag built">Built</span><span class="tag ">Migration</span><span class="tag ">Shopify</span></div>
+          <h3>Three wineries, moved to Shopify</h3>
+          <p>Australian wineries moved off older platforms onto custom Shopify stores. For Boat O'Craigo I did the new design too.</p><div class="names"><span>Boat O'Craigo · Yarra Valley</span><span>Frankland Estate</span><span>God's Hill · Barossa Valley</span></div>
+          <div class="role">Design &amp; development · <span class="placeholder">[years]</span></div>
+          <button class="behind-toggle" type="button" aria-expanded="false">What's behind it ↓</button>
+        </div>
+        <div class="behind">
+          <div class="head"><span>$ cat behind.log</span><span>migrations</span></div>
+          <dl><dt>from:</dt><dd>Vin Creative (×2), WordPress (×1)</dd><dt>to:</dt><dd>custom Shopify stores</dd><dt>did:</dt><dd>Boat O'Craigo: new design + build. Frankland Estate, God's Hill: custom build + migration</dd><dt>moved:</dt><dd><span class="placeholder">[products? customers? orders? redirects?]</span></dd><dt>outcome:</dt><dd><span class="placeholder">[pending]</span></dd></dl>
+          <button class="behind-close" type="button">Close ×</button>
+        </div>
+      </article>
+      <article class="card flip " data-type="built" data-reveal>
+        <div class="shot">
+          <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i><span>perkrunner.com · winehub.io</span></div>
+          <div class="shot-img split"><img src="assets/shots/perkrunner.jpg" alt="PerkRunner homepage" width="800" height="499" loading="lazy"><img src="assets/shots/winehub.jpg" alt="Winehub homepage" width="800" height="499" loading="lazy"></div>
+        </div>
+        <div class="card-body">
+          <div class="tags"><span class="tag built">Built</span><span class="tag ">WordPress</span><span class="tag ">Design</span></div>
+          <h3>Selling subscriptions to Shopify merchants</h3>
+          <p>Designed and built from scratch: the websites for two Shopify subscription and loyalty platforms, PerkRunner and Winehub.</p>
+          <div class="role">Design &amp; development · <span class="placeholder">[years]</span></div>
+          <button class="behind-toggle" type="button" aria-expanded="false">What's behind it ↓</button>
+        </div>
+        <div class="behind">
+          <div class="head"><span>$ cat behind.log</span><span>built · from scratch</span></div>
+          <dl><dt>needed:</dt><dd>marketing sites for two SaaS products</dd><dt>did:</dt><dd>design, build and launch, from blank page to live</dd><dt>stack:</dt><dd>WordPress · <span class="placeholder">[theme / builder?]</span></dd><dt>detail:</dt><dd><span class="placeholder">[anything custom: demos, pricing tables, integrations?]</span></dd></dl>
+          <button class="behind-close" type="button">Close ×</button>
+        </div>
+      </article>
+      <article class="card flip " data-type="built" data-reveal>
+        <div class="shot">
+          <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i><span>soundandsight · live domain pending</span></div>
+          <div class="shot-img"><img src="assets/shots/soundsight-design.jpg" alt="Sound and Sight Solutions homepage design" width="485" height="2000" loading="lazy"><span class="placeholder">design file; live screenshot pending</span></div>
+        </div>
+        <div class="card-body">
+          <div class="tags"><span class="tag built">Built</span><span class="tag ">WordPress</span><span class="tag ">Custom</span></div>
+          <h3>From design file to working website</h3>
+          <p>A custom WordPress site for Sound &amp; Sight Solutions, a Chicago smart-home and AV company, built from their design all the way to deployment.</p>
+          <div class="role">Development · <span class="placeholder">[year]</span></div>
+          <button class="behind-toggle" type="button" aria-expanded="false">What's behind it ↓</button>
+        </div>
+        <div class="behind">
+          <div class="head"><span>$ cat behind.log</span><span>built · design → deploy</span></div>
+          <dl><dt>needed:</dt><dd>a working site matching the approved design</dd><dt>did:</dt><dd>custom build, responsive behaviour, deployment</dd><dt>stack:</dt><dd>WordPress · Elementor</dd><dt>live:</dt><dd><span class="placeholder">[live domain?]</span></dd></dl>
+          <button class="behind-close" type="button">Close ×</button>
+        </div>
+      </article>
+      <article class="card flip " data-type="solved" data-reveal>
+        <div class="shot">
+          <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i><span>client-site.example</span></div>
+          <div class="shot-img"><div class="mock" style="background:repeating-linear-gradient(0deg,#101015 0 22px,#14141a 22px 23px)"></div><span class="mock-label" style="font-family:var(--mono);font-weight:500;font-size:15px;color:#7ee2b8">$ grep -r "eval(base64_decode" ./wp-content</span></div>
+        </div>
+        <div class="card-body">
+          <div class="tags"><span class="tag solved">Solved</span><span class="tag ">WordPress</span><span class="tag ">Security</span></div>
+          <h3><span class="placeholder">[Your security / malware recovery story]</span></h3>
+          <p>Confidential incidents are shown anonymised: industry and region only, no screenshots, no client name.</p>
+          <div class="role"><span class="placeholder">role · year · region</span></div>
+          <button class="behind-toggle" type="button" aria-expanded="false">What's behind it ↓</button>
+        </div>
+        <div class="behind">
+          <div class="head"><span>$ cat behind.log</span><span>solved · confidential</span></div>
+          <dl><dt>symptom:</dt><dd><span class="placeholder">[what the client noticed]</span></dd><dt>cause:</dt><dd><span class="placeholder">[how it got in]</span></dd><dt>fix:</dt><dd><span class="placeholder">[cleanup + hardening]</span></dd><dt>after:</dt><dd><span class="placeholder">[monitoring / what changed]</span></dd></dl>
+          <button class="behind-close" type="button">Close ×</button>
+        </div>
+      </article>
+      <article class="card flip span-3" data-type="built" data-reveal>
+        <div class="shot">
+          <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i><span>shop.cenitlighting.com · oasiswaterph.com</span></div>
+          <div class="shot-img split"><img src="assets/shots/cenit.jpg" alt="Cenit Lighting Shopify store" width="800" height="499" loading="lazy"><img src="assets/shots/oasis.jpg" alt="Oasis Water Philippines homepage" width="800" height="499" loading="lazy"></div>
+        </div>
+        <div class="card-body">
+          <div class="tags"><span class="tag built">Built</span><span class="tag ">Shopify</span><span class="tag ">WordPress</span><span class="tag ">Elementor</span></div>
+          <h3>A Shopify store, then the sister brand</h3>
+          <p>Cenit Lighting hired me to build their Shopify store. Then they brought me back to turn their design for Oasis Water into a working WordPress site in Elementor.</p>
+          <div class="role">Shopify &amp; WordPress developer · Manila · <span class="placeholder">[years]</span></div>
+          <button class="behind-toggle" type="button" aria-expanded="false">What's behind it ↓</button>
+        </div>
+        <div class="behind">
+          <div class="head"><span>$ cat behind.log</span><span>built · repeat client</span></div>
+          <dl><dt>first:</dt><dd>Shopify store for Cenit Lighting (their WordPress site stayed as is)</dd><dt>then:</dt><dd>Oasis Water Philippines: their design, built in WordPress + Elementor</dd><dt>why it matters:</dt><dd>they came back</dd></dl>
+          <button class="behind-close" type="button">Close ×</button>
+        </div>
+      </article>
+      <article class="card more-tile span-3" data-type="built solved" data-reveal>
+        <div class="eyebrow path"><b>~/elisa</b>/work --more</div>
+        <h3>Also built from scratch, ground to deployment</h3>
+        <ul>
+          <li><b>TVI Resource Development</b><span>WordPress · PH</span></li>
+          <li><b>St. Augustine Gold &amp; Copper</b><span>WordPress · PH</span></li>
+          <li><b>D&amp;D Music</b><span>WordPress · PH</span></li>
+          <li><b>Futbol Funatics</b><span>WordPress · PH</span></li>
+          <li><b>Sorini Strategic Advisors</b><span>WordPress · design → deploy</span></li>
+          <li><b>Home of Lights</b><span>Shopify · custom PDP template</span></li>
+        </ul>
+        <a class="link-arrow pending" href="#" title="/projects/ page is not part of this prototype">All projects <span class="arr">→</span></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 3. CALLED IN FOR -->
+<section class="sec" id="services">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <div class="eyebrow path"><b>~/elisa</b>/services</div>
+      <h2>What I'm usually called in for.</h2>
+    </div>
+    <div class="called-grid" data-reveal>
+      <div class="called">
+        <span class="num">01 / move</span>
+        <h3>Moving house without losing the furniture</h3>
+        <p>Migrations: WooCommerce to Shopify, host to host, theme to theme. Rankings, redirects, customers and orders come along.</p>
+        <span class="stack">301 maps · data import · DNS · Search Console</span>
+        <a class="link-arrow" href="#work">See a migration <span class="arr">→</span></a>
+      </div>
+      <div class="called">
+        <span class="num">02 / rescue</span>
+        <h3>Getting hacked sites back on their feet</h3>
+        <p>Malware cleanup, recovery, and hardening, so it doesn't happen twice.</p>
+        <span class="stack">file forensics · clean restore · hardening · monitoring</span>
+        <a class="link-arrow" href="#work">See a rescue <span class="arr">→</span></a>
+      </div>
+      <div class="called">
+        <span class="num">03 / speed</span>
+        <h3>Making slow sites stop being slow</h3>
+        <p>Core Web Vitals, bloated page builders, image pipelines, caching, and the plugin nobody remembers installing.</p>
+        <span class="stack">Lighthouse · caching · images · script audits</span>
+        <a class="link-arrow" href="#work">See a speed fix <span class="arr">→</span></a>
+      </div>
+      <div class="called">
+        <span class="num">04 / build</span>
+        <h3>Building the bit the theme can't do</h3>
+        <p>Custom Liquid sections, ACF architecture, PHP and JavaScript functionality, API integrations and automation.</p>
+        <span class="stack">Liquid · PHP · ACF · REST / GraphQL · JS</span>
+        <a class="link-arrow" href="#work">See a build <span class="arr">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. BEHIND THE CODE -->
+<section class="sec light" id="about">
+  <div class="wrap btc">
+    <div class="hex" data-reveal><img src="https://elisaarmas.com/wp-content/uploads/2026/07/628105985_26434143126170683_3120392800049720687_n.jpg" alt="Illustrated portrait of Elisa at her desk with a laptop and a coffee" width="600" height="900" loading="lazy"></div>
+    <div data-reveal>
+      <div class="eyebrow path"><b>~/elisa</b>/about</div>
+      <h2>Hi, I'm Elisa. I like&nbsp;<em class="voice">problems</em>.</h2>
+      <div class="story">
+        <p>I started in 2011 writing PHP portal systems. Somewhere along the way I became the person teams call when a migration stalls, a site gets hacked, or a checkout breaks at 2am.</p>
+        <p>I've built for clients in <span class="pending" title="Confirm: 4 or 5 countries (incl. Philippines)?">Australia, the US, the UK and South Africa</span>, and I still enjoy the moment a stubborn bug finally makes sense.</p>
+      </div>
+      <ol class="principles">
+        <li><h3>Find the real problem first.</h3><p>I'd rather spend an hour diagnosing than a week fixing the wrong thing.</p></li>
+        <li><h3>Leave it better documented than I found it.</h3><p>Handovers, redirect maps, and notes for whoever comes next.</p></li>
+        <li><h3>Say the uncomfortable thing early.</h3><p>If the timeline, plugin or plan won't work, you'll hear it in week one, not week six.</p></li>
+      </ol>
+      <figure class="pull">
+        <blockquote>"She brings the confidence to challenge assumptions and the judgment to make that pushback constructive. If a timeline needs rethinking or there's a better way to approach a problem, she'll speak up and explain why."</blockquote>
+        <figcaption><b>Christopher Sorini</b> · hired me as one of his first senior engineers · <span class="placeholder">[title · company]</span></figcaption>
+      </figure>
+      <div class="lead-strip">
+        <strong>I've also led the team.</strong>
+        <p>Scrum, client reporting and dev coordination at 2nd Office. <span class="pending" title="From Chris's recommendation. Confirm the company and wording.">Later, UX and UI teams as a senior engineer.</span> Today I coordinate SEO specialists, ads, copywriters and junior developers on client projects.</p>
+      </div>
+      <p style="margin-top:28px"><a class="link-arrow pending" href="#" title="/about/ page is not part of this prototype">More about me <span class="arr">→</span></a></p>
+    </div>
+  </div>
+</section>
+
+<!-- 5. TRACK RECORD -->
+<section class="sec" id="record">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <div class="eyebrow path"><b>~/elisa</b>/track-record</div>
+      <h2><span class="pending" title="Depends on confirmed numbers">Fifteen years.</span> Four&nbsp;continents. No disappearing&nbsp;acts.</h2>
+    </div>
+
+    <div class="stats" data-reveal>
+      <div class="stat"><b class="pending" title="Confirm: 15 years (since 2011)?">15</b><span>Years</span></div>
+      <div class="stat"><b class="pending" title="Confirm: 150+ projects?">150+</b><span>Projects</span></div>
+      <div class="stat"><b class="pending" title="Confirm: 4 or 5?">4</b><span>Countries</span></div>
+    </div>
+
+    <p class="log-head" data-reveal>$ git log --career --oneline</p>
+    <ol class="log" data-reveal>
+      <li class="head"><details open><summary><span class="hash">a3f9e12</span><span class="msg"><b>feat:</b> going independent <i>(HEAD → now)</i></span><span class="when">2022 →</span></summary>
+        <div class="body"><div class="meta">Client Website Manager · independent · local &amp; overseas clients</div>Customising Shopify themes, building WordPress funnels and landing pages, and looking after sites long-term. I also coordinate a small team of SEO specialists, Google Ads people, copywriters and junior developers.</div></details></li>
+      <li><details><summary><span class="hash">7c1d0b4</span><span class="msg"><b>feat:</b> Shopify at scale, four storefronts <i>(US beauty brand, via Microsourcing)</i></span><span class="when">2020–22</span></summary>
+        <div class="body"><div class="meta">Shopify Developer · US account</div>Maintaining the US store and replicating it for Australia, Europe and Canada. In the same years: WordPress development and support for Capability Partners and The AM College in Australia, and consulting for Cenit Lighting in Manila.</div></details></li>
+      <li><details><summary><span class="hash">5e88a20</span><span class="msg"><b>chore:</b> dedicated developer for US &amp; AU accounts <i>(Microsourcing, EMAPTA)</i></span><span class="when">2018–20</span></summary>
+        <div class="body"><div class="meta">WordPress Developer · Fourandhalf (US real estate) · RedEx Digital &amp; Filta (AU)</div>Designing, building and maintaining WordPress sites for overseas agencies and their clients.</div></details></li>
+      <li><details><summary><span class="hash">2b6f9d7</span><span class="msg"><b>feat:</b> leading the dev team <i>(2nd Office)</i></span><span class="when">2016–18</span></summary>
+        <div class="body"><div class="meta">Mid-level Web Developer / Project Coordinator</div>E-commerce sites for US clients on Shopify and WordPress. I ran the dev team, the scrum meetings and the client reporting. This is where I learned that most project problems aren't code problems.</div></details></li>
+      <li><details><summary><span class="hash">9a04c3e</span><span class="msg"><b>refactor:</b> agency years, AU clients <i>(ZigZag / The Colour Club, Follow Digital)</i></span><span class="when">2015–18</span></summary>
+        <div class="body"><div class="meta">Web Developer · Sage + SASS builds</div>Custom WordPress themes for Australian agencies, including photography portfolios built from scratch on Sage.</div></details></li>
+      <li class="older"><details><summary><span class="hash">d1e7f55</span><span class="msg"><b>feat:</b> HTML, jQuery, PHP, WordPress &amp; Magento <i>(Glued Creative)</i></span><span class="when">2012–15</span></summary>
+        <div class="body"><div class="meta">Web Developer</div>Where WordPress became the main tool, with Magento along the way.</div></details></li>
+      <li class="older"><details><summary><span class="hash">0000001</span><span class="msg"><b>init:</b> PHP portal systems <i>(J.A.O. Builders)</i></span><span class="when">2011</span></summary>
+        <div class="body"><div class="meta">PHP Web Developer</div>A web-based portal system and its database, from scratch. The first commit.</div></details></li>
+    </ol>
+    <button type="button" class="log-more" aria-expanded="false" hidden>$ git log --all <span>(show 2011–2015)</span></button>
+
+    <div class="testis three">
+      <figure class="testi" data-reveal>
+        <span class="kind">$ role: client</span>
+        <blockquote>"Working with Elisa has been an outstanding experience. She consistently delivers high-quality solutions, responds quickly to client needs, and combines strong technical expertise with genuine professionalism."</blockquote>
+        <figcaption class="who"><b>Rachel S.</b> · Principal Consultant, Capability Partners</figcaption>
+      </figure>
+      <figure class="testi" data-reveal>
+        <span class="kind emp">$ role: employer</span>
+        <blockquote>"Give her an unfamiliar technology, and she'll learn it quickly, then teach you a thing or two along the way. … Elisa is someone I was fortunate to hire and would gladly work with again."</blockquote>
+        <figcaption class="who"><b>Christopher Sorini</b> · <span class="placeholder">[title · company]</span></figcaption>
+        <a class="more pending" href="#" title="Link to the LinkedIn recommendation">Full recommendation on LinkedIn ↗</a>
+      </figure>
+      <figure class="testi" data-reveal>
+        <span class="kind">$ role: client</span>
+        <blockquote>"Elisa doesn't just build websites. She solves the problems other developers give up on."</blockquote>
+        <figcaption class="who"><span class="placeholder">[name · role · company: attribution pending]</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- 6. CONTACT -->
+<section class="contact" id="contact">
+  <div class="wrap" data-reveal>
+    <div class="eyebrow path"><b>~/elisa</b>/contact</div>
+    <h2>Got something that's <em class="voice grad-text">stuck</em>?</h2>
+    <p class="sub">A stalled migration, a site that's acting strange, or a role that needs a senior developer. Tell me about it.</p>
+    <div class="ctas">
+      <a class="btn btn-primary" href="#" data-open-contact>Start a conversation <span class="arr">→</span></a>
+      <a class="btn btn-ghost pending" href="#" title="Needs your CV PDF">Download CV</a>
+    </div>
+    <div class="alt">
+      <button type="button" data-copy="hello@elisaarmas.com">hello@elisaarmas.com</button>
+      <a href="#" class="pending" title="Needs your LinkedIn URL">LinkedIn</a>
+      <a href="#" class="pending" title="Needs your GitHub URL">GitHub</a>
+    </div>
+    <p class="meta">Replies within one working day · Manila, working with AU / US / UK time zones</p>
+    <p class="sr-only" id="copy-status" aria-live="polite"></p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Elisa A. Dela Cruz</span>
+    <nav aria-label="Footer"><a href="#work">Work</a><a href="#services">Services</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+  </div>
+</footer>
+
+<div class="modal" id="contactModal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+  <div class="modal-box">
+    <button class="close" aria-label="Close">×</button>
+    <form>
+      <h3 id="mTitle">Tell me about it</h3>
+      <p>A few details is plenty. I'll reply within one working day.</p>
+      <label for="f-name">Your name</label><input id="f-name" autocomplete="name" required>
+      <label for="f-email">Email</label><input id="f-email" type="email" autocomplete="email" required>
+      <label for="f-msg">What's going on?</label><textarea id="f-msg" required></textarea>
+      <p style="margin-top:20px"><button class="btn btn-primary" type="submit">Send <span class="arr">→</span></button></p>
+    </form>
+    <div class="sent" tabindex="-1"><div class="check" aria-hidden="true">✓</div><h3>Got it.</h3><p>Prototype only. Nothing was sent.</p></div>
+  </div>
+</div>
+
+<div class="proto-bar" role="region" aria-label="Prototype controls">
+  <span><b>Prototype B−</b><span class="long"> · A+ with signature moments</span></span>
+  <button id="notesToggle" aria-pressed="true">Hide review notes</button>
+  <a href="index.html">Compare</a>
+</div>
+<script src="assets/proto.js"></script>
+</body>
+</html>
